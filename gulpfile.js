@@ -15,15 +15,65 @@
   path = require('path'),
   lint = require('gulp-eslint');
 
+var paths = {
+  public: 'public/**',
+  images: 'app/images/**/*',
+  scripts: 'app/**/*.+(jsx|js)',
+  styles: 'app/styles/*.+(less|css)',
+  jade: ['app/**/*.jade']
+};
  gulp.task('lint', function() {
-  return gulp.src(['./routes/*.js', './server/schema/*.js', 'app.js'])
+  return gulp.src(['./app/**/*.js', './app/**/*.jsx', './server/**/*.js', 'app.js', './tests/**/*.js'])
    .pipe(lint())
    .pipe(lint.format());
  });
 
+ gulp.task('images', function() {
+   gulp.src(paths.images)
+     .pipe(imagemin({
+       optimizationLevel: 3,
+       progressive: true,
+       interlaced: true
+     }))
+     .pipe(gulp.dest('./public/images/'));
+ });
 
- gulp.task('watch', function() {
+ gulp.task('bower', function() {
+   return bower()
+     .pipe(gulp.dest('public/lib/'));
+ });
 
+ gulp.task('jade', function() {
+   gulp.src(paths.jade)
+     .pipe(jade())
+     .pipe(gulp.dest('./public/'));
+ });
+
+ gulp.task('less', function() {
+   gulp.src(paths.styles)
+     .pipe(less({
+       paths: [path.join(__dirname, './app/styles')]
+     }))
+     .pipe(gulp.dest('./public/css'));
+ });
+
+ gulp.task('browserify', function() {
+   var bundler = browserify({
+     entries: ['./app/scripts/app.jsx'],
+     debug: true,
+     fullPaths: true,
+     transform: [reactify, babelify]
+   });
+
+   bundler.bundle()
+     .on('success', gutil.log.bind(gutil, 'Browserify Rebundled'))
+     .on('error', gutil.log.bind(gutil, 'Browserify ' +
+       'Error: in browserify gulp task'))
+     // vinyl-source-stream makes the bundle compatible with gulp
+     .pipe(source('app.js')) // filename
+     // Output the file
+     .pipe(gulp.dest('./public/js/'));
+   return bundler;
  });
 
  gulp.task('server', function() {
@@ -31,7 +81,12 @@
   server.start();
  });
 
- gulp.watch();
+ gulp.task('watch', function() {
+   gulp.watch(paths.jade, ['jade']);
+   gulp.watch(paths.styles, ['less']);
+  //  gulp.watch(paths.scripts, ['browserify']);
+ });
 
- gulp.task('default', ['lint', 'server']);
+ gulp.task('default', ['watch', 'build']);
+ gulp.task('build', ['jade', 'less', 'images', 'bower', 'server']);
 })();

@@ -38,6 +38,8 @@
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
     "request-json": "^0.5.5",
     "supertest": "^1.1.0",
     "supervisor": "^0.9.1"
