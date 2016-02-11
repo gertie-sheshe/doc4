@@ -2,6 +2,17 @@
  'use strict';
  var gulp = require('gulp'),
   LiveServer = require('gulp-live-server'),
+  less = require('gulp-less'),
+  source = require('vinyl-source-stream'),
+  jade = require('gulp-jade'),
+  gutil = require('gulp-util'),
+  bower = require('gulp-bower'),
+  reactify = require('reactify'),
+  babelify = require('babelify'),
+  browserify = require('browserify'),
+  imagemin = require('gulp-imagemin'),
+  nodemon = require('gulp-nodemon'),
+  path = require('path'),
   lint = require('gulp-eslint');
 
  gulp.task('lint', function() {
