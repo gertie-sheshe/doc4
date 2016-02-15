@@ -88,5 +88,5 @@ var paths = {
  });
 
  gulp.task('default', ['watch', 'build']);
- gulp.task('build', ['jade', 'less', 'images', 'bower', 'server']);
+ gulp.task('build', ['jade', 'less', 'images', 'browserify', 'bower', 'server']);
 })();
