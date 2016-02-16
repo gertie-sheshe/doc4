@@ -28,6 +28,11 @@ var paths = {
    .pipe(lint.format());
  });
 
+ gulp.task('font', function() {
+    gulp.src('./app/fonts/*.{ttf,woff,eof,svg}')
+    .pipe(gulp.dest('./public/fonts'));
+});
+
  gulp.task('images', function() {
    gulp.src(paths.images)
      .pipe(imagemin({
@@ -59,7 +64,7 @@ var paths = {
 
  gulp.task('browserify', function() {
    var bundler = browserify({
-     entries: ['./app/scripts/app.jsx'],
+     entries: ['./app/scripts/app.jsx', 'app/scripts/dialog.js'],
      debug: true,
      fullPaths: true,
      transform: [reactify, babelify]
@@ -84,9 +89,9 @@ var paths = {
  gulp.task('watch', function() {
    gulp.watch(paths.jade, ['jade']);
    gulp.watch(paths.styles, ['less']);
-  //  gulp.watch(paths.scripts, ['browserify']);
+   gulp.watch(paths.scripts, ['browserify']);
  });
 
  gulp.task('default', ['watch', 'build']);
- gulp.task('build', ['jade', 'less', 'images', 'browserify', 'bower', 'server']);
+ gulp.task('build', ['jade', 'less', 'font', 'images', 'browserify', 'bower', 'server']);
 })();

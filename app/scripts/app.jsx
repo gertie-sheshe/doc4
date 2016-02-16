@@ -11,8 +11,8 @@
 
     ReactDOM.render((
       <Router>
-        <Route  path="/home" component={Landing}>
-            <IndexRoute component={Landing} />
+        <Route path="/" component={Landing}>
+          <Route path="/home" component={Landing} />
         </Route>
       </Router>
     ), document.getElementById('ui'));

@@ -1,9 +1,76 @@
-.demo-layout-transparent {
-  background: url('../images/bg.jpg') center / cover;
+@font-face {
+  font-family: 'learningcurve';
+  src: url('../fonts/LearningCurve.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
-.demo-layout-transparent .mdl-layout__header {
-  color: white;
+@font-face {
+  font-family: 'GeosansLight';
+  src: url('../fonts/GeosansLight.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
-.demo-layout-transparent .mdl-layout__drawer-button {
-  color: white;
+@font-face {
+  font-family: 'learningcurvedashed';
+  src: url('../fonts/LearningCurveDashed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+#back {
+  background: url("../images/bg.jpeg");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+}
+.img > h1 {
+  color: #fff;
+}
+.img {
+  background: #000;
+}
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 40%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.content h1 {
+  color: #fff;
+  font-size: 5em;
+  font-family: learningcurve;
+}
+.content h2 {
+  color: #fff;
+  font-size: 3em;
+  font-family: GeosansLight;
+}
+.content .mdl-cell {
+  padding: 10px 5px;
+}
+.back {
+  opacity: 0.2%;
+}
+@media (max-width: 960px) {
+  .content {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.mdl-dialog {
+  width: 50%;
+  max-height: 100%;
+}
+.mdl-dialog h3 {
+  font-family: learningcurve;
+}
+.mdl-textfield--floating-label {
+  width: 70%;
 }
