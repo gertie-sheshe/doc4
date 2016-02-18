@@ -24,6 +24,16 @@
       })(req, res, next);
     },
 
+    decode: function(req, res) {
+      if (req.decoded) {
+        res.send(rec.decoded);
+      } else {
+        res.status(401).send({
+          error: {}
+        });
+      }
+    },
+
     session: function(req, res, next) {
       var token = req.headers['x-access-token'];
       if(token) {
