@@ -150,32 +150,57 @@
       Document.find({
         _id: req.params.document_id
       }).exec(function(err, documents) {
-        if (documents[0].id !== req.decoded._doc.roleId) {
-          Document.find({
-            _id : req.params.document_id,
-            accessId: req.decoded._doc.roleId,
-            accessType: 'None'
-          }).exec(function(err, docs) {
-            if (docs.length < 1) {
-              return res.status(200).json({
-                'message': 'This document does not exist or you are  not allowed to view it'
-              });
-            }
-            if (err) {
-              return res.status(500).send(err.errmessage || err);
-            } else {
-              return res.status(200).json(docs);
-            }
-          });
-        } else {
-          if (documents.length < 1) {
-            return res.status(404).json({
-              'message' : 'No documents are available'
-            });
-          } else {
-            return res.status(200).json(documents);
-          }
-        }
+        console.log('Ndio hapa', documents);
+        if (documents === undefined) {
+           return res.status(404).json({
+             'message' : 'No documents are available'
+           });
+         } else {
+           if (documents[0].id !== req.decoded._doc.roleId) {
+             Document.find({
+               _id : req.params.document_id,
+               accessId: req.decoded._doc.roleId,
+               accessType: 'None'
+             }).exec(function(err, docs) {
+               if (docs.length < 1) {
+                 return res.status(200).json({
+                   'message': 'This document does not exist or you are  not allowed to view it'
+                 });
+               }
+               if (err) {
+                 return res.status(500).send(err.errmessage || err);
+               } else {
+                 return res.status(200).json(docs);
+               }
+             });
+           }
+         }
+        // if (documents[0].id !== req.decoded._doc.roleId) {
+        //   Document.find({
+        //     _id : req.params.document_id,
+        //     accessId: req.decoded._doc.roleId,
+        //     accessType: 'None'
+        //   }).exec(function(err, docs) {
+        //     if (docs.length < 1) {
+        //       return res.status(200).json({
+        //         'message': 'This document does not exist or you are  not allowed to view it'
+        //       });
+        //     }
+        //     if (err) {
+        //       return res.status(500).send(err.errmessage || err);
+        //     } else {
+        //       return res.status(200).json(docs);
+        //     }
+        //   });
+        // } else {
+        //   if (documents.length < 1) {
+        //     return res.status(404).json({
+        //       'message' : 'No documents are available'
+        //     });
+        //   } else {
+        //     return res.status(200).json(documents);
+        //   }
+        // }
       });
     },
 

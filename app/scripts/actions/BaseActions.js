@@ -4,9 +4,10 @@
   var request = require('superagent');
 
   module.exports= {
-    get: function(url, actionType) {
+    get: function(url, actionType, token) {
       request
         .get(url)
+        .set('x-access-token', token)
         .end(function(err, result) {
           AppDispatcher.dispatch({
             actionType: actionType,
@@ -44,6 +45,8 @@
         .post(url)
         .send(data)
         .end(function(err, result) {
+          console.log('DATA', data);
+          console.log('DATA', result.body);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body

@@ -81,9 +81,20 @@ var paths = {
    return bundler;
  });
 
+ // gulp.task('server', function() {
+ //  var server = new LiveServer('app.js');
+ //  server.start();
+ // });
  gulp.task('server', function() {
-  var server = new LiveServer('app.js');
-  server.start();
+   nodemon({
+       script: 'app.js',
+       ext: 'js',
+       // tasks: ['lint'],
+       ignore: ['public/', 'node_modules/']
+     })
+     .on('restart', function() {
+       console.log('>> node restart');
+     });
  });
 
  gulp.task('watch', function() {
@@ -92,6 +103,6 @@ var paths = {
    gulp.watch(paths.scripts, ['browserify']);
  });
 
- gulp.task('default', ['watch', 'build']);
- gulp.task('build', ['jade', 'less', 'font', 'images', 'browserify', 'bower', 'server']);
+ gulp.task('default', ['server','watch', 'build']);
+ gulp.task('build', ['jade', 'less', 'font', 'images', 'browserify', 'bower']);
 })();

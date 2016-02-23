@@ -7,12 +7,20 @@
     Redirect = ReactRouter.Redirect,
     IndexRoute = ReactRouter.IndexRoute,
     Route = ReactRouter.Route,
-    Landing = require('./components/LandingPage/LandingPage.jsx');
+    createBrowserHistory = require('history/lib/createBrowserHistory'),
+    Main = require('./components/LandingPage/Main.jsx'),
+    Landing = require('./components/LandingPage/LandingPage.jsx'),
+    NotFound = require('./components/NotFound/NotFound.jsx'),
+    Dashboard = require('./components/Dashboard/Page.jsx');
 
     ReactDOM.render((
-      <Router>
-        <Route path="/" component={Landing}>
-          <Route path="/home" component={Landing} />
+      <Router history={createBrowserHistory()}>
+        <Route path="/" component={Main} >
+          <IndexRoute component={Landing} />
+        </Route>
+        <Route path="/dashboard" component={Dashboard}>
+          <Route path="/docs" component={NotFound} />
+          <Route path="*" component={NotFound} />
         </Route>
       </Router>
     ), document.getElementById('ui'));

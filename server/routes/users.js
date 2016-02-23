@@ -4,7 +4,7 @@
 
   module.exports = function(app) {
     app.post('/api/users/login', Users.login);
-    app.get('/api/users/decode', Users.decode);
+    app.get('/api/users/decode', Users.session,  Users.decode);
     app.get('/api/users/logout', Users.session, Users.logout);
     app.route('/api/users')
       .post(Users.createUser)

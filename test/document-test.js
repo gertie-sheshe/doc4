@@ -8,7 +8,7 @@
   var helper = require('../seeder/seeds');
 
   describe('Document tests', function() {
-    var user, user2, documents, documents1, token, token1;
+    var user, user2, documents, documents1, result, result1;
     describe('Documents', function() {
       it('You must be logged in to create a document', function(done) {
         server
@@ -24,7 +24,7 @@
             done();
           });
       });
-      it('User can create documents if they are authenticated', function(done) {
+      it('Login to create Document', function(done) {
         server
           .post('/api/users/login')
           .send({
@@ -32,32 +32,33 @@
             password: 'anitamrunde'
           })
           .end(function(err, res) {
-            assert.strictEqual(res.status, 200);
+            result = res.body.token;
             user = res.body;
-            token = res.body.token;
+            done();
+          });
+      });
+      it('User can create a document if they are authenticated', function(done) {
+        server
+          .post('/api/documents')
+          .set('x-access-token', result)
+          .send({
+            title: 'Utonium',
+            content: 'TownsVille'
+          })
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 200);
+            assert.strictEqual(res.body.content, 'TownsVille');
+            assert.strictEqual(res.body.ownerId, user.user._id);
+            assert.strictEqual(res.body.title, 'Utonium');
+            expect(res.body).to.not.be.undefined;
             expect(res.body).to.be.a('object');
-            server
-              .post('/api/documents')
-              .set('x-access-token', token)
-              .send({
-                title: 'Utonium',
-                content: 'TownsVille'
-              })
-              .end(function(err, res) {
-                assert.strictEqual(res.status, 200);
-                assert.strictEqual(res.body.content, 'TownsVille');
-                assert.strictEqual(res.body.ownerId, user.user._id);
-                assert.strictEqual(res.body.title, 'Utonium');
-                expect(res.body).to.not.be.undefined;
-                expect(res.body).to.be.a('object');
-                done();
-              });
+            done();
           });
       });
       it('Document title is unique', function(done) {
         server
           .post('/api/documents')
-          .set('x-access-token', token)
+          .set('x-access-token', result)
           .send({
             title: 'Utonium',
             content: 'Power Puff'
@@ -73,9 +74,11 @@
       it('User with any role can only view documents available to that role and are not private', function(done) {
         server
           .get('/api/documents')
-          .set('x-access-token', token)
+          .set('x-access-token', result)
           .end(function(err, res) {
             documents = res.body;
+            console.log('docs', documents);
+            console.log('user', user);
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body[0].accessId, user.user.roleId);
             assert.strictEqual(res.body[1].accessId, user.user.roleId);
@@ -91,14 +94,14 @@
       it('User can update any document they are owners of', function(done) {
         server
           .put('/api/documents/' + documents[0]._id)
-          .set('x-access-token', token)
+          .set('x-access-token', result)
           .send({
             title: 'Prof Utonium'
           })
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.title, 'Prof Utonium');
-            assert.strictEqual(documents[1].ownerId, user.user._id);
+            assert.strictEqual(documents[0].ownerId, user.user._id);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
             expect(res.body).to.not.be.undefined;
@@ -108,14 +111,14 @@
       it('Users can update documents availabe to their role', function(done) {
         server
           .put('/api/documents/' + documents[0]._id)
-          .set('x-access-token', token)
+          .set('x-access-token', result)
           .send({
             content: 'Jane Doe'
           })
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.content, 'Jane Doe');
-            assert.strictEqual(documents[1].accessId, user.user.roleId);
+            assert.strictEqual(documents[0].accessId, user.user.roleId);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
             expect(res.body).to.not.be.undefined;
@@ -124,8 +127,8 @@
       });
       it('User cannot delete a document unless they are the owner or an Admin', function(done) {
         server
-          .delete('/api/documents/' + documents[0]._id)
-          .set('x-access-token', token)
+          .delete('/api/documents/' + documents[1]._id)
+          .set('x-access-token', result)
           .end(function(err, res) {
             assert.strictEqual(res.status, 403);
             assert.strictEqual(res.body.message, 'You need to be Owner or Admin to delete this Document');
@@ -134,8 +137,8 @@
       });
       it('User can delete a document if they are the owner', function(done) {
         server
-          .delete('/api/documents/' + documents[1]._id)
-          .set('x-access-token', token)
+          .delete('/api/documents/' + documents[0]._id)
+          .set('x-access-token', result)
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.message, 'Document has been deleted');
@@ -145,7 +148,7 @@
       it('Returns document by limit provided', function(done) {
         server
           .get('/api/documents/?limit=2')
-          .set('x-access-token', token)
+          .set('x-access-token', result)
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.length, 2);
@@ -156,7 +159,7 @@
       it('Returns documents according to date created', function(done) {
         server
           .get('/api/documents')
-          .set('x-access-token', token)
+          .set('x-access-token', result)
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             (res.body[0].dateCreated).should.be.above(res.body[1].dateCreated);
@@ -164,7 +167,18 @@
             done();
           });
       });
-      it('User can view a different user\'s documents that the user has set visible to them', function(done) {
+      it('User can find his/her document', function(done) {
+        server
+          .get('/api/documents/' + documents[1]._id)
+          .set('x-access-token', result)
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 200);
+            console.log(res.body);
+            assert.strictEqual(documents[1]._id, res.body[0]._id);
+            done();
+          });
+      });
+      it('Login another user', function(done) {
         server
           .post('/api/users/login')
           .send({
@@ -172,42 +186,25 @@
             password: 'gertrudenyenyeshi'
           })
           .end(function(err, res) {
-            token1 = res.body.token;
-            user2 = res.body;
-            server
-              .get('/api/users/' + user.user._id + '/documents')
-              .set('x-access-token', token1)
-              .end(function(err, res) {
-                assert.strictEqual(res.status, 200);
-                assert.strictEqual(res.body.length, 1);
-                expect(res.body).to.have.length.above(0);
-                expect(res.body[0].ownerId).to.be.equal(user.user._id);
-                expect(res.body[0].accessId).to.be.equal(user2.user.roleId);
-                expect(res.body).to.be.instanceof(Array);
-                documents1 = res.body;
-                done();
-              });
-          });
-      });
-      it('User cannot find a document he/she is not allowed to view', function(done) {
-        server
-          .get('/api/documents/' + documents[0]._id)
-          .set('x-access-token', token1)
-          .end(function(err, res) {
-            assert.strictEqual(res.status, 200);
-            assert.strictEqual(res.body.message, 'This document does not exist or you are  not allowed to view it');
+            result1 = res.body.token;
+            user2 = res.body.user;
             done();
           });
       });
-      it('User can find his/her document', function(done) {
-            server
-              .get('/api/documents/' + documents1[0]._id)
-              .set('x-access-token', token1)
-              .end(function(err, res) {
-                assert.strictEqual(res.status, 200);
-                assert.strictEqual(documents1[0]._id, res.body[0]._id);
-                done();
-              });
+      it('User can view a different user\'s document that the user has set visible to them', function(done) {
+        server
+          .get('/api/users/' + user.user._id + '/documents')
+          .set('x-access-token', result1)
+          .end(function(err, res) {
+            console.log('AVAILABLE', res.body);
+            assert.strictEqual(res.status, 200);
+            assert.strictEqual(res.body.length, 1);
+            expect(res.body).to.have.length.above(0);
+            expect(res.body[0].ownerId).to.be.equal(user.user._id);
+            expect(res.body[0].accessId).to.be.equal(user2.roleId);
+            expect(res.body).to.be.instanceof(Array);
+            done();
+          });
       });
     });
   });

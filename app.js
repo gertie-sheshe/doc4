@@ -3,16 +3,18 @@
   // Require dependencies
   var express = require('express'),
     bodyParser = require('body-parser'),
-    morgan = require('morgan'),
+    logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     port = process.env.PORT || 4040,
     mongoose = require('mongoose'),
+    routes = require('./server/routes'),
     config = require('./config/config'),
     users = require('./server/routes/users'),
+    path = require('path'),
     types = require('./server/routes/doc-type'),
     documents = require('./server/routes/document'),
     roles = require('./server/routes/role'),
-    Strategy = require('./config/local-strategy'),
+    strategy = require('./config/local-strategy'),
 
     // Passport
     passport = require('passport'),
@@ -21,12 +23,14 @@
 
   // Environment
   app.set('superSecret', config.secret);
+  app.use(express.static(path.join(__dirname, '/public')));
   app.use(bodyParser.urlencoded({
     extended: true
   }));
   app.use(bodyParser.json());
+  app.use(logger('dev'));
   app.use(cookieParser());
-  app.use(morgan('combined'));
+  // app.use(morgan('combined'));
   app.use(session({
     secret: 'secret',
     resave: true,
@@ -35,13 +39,11 @@
   app.use(passport.initialize());
   app.use(passport.session());
 
-  // Routes
-  Strategy(app, passport);
-  users(app, passport);
-  types(app);
-  roles(app);
-  documents(app);
+  // Auth
+  strategy(app, passport);
 
+  //Routes
+  routes(app, passport);
 
   // Connect to the database
   mongoose.connect(config.db, function(err) {

@@ -25,13 +25,19 @@
     },
 
     decode: function(req, res) {
-      if (req.decoded) {
-        res.send(rec.decoded);
-      } else {
-        res.status(401).send({
-          error: {}
-        });
-      }
+      console.log('IDDDD', typeof req.decoded._doc._id);
+      User.findById(req.decoded._doc._id)
+      .then(function(user) {
+        console.log('USEEEER', user);
+        if (user && user.loggedIn) {
+          user.password = null;
+          return res.send(user);
+        } else {
+          return res.status(401).send({
+            message: 'Not authenticated'
+          });
+        }
+      });
     },
 
     session: function(req, res, next) {
@@ -40,12 +46,15 @@
         jwt.verify(token, secretKey, function(err, decoded) {
           if (!err) {
             req.decoded = decoded;
+            req.token = token;
+            console.log('DECODED', req.decoded);
             // // Check in loggedIn has been set to true
             User.findById(req.decoded._doc._id, function(err, user){
               if (err) {
                 return res.status(401).send(err.errmessage || err);
               } else {
                 if (user && user.loggedIn) {
+                  console.log('NEEEEXT');
                   next();
                 } else {
                   return res.status(401).json({
@@ -144,6 +153,10 @@
         }).exec(function(err, document) {
           if (err) {
             return res.status(500).send(err.errmessage || err);
+          } else if (document.length < 1){
+            return res.status(404).json({
+              'message' : 'Document not found'
+            });
           } else {
             return res.status(200).json(document);
           }
