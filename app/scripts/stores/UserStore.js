@@ -46,7 +46,8 @@ var UserStore = assign({}, BaseStore, {
       case DocConstants.USER_SIGNUP:
         UserStore.setSignUpData(action.data);
         break;
-      case DocConstants.USER_SIGNUP:
+      case DocConstants.USER_DECODE:
+      console.log('USER STORE', action.data);
         UserStore.setDecodedData(action.data);
         break;
       default:

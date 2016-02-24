@@ -5,7 +5,7 @@
   var should = require('should');
   var assert = require('assert');
   var server = supertest.agent('http://127.0.0.1:4040');
-  var helper = require('../seeder/seeds');
+
 
   describe('Document tests', function() {
     var user, user2, documents, documents1, result, result1;

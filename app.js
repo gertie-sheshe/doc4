@@ -7,6 +7,7 @@
     cookieParser = require('cookie-parser'),
     port = process.env.PORT || 4040,
     mongoose = require('mongoose'),
+    favicon = require('express-favicon'),
     routes = require('./server/routes'),
     config = require('./config/config'),
     users = require('./server/routes/users'),
@@ -30,7 +31,7 @@
   app.use(bodyParser.json());
   app.use(logger('dev'));
   app.use(cookieParser());
-  // app.use(morgan('combined'));
+  app.use(favicon(__dirname + '/public/images/favicon.png'));
   app.use(session({
     secret: 'secret',
     resave: true,

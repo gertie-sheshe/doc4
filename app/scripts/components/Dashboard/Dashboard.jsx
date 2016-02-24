@@ -23,11 +23,11 @@
 
     getDecoded: function() {
       var decode = UserStore.getDecodedData();
-      console.log('DECODE', decode);
-      if (decode.message === 'Not Authenticated') {
-        toastr.error('What\'s the password?', {timeout: 3000});
-        this.history.pushState(null, '/');
-      }
+      // console.log('DECODE', decode);
+      // if (decode.message === 'Not Authenticated') {
+      //   toastr.error('What\'s the password?', {timeout: 3000});
+      //   this.history.pushState(null, '/');
+      // }
     },
     render: function() {
       return (
