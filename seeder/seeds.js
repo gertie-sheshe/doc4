@@ -151,8 +151,15 @@
       dateCreated: date.setDate(6),
       accessId: role[1]._id
     }, {
-      title: 'Six',
-      content: 'Dennis the Menace',
+      title: 'Dennis the Menace',
+      content: 'Mischievous Dennis Mitchell makes ' +
+      'the life of neighbor George Wilson miserable with ' +
+      'his overactive energy and inadvertent troublemaking. ' +
+      'Because his parents must leave town for work and cannot ' +
+      'find a baby sitter for Dennis, they ask George and his wife, ' +
+      ' Martha (Joan Plowright), to take care of him. But when burglar ' +
+      'Switchblade Sam (Christopher Lloyd) breaks in to steal George\'s gold ' +
+      'coin collection, he takes Dennis as a hostage, and crusty George must save the boy.',
       ownerId: user.two._id,
       accessType: 'None',
       typeId: type[2]._id,

@@ -7,6 +7,7 @@
   var History = require('react-router').History;
   var UserAction = require('../../actions/UserActions');
   var toastr = require('toastr');
+  var Select = require('react-select');
 
   var Landing = new React.createClass({
     mixins: [History],
@@ -23,8 +24,21 @@
           lastname: '',
           username: '',
           email: '',
-          password: ''
-        }
+          password: '',
+          role: ''
+        },
+
+        lo : '',
+
+        roles: [
+          {
+            value: 'Admin', label: 'Admin'
+          }, {
+            value: 'Viewer', label: 'Viewer'
+          }, {
+            value: 'Staff', label: 'Staff'
+          }
+        ]
       };
     },
 
@@ -43,6 +57,17 @@
       }
     },
 
+    handleRoleSelect: function(value) {
+      console.log('HAIJAJAJA', this.state);
+      console.log('VIOLIIN', value);
+      if(value) {
+        var name = value;
+        this.setState({
+          lo: name
+        });
+        console.log('ROOOOL', this.state.lo);
+      }
+    },
     handleLogin: function() {
       var data = UserStore.getLoginData();
        if(data.error) {
@@ -109,10 +134,19 @@
                       <a href="#login-panel" className="mdl-tabs__tab">LOGIN</a>
                     </div>
                     <div className="mdl-tabs__panel is-active" id="signup-panel">
-                      <SignUp onChange={this.fetchValues} onSubmit={this.handleSignUpAction} onClick={this.handleSignUpAction}/>
+                      <SignUp
+                        onChange={this.fetchValues}
+                        onSubmit={this.handleSignUpAction}
+                        onClick={this.handleSignUpAction}
+                        roles={this.state.roles}
+                        info={this.state.info}
+                        select={this.handleRoleSelect}/>
                    </div>
                    <div className="mdl-tabs__panel" id="login-panel">
-                     <Login onChange={this.fetchValues} onSubmit={this.handleLoginAction} onClick={this.handleLoginAction}/>
+                     <Login
+                      onChange={this.fetchValues}
+                      onSubmit={this.handleLoginAction}
+                      onClick={this.handleLoginAction}/>
                   </div>
                   </div>
                 </dialog>

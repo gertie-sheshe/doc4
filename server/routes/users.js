@@ -8,7 +8,7 @@
     app.get('/api/users/logout', Users.session, Users.logout);
     app.route('/api/users')
       .post(Users.createUser)
-      .get(Users.session, Users.find);
+      .get( Users.find);
     app.use(Users.session);
     app.route('/api/users/:user_id')
       .get(Users.findOne)

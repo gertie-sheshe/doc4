@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:back": "node seeder/clear; mocha",
-    "test:front": "",
-    "test": "npm run test:back && npm run test:front"
+    "test:back": "node seeder/clear; mocha tests/test",
+    "test:front": "mocha --compilers .:tests/compiler.js tests/testdom.js  tests/front/**/*test.js",
+    "test": "npm run test:back && npm run test:frontt"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
     "toastr": "^2.1.2"
   },
   "devDependencies": {
+    "async": "^1.5.2",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
@@ -64,14 +65,18 @@
     "gulp-less": "^3.0.3",
     "gulp-nodemon": "^2.0.6",
     "gulp-util": "^3.0.7",
+    "history": "^1.17.0",
     "jsdom": "^8.0.4",
     "mocha": "^2.3.4",
     "path": "^0.12.7",
+    "react-addons-test-utils": "^0.14.7",
     "react-router": "^1.0.3",
+    "react-select": "^0.9.1",
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
     "should": "^8.1.1",
-    "supertest": "^1.1.0",
+    "sinon": "^1.17.3",
+    "supertest": "^1.2.0",
     "vinyl-source-stream": "^1.1.0"
   }
 }

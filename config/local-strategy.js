@@ -19,7 +19,6 @@ module.exports = function(app, passport) {
     passwordField: 'username',
     passReqToCallback: true
   }, function createUser(req, email, username, done) {
-      console.log(req.body.username, req.body.email,'passport');
       // Checking if email is in use
       User.findOne({
         $or: [{
@@ -28,12 +27,12 @@ module.exports = function(app, passport) {
           'username': username
         }]
       }, function(err, user) {
-        console.log(err, user, 'ERRRRRR USer');
+
         if (err) {
           return done(err);
         }
         if (user) {
-          console.log('nullfalse ethfhgfhvhv');
+
           return done(null, false);
         } else {
           //Create user if email is not in use
@@ -61,7 +60,7 @@ module.exports = function(app, passport) {
                 }
               }
               user.password = null;
-              console.log('null false???', err, newUser, user);
+
               return done(err, newUser);
             });
           });

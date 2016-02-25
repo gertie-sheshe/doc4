@@ -5,11 +5,12 @@
   var assign = require('object-assign');
   var BaseStore = require('./BaseStore');
 
-console.log('BASE',BaseStore);
+// console.log('BASE',BaseStore);
 var UserStore = assign({}, BaseStore, {
   loginData: null,
   signUpData: null,
   decodedData: null,
+  usersData: null,
 
   setLoginData: function(loginData) {
     this.loginData = loginData;
@@ -36,6 +37,15 @@ var UserStore = assign({}, BaseStore, {
 
   getDecodedData: function() {
     return this.decodedData;
+  },
+
+  setUserData: function(usersData) {
+    this.usersData = usersData;
+    this.emitChange('users');
+  },
+
+  getUserData: function() {
+    return this.usersData;
   }
 });
   AppDispatcher.register(function(action) {
@@ -47,8 +57,12 @@ var UserStore = assign({}, BaseStore, {
         UserStore.setSignUpData(action.data);
         break;
       case DocConstants.USER_DECODE:
-      console.log('USER STORE', action.data);
+      //console.log('USER TOKEN', action.data);
         UserStore.setDecodedData(action.data);
+        break;
+      case DocConstants.USER_DATA:
+      // console.log('USER DATA', action.data);
+        UserStore.setUserData(action.data);
         break;
       default:
     }

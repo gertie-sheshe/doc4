@@ -4,6 +4,8 @@
     USER_LOGIN: null,
     USER_SESSION: null,
     USER_SIGNUP: null,
-    USER_DECODE: null
+    USER_DECODE: null,
+    GET_DOCS: null,
+    OWNER_DOCS: null
   });
 })();
