@@ -9,6 +9,7 @@
   var UserStore = require('../../stores/UserStore');
   var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
+  var NewDoc = require('../Documents/NewDoc.jsx');
   var Select = require('react-select');
 
 
@@ -18,7 +19,19 @@
     getInitialState: function() {
       return {
         users: [],
+        user: {
+          name: {
+            first: '',
+            last: ''
+          },
+          username: '',
+          email: ''
+        },
         documents: [],
+        document: {
+          title: '',
+          content: ''
+        },
         options: [
           {
           value: 'My Documents', label: 'My Documents'
@@ -38,19 +51,82 @@
       UserStore.addChangeListener(this.getDecoded, 'decode');
       UserStore.addChangeListener(this.getUsers, 'users');
       DocumentStore.addChangeListener(this.getDocuments, 'documents');
+      this.dialogInit();
+      this.profileInit();
+      this.viewInit();
       //DocumentStore.addChangeListener(this.Change, 'owner');
     },
 
+    dialogInit: function() {
+      var docDialog = document.querySelector('#doc-dialog');
+      var docDialogButton = document.querySelector('#show-doc-dialog');
+      if (!docDialog.showModal) {
+        dialogPolyfill.registerDialog(docDialog);
+      }
+      docDialogButton.addEventListener('click', function() {
+        docDialog.showModal();
+      });
+      docDialog.querySelector('.close').addEventListener('click', function() {
+        docDialog.close();
+      });
+    },
+
+    profileInit: function() {
+      var profDialog = document.querySelector('.prof-dialog');
+      var profDialogButton = document.querySelector('.show-prof-dialog');
+      if (!profDialog.showModal) {
+        dialogPolyfill.registerDialog(profDialog);
+      }
+      profDialogButton.addEventListener('click', function() {
+        profDialog.showModal();
+      });
+      profDialog.querySelector('.close').addEventListener('click', function() {
+        profDialog.close();
+      });
+    },
+
+    viewInit: function() {
+      var viewDialog = document.querySelector('.view-dialog');
+      var viewDialogButton = document.querySelector('.show-view-dialog');
+      if (!viewDialog.showModal) {
+        dialogPolyfill.registerDialog(viewDialog);
+      }
+      viewDialogButton.addEventListener('click', function() {
+        viewDialog.showModal();
+      });
+      viewDialog.querySelector('.close').addEventListener('click', function() {
+        viewDialog.close();
+      });
+    },
+
     getDecoded: function() {
+      console.log('Does this ever get called');
       var token = localStorage.getItem('x-access-token');
       var decode = UserStore.getDecodedData();
+      console.log('KWA GET DECODED', decode);
+      this.setState({
+        user: {
+          name: {
+            first: decode.name.first,
+            last: decode.name.last
+          },
+          username: decode.username,
+          email: decode.email
+        }
+      });
+      console.log('DECODE', decode._id);
       DocumentAction.userDocuments(token);
-      DocumentAction.ownerDocuments(token,decode._id);
-      console.log('DECODE', decode);
-      if (decode.message === 'You are not authenticated') {
-        toastr.error('What\'s the password?', {timeout: 3000});
+      DocumentAction.ownerDocuments(token, decode._id);
+      if (decode.message === 'You are not authenticated user') {
+        console.log('AS IN!!!!');
+        toastr.error('You must be logged in bitte :)', {timeout: 3000});
         this.history.pushState(null, '/');
       }
+    },
+
+    logout: function() {
+      localStorage.removeItem('x-access-token');
+      this.history.pushState(null, '/');
     },
 
     getDocuments: function() {
@@ -63,6 +139,7 @@
     Change: function(value) {
       if (value === 'My Documents') {
         var userDocuments = DocumentStore.getOwnerDocs();
+        console.log('USER DOCUMENTS KWA DASHBOARD', userDocuments);
         if(userDocuments.message) {
           toastr.warning('You do not have any Documents');
         }
@@ -86,29 +163,54 @@
         users: updatedUsers
       });
     },
+
+    fetchInputValues: function(event) {
+      var field = event.target.name;
+      var value = event.target.value;
+      console.log(value);
+      this.state.document[field] = value;
+      // this.state.user[field] = value;
+      this.setState({document: this.state.document});
+    },
+
+    saveDocument: function() {
+      console.log('Ndio hii doc', this.state.document);
+      var token = localStorage.getItem('x-access-token');
+      DocumentAction.createDocument(this.state.document, token);
+      toastr.success('Document successfully created', {timeout: 1500});
+    },
     render: function() {
       return (
-        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+        <div id="drawer" className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
           mdl-layout--fixed-header">
         <header className="mdl-layout__header">
           <div className="mdl-layout__header-row">
             <span className="mdl-layout-title">doc 4.0</span>
             <div className="mdl-layout-spacer"></div>
             <nav className="mdl-navigation">
-              <button id="show-dialog" className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+              <button id="show-doc-dialog" className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i className="material-icons">add</i>
               </button>
-              <dialog className="mdl-dialog">
-                Hello
+              <dialog id="doc-dialog" className="mdl-dialog">
+                <NewDoc onChange={this.fetchInputValues} saveDoc={this.saveDocument}/>
               </dialog>
-              <div id="profile" className="icon material-icons">person</div>
-              <div className="mdl-tooltip" htmlFor="profile">
-                My Profile
-              </div>
-              <div id="logout" className="icon material-icons">launch</div>
-              <div className="mdl-tooltip" htmlFor="logout">
-                Logout
-              </div>
+              <button  className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored show-prof-dialog">
+                <i className="material-icons">person</i>
+              </button>
+              <dialog className="mdl-dialog prof-dialog">
+                <p>{this.state.user.name.first}</p>
+                <p>{this.state.user.name.last}</p>
+                <p>{this.state.user.username}</p>
+                <p>{this.state.user.email}</p>
+                  <div className="mdl-grid">
+                    <div className="mdl-cell mdl-cell--6-col">
+                      <button type="button" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Close</button>
+                    </div>
+                  </div>
+              </dialog>
+              <button id="show-doc-dialog" className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" onClick={this.logout}>
+                <i className="material-icons">launch</i>
+              </button>
             </nav>
           </div>
         </header>
@@ -121,7 +223,7 @@
            </nav>
          </div>
         <main className="mdl-layout__content">
-          <div className="mdl-grid">
+          <div id="dash-heading" className="mdl-grid">
             <div className="mdl-cell mdl-cell--8-col">
               <h2>Documents</h2>
             </div>

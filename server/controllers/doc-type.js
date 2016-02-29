@@ -51,7 +51,7 @@
         }
       });
     },
-    // Function to allow authenticated Users the respective rights.
+    //Function to allow authenticated Users the respective rights.
     session: function(req, res, next) {
       var token = req.headers['x-access-token'];
       if(token) {
@@ -66,7 +66,7 @@
           }
         });
       } else {
-        return res.status(401).send({message: 'You are not authenticated'});
+        return res.status(401).send({message: 'You are not authenticated type'});
       }
     },
 

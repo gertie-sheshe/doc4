@@ -17,9 +17,7 @@
       <Router history={createBrowserHistory()}>
         <Route path="/" component={Main} >
           <IndexRoute component={Landing} />
-        </Route>
-        <Route path="/dashboard" component={Dashboard}>
-          <Route path="/docs" component={NotFound} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="*" component={NotFound} />
         </Route>
       </Router>

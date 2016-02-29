@@ -193,7 +193,47 @@
       lastModified: Date.now(),
       dateCreated: date.setDate(10),
       accessId: role[0]._id
-    }];
+    },
+    {
+     title: 'Ein',
+     content: 'Christian Balerina',
+     ownerId: user.two._id,
+     accessType: 'Private',
+     typeId: type[1]._id,
+     lastModified: Date.now(),
+     dateCreated: date.setDate(6),
+     accessId: role[1]._id
+   },
+   {
+    title: 'Zwei',
+    content: 'Dead pool',
+    ownerId: user.two._id,
+    accessType: 'Private',
+    typeId: type[1]._id,
+    lastModified: Date.now(),
+    dateCreated: date.setDate(6),
+    accessId: role[1]._id
+  },
+  {
+   title: 'Drei',
+   content: 'Bad Minton',
+   ownerId: user.two._id,
+   accessType: 'Private',
+   typeId: type[1]._id,
+   lastModified: Date.now(),
+   dateCreated: date.setDate(6),
+   accessId: role[1]._id
+ },
+ {
+  title: 'Vier',
+  content: 'Closets closets closets closets',
+  ownerId: user.two._id,
+  accessType: 'Private',
+  typeId: type[1]._id,
+  lastModified: Date.now(),
+  dateCreated: date.setDate(6),
+  accessId: role[1]._id
+}];
 
     Documents.create(documents, function(err, docs) {
       if (err) {

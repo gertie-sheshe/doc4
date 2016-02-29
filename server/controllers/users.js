@@ -70,7 +70,7 @@
           }
         });
       } else {
-        return res.status(401).send({message: 'You are not authenticated'});
+        return res.status(401).send({message: 'You are not authenticated user'});
       }
     },
 
@@ -127,6 +127,7 @@
 
     getDocs: function(req, res) {
       // Get all the documents that belong to the user
+      console.log('KWA CONTROLLER YA USERS', req.decoded);
       if (req.params.user_id === req.decoded._doc._id) {
         Documents.find({
           ownerId: req.params.user_id

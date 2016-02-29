@@ -43,6 +43,7 @@
     },
 
     componentDidMount: function() {
+      this.dialog();
       UserStore.addChangeListener(this.handleLogin, 'login');
       UserStore.addChangeListener(this.handleSignUp, 'signup');
     },
@@ -55,6 +56,20 @@
       } else {
         toastr.success('Success');
       }
+    },
+
+    dialog: function() {
+      var landingDialog = document.querySelector('#landing-dialog');
+      var showDialogButton = document.querySelector('#show-dialog');
+      if (!landingDialog.showModal) {
+        dialogPolyfill.registerDialog(landingDialog);
+      }
+      showDialogButton.addEventListener('click', function() {
+        landingDialog.showModal();
+      });
+      landingDialog.querySelector('.close').addEventListener('click', function() {
+        landingDialog.close();
+      });
     },
 
     handleRoleSelect: function(value) {
@@ -75,7 +90,7 @@
       } else {
         //local storage token
         localStorage.setItem('x-access-token', data.token);
-        toastr.success('Success');
+        // toastr.success('Success');
         this.history.pushState(null, '/dashboard');
       }
     },
@@ -126,7 +141,7 @@
             <div className="mdl-grid">
               <div className="mdl-cell mdl-cell--12-col">
                 <button id="show-dialog" type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">GET STARTED</button>
-                <dialog className="mdl-dialog">
+                <dialog id="landing-dialog" className="mdl-dialog">
                   <h3 class="mdl-dialog__title">Enter Credentials</h3>
                   <div className="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                     <div className="mdl-tabs__tab-bar">

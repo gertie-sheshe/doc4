@@ -60,7 +60,7 @@
           }
         });
       } else {
-        return res.status(401).send({message: 'You are not authenticated'});
+        return res.status(401).send({message: 'You are not authenticated documents'});
       }
     },
 

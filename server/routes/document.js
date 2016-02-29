@@ -4,13 +4,11 @@
   var User = require('../controllers/users.js');
 
   module.exports = function(app) {
-    // app.use(Documents.session);
-    app.post('/api/documents', Documents.create);
-    app.get('/api/documents', Documents.find);
-    app.get('/api/users/:user_id/documents', User.getDocs);
+    app.post('/api/documents', Documents.session, Documents.create);
+    app.get('/api/documents', Documents.session, Documents.find);
     app.route('/api/documents/:document_id')
-      .put(Documents.update)
-      .get(Documents.findADoc)
-      .delete(Documents.delete);
+      .put(Documents.session, Documents.update)
+      .get(Documents.session, Documents.findADoc)
+      .delete(Documents.session, Documents.delete);
   };
 })();

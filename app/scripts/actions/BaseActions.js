@@ -9,6 +9,7 @@
         .get(url)
         .set('x-access-token', token)
         .end(function(err, result) {
+          console.log('BASI KWA DISPATCHER NDIO HAO SISI', result);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body
@@ -40,9 +41,10 @@
         });
     },
 
-    post: function(url, data, actionType) {
+    post: function(url, data, actionType, token) {
       request
         .post(url)
+        .set('x-access-token', token)
         .send(data)
         .end(function(err, result) {
           console.log('DATA', data);

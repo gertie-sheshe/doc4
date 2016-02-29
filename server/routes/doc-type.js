@@ -3,12 +3,11 @@
   var docTypes = require('../controllers/doc-type');
 
   module.exports = function(app) {
-    app.use(docTypes.session);
     app.route('/api/types')
-      .post(docTypes.create)
-      .get(docTypes.find);
+      .post(docTypes.session, docTypes.create)
+      .get(docTypes.session, docTypes.find);
     app.route('/api/types/:type_id')
-      .put(docTypes.update)
-      .delete(docTypes.delete);
+      .put(docTypes.session, docTypes.update)
+      .delete(docTypes.session, docTypes.delete);
   };
 })();

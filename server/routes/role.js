@@ -3,14 +3,13 @@
   var Roles = require('../controllers/roles');
 
   module.exports = function(app) {
-    app.use(Roles.session);
     app.route('/api/roles')
-      .post(Roles.create)
-      .get(Roles.find);
+      .post(Roles.session, Roles.create)
+      .get(Roles.session, Roles.find);
 
     app.route('/api/roles/:role_id')
-      .get(Roles.findOne)
-      .put(Roles.update)
-      .delete(Roles.delete);
+      .get(Roles.session, Roles.findOne)
+      .put(Roles.session, Roles.update)
+      .delete(Roles.session, Roles.delete);
   };
 })();

@@ -31,6 +31,7 @@ var UserStore = assign({}, BaseStore, {
   },
 
   setDecodedData: function(decodedData) {
+    console.log('SET DECODED DATA', decodedData);
     this.decodedData = decodedData;
     this.emitChange('decode');
   },
@@ -57,11 +58,11 @@ var UserStore = assign({}, BaseStore, {
         UserStore.setSignUpData(action.data);
         break;
       case DocConstants.USER_DECODE:
-      //console.log('USER TOKEN', action.data);
+      console.log('USER TOKEN HUKU KWA STORE', action.data);
         UserStore.setDecodedData(action.data);
         break;
       case DocConstants.USER_DATA:
-      // console.log('USER DATA', action.data);
+      console.log('USER DATA', action.data);
         UserStore.setUserData(action.data);
         break;
       default:

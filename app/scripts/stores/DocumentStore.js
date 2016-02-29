@@ -8,6 +8,7 @@
   var DocumentStore = assign({}, BaseStore, {
     userDocs: null,
     ownerDocs: null,
+    createdDoc: null,
 
     setUserDocs: function(userDocs) {
       this.userDocs = userDocs;
@@ -25,6 +26,10 @@
 
     getOwnerDocs: function() {
       return this.ownerDocs;
+    },
+
+    createDoc: function(createDoc) {
+      this.createDoc = createDoc;
     }
   });
 
@@ -34,7 +39,11 @@
       DocumentStore.setUserDocs(action.data);
       break;
       case DocConstants.OWNER_DOCS:
+      console.log('HUKU KWA DOCUMENT STORE', action.data);
       DocumentStore.setOwnerDocs(action.data);
+      break;
+      case DocConstants.CREATE_DOCS:
+      DocumentStore.createDoc(action.data);
       break;
     default:
     }

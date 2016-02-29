@@ -6,6 +6,7 @@
     USER_SIGNUP: null,
     USER_DECODE: null,
     GET_DOCS: null,
-    OWNER_DOCS: null
+    OWNER_DOCS: null,
+    CREATE_DOCS: null
   });
 })();
