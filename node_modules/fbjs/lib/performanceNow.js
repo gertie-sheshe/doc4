@@ -13,22 +13,17 @@
 'use strict';
 
 var performance = require('./performance');
-
-var performanceNow;
+var curPerformance = performance;
 
 /**
  * Detect if we can use `window.performance.now()` and gracefully fallback to
  * `Date.now()` if it doesn't exist. We need to support Firefox < 15 for now
  * because of Facebook's testing infrastructure.
  */
-if (performance.now) {
-  performanceNow = function () {
-    return performance.now();
-  };
-} else {
-  performanceNow = function () {
-    return Date.now();
-  };
+if (!curPerformance || !curPerformance.now) {
+  curPerformance = Date;
 }
+
+var performanceNow = curPerformance.now.bind(curPerformance);
 
 module.exports = performanceNow;

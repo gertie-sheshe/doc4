@@ -31,7 +31,6 @@
 
     deleteDoc: function(deleted) {
       this.deleted = deleted;
-      console.log('Oyoyo', this.deleted);
     },
 
     getDeleted: function() {

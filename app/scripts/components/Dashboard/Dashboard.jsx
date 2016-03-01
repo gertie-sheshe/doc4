@@ -12,7 +12,6 @@
   var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
   var popups = require('popups');
-  var async = require('async');
   var NewDoc = require('../Documents/NewDoc.jsx');
   var Select = require('react-select');
 
@@ -49,17 +48,21 @@
     },
 
     componentDidMount: function() {
+      this.dialogInit();
+      this.profileInit();
+      DocumentStore.addChangeListener(this.Change, 'owner');
+      var roleResult = RoleStore.getRole();
+    },
+
+    componentWillMount: function() {
       var token = localStorage.getItem('x-access-token');
       UserAction.decode(token);
       UserAction.userData(token);
-      RoleAction.getUserRole(token);
-      UserStore.addChangeListener(this.getDecoded, 'decode');
       UserStore.addChangeListener(this.getUsers, 'users');
       DocumentStore.addChangeListener(this.getDocuments, 'documents');
-      this.dialogInit();
-      this.profileInit();
+      UserStore.addChangeListener(this.getDecoded, 'decode');
+      this.Change();
 
-      //DocumentStore.addChangeListener(this.Change, 'owner');
     },
 
     dialogInit: function() {
@@ -93,16 +96,14 @@
     getDecoded: function() {
       var token = localStorage.getItem('x-access-token');
       var decode = UserStore.getDecodedData();
-      var roleResult = RoleStore.getRole();
+
       if (decode.message === 'You are not authenticated user') {
-        console.log('AS IN!!!!');
         toastr.error('You must be logged in bitte :)', {timeout: 3000});
         this.history.pushState(null, '/');
       }
       DocumentAction.userDocuments(token);
       DocumentAction.ownerDocuments(token, decode._id);
 
-      console.log('roleresult', roleResult);
       this.setState({
         user: {
           name: {
@@ -110,8 +111,7 @@
             last: decode.name.last
           },
           username: decode.username,
-          email: decode.email,
-          role: roleResult
+          email: decode.email
         }
       });
     },
@@ -123,6 +123,7 @@
 
     getDocuments: function() {
       var userDocuments = DocumentStore.getUserDocs();
+
       this.setState({
         documents: userDocuments
       });
@@ -130,7 +131,6 @@
 
     Change: function(value) {
       var roleResult = RoleStore.getRole();
-      console.log('Haha', roleResult);
       if (value === 'My Documents') {
         var userDocuments = DocumentStore.getOwnerDocs();
         if(userDocuments.message) {
@@ -160,7 +160,6 @@
     fetchInputValues: function(event) {
       var field = event.target.name;
       var value = event.target.value;
-      console.log(value);
       this.state.document[field] = value;
       // this.state.user[field] = value;
       this.setState({document: this.state.document});
@@ -169,13 +168,16 @@
     saveDocument: function() {
       var token = localStorage.getItem('x-access-token');
       DocumentAction.createDocument(this.state.document, token);
+      // var userDocuments = DocumentStore.getOwnerDocs();
+      // this.setState({document: this.state.document});
+      this.refs.other.forceUpdate();
      toastr.success('Document successfully created', {timeout: 1500});
     },
 
     render: function() {
       return (
         <div id="drawer" className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-          mdl-layout--fixed-header">
+          mdl-layout--fixed-header" ref="other">
         <header className="mdl-layout__header">
           <div className="mdl-layout__header-row">
             <span className="mdl-layout-title">doc 4.0</span>
@@ -185,7 +187,7 @@
                 <i className="material-icons">add</i>
               </button>
               <dialog id="doc-dialog" className="mdl-dialog">
-                <NewDoc onChange={this.fetchInputValues} saveDoc={this.saveDocument}/>
+                <NewDoc onChange={this.fetchInputValues} saveDoc={this.saveDocument} />
               </dialog>
               <button  className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored show-prof-dialog">
                 <i className="material-icons">person</i>
@@ -230,7 +232,7 @@
             </div>
           </div>
           <hr />
-          <Documents click={this.onClick} documents={this.state.documents} />
+          <Documents documents={this.state.documents} />
         </main>
     </div>
       );

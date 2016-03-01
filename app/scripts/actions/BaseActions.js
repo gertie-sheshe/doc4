@@ -30,7 +30,6 @@
     },
 
     delete: function(url, actionType, token) {
-      console.log('TOKEN', token);
       request
         .delete(url)
         .set('x-access-token', token)

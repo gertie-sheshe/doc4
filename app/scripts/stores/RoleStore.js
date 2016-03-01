@@ -15,7 +15,7 @@ var RoleStore = assign({}, BaseStore, {
   },
 
   getRole: function() {
-  console.log('HUKU NI NULL?', this.userRole);
+  return this.userRole;
   },
 });
   AppDispatcher.register(function(action) {

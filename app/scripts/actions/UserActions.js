@@ -11,7 +11,6 @@
       BaseActions.post('/api/users', user, DocConstants.USER_SIGNUP);
     },
     decode: function(token) {
-      console.log('TUNADECODE KWA ACTIONS', token);
       BaseActions.get('/api/users/decode', DocConstants.USER_DECODE, token);
     },
     userData: function(token) {

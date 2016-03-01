@@ -5,7 +5,6 @@
   var assign = require('object-assign');
   var BaseStore = require('./BaseStore');
 
-// console.log('BASE',BaseStore);
 var UserStore = assign({}, BaseStore, {
   loginData: null,
   signUpData: null,
@@ -31,7 +30,6 @@ var UserStore = assign({}, BaseStore, {
   },
 
   setDecodedData: function(decodedData) {
-    console.log('SET DECODED DATA', decodedData);
     this.decodedData = decodedData;
     this.emitChange('decode');
   },

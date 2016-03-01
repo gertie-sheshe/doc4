@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:back": "node seeder/clear; mocha test/test",
-    "test:front": "mocha --compilers .:test/compiler.js test/testdom.js  test/front/**/*test.js",
+    "test:back": "node seeder/clear; mocha test",
+    "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/**/*test.js",
     "test": "npm run test:front && npm run test:back"
   },
   "config": {
@@ -56,8 +56,9 @@
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
     "request-json": "^0.5.5",
-    "superagent": "^1.7.2",
+    "superagent": "^1.3.0",
     "supertest": "^1.1.0",
+    "supertest-as-promised": "^3.0.0",
     "supervisor": "^0.9.1",
     "toastr": "^2.1.2"
   },
