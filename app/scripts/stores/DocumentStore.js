@@ -9,6 +9,7 @@
     userDocs: null,
     ownerDocs: null,
     createdDoc: null,
+    deleted: null,
 
     setUserDocs: function(userDocs) {
       this.userDocs = userDocs;
@@ -28,6 +29,19 @@
       return this.ownerDocs;
     },
 
+    deleteDoc: function(deleted) {
+      this.deleted = deleted;
+      console.log('Oyoyo', this.deleted);
+    },
+
+    getDeleted: function() {
+      if(this.deleted === 'Document has been deleted') {
+        return this.deleted;
+      } else {
+        return null;
+      }
+    },
+
     createDoc: function(createDoc) {
       this.createDoc = createDoc;
     }
@@ -39,11 +53,13 @@
       DocumentStore.setUserDocs(action.data);
       break;
       case DocConstants.OWNER_DOCS:
-      console.log('HUKU KWA DOCUMENT STORE', action.data);
       DocumentStore.setOwnerDocs(action.data);
       break;
       case DocConstants.CREATE_DOCS:
       DocumentStore.createDoc(action.data);
+      break;
+      case DocConstants.DELETE_DOC:
+      DocumentStore.deleteDoc(action.data);
       break;
     default:
     }

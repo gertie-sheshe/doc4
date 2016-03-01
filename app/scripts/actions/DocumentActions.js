@@ -14,6 +14,11 @@
     },
     createDocument: function(doc, token) {
       BaseActions.post('/api/documents', doc, DocConstants.CREATE_DOCS, token);
+    },
+
+    deleteDocument: function(id, token) {
+      console.log('TUKooo', token);
+      BaseActions.delete('/api/documents/' + id, DocConstants.DELETE_DOC, token);
     }
   };
 })();

@@ -42,6 +42,7 @@
 
     session: function(req, res, next) {
       var token = req.headers['x-access-token'];
+      console.log('userS TOKEN', token);
       if(token) {
         jwt.verify(token, secretKey, function(err, decoded) {
           if (!err) {

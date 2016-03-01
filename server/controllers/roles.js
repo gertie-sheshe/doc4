@@ -73,18 +73,18 @@
       Roles.findById(req.decoded._doc.roleId, function(err, role) {
         if (err)
           return res.status(500).send(err.errmessage || err);
-        roles = role.title;
-        if (roles === 'Admin') {
-          Roles.findById(req.params.role_id, function(err, roles) {
-            if (err)
-              return res.status(500).send(err.errmessage || err);
-            return res.status(200).json(roles);
-          });
-        } else {
-          return res.status(403).json({
-            'message': 'You need to be an Admin to perform this.'
-          });
-        }
+        return res.status(200).send(role.title);
+        // if (roles === 'Admin') {
+        //   Roles.findById(req.params.role_id, function(err, roles) {
+        //     if (err)
+        //       return res.status(500).send(err.errmessage || err);
+        //     return res.status(200).json(roles);
+        //   });
+        // } else {
+        //   return res.status(403).json({
+        //     'message': 'You need to be an Admin to perform this.'
+        //   });
+        // }
       });
     },
 

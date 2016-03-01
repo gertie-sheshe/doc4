@@ -47,9 +47,11 @@
     },
 
     session: function(req, res, next) {
-      var token = req.headers['x-access-token'];
-      if(token) {
-        jwt.verify(token, secretKey, function(err, decoded) {
+      console.log('SESSION');
+      var tokenOne = req.headers['x-access-token'];
+      console.log('DOCS TOKEN', tokenOne);
+      if(tokenOne) {
+        jwt.verify(tokenOne, secretKey, function(err, decoded) {
           if (!err) {
             req.decoded = decoded;
             next();
@@ -60,6 +62,7 @@
           }
         });
       } else {
+        console.log('DOCS TOKEN', tokenOne);
         return res.status(401).send({message: 'You are not authenticated documents'});
       }
     },

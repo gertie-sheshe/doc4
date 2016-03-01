@@ -6,9 +6,13 @@
   var DocumentStore = require('../../stores/DocumentStore');
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
+  var RoleAction = require('../../actions/RoleAction');
   var UserStore = require('../../stores/UserStore');
+  var RoleStore = require('../../stores/RoleStore');
   var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
+  var popups = require('popups');
+  var async = require('async');
   var NewDoc = require('../Documents/NewDoc.jsx');
   var Select = require('react-select');
 
@@ -25,7 +29,8 @@
             last: ''
           },
           username: '',
-          email: ''
+          email: '',
+          role: ''
         },
         documents: [],
         document: {
@@ -45,15 +50,15 @@
 
     componentDidMount: function() {
       var token = localStorage.getItem('x-access-token');
-      console.log(token);
       UserAction.decode(token);
       UserAction.userData(token);
+      RoleAction.getUserRole(token);
       UserStore.addChangeListener(this.getDecoded, 'decode');
       UserStore.addChangeListener(this.getUsers, 'users');
       DocumentStore.addChangeListener(this.getDocuments, 'documents');
       this.dialogInit();
       this.profileInit();
-      this.viewInit();
+
       //DocumentStore.addChangeListener(this.Change, 'owner');
     },
 
@@ -85,25 +90,19 @@
       });
     },
 
-    viewInit: function() {
-      var viewDialog = document.querySelector('.view-dialog');
-      var viewDialogButton = document.querySelector('.show-view-dialog');
-      if (!viewDialog.showModal) {
-        dialogPolyfill.registerDialog(viewDialog);
-      }
-      viewDialogButton.addEventListener('click', function() {
-        viewDialog.showModal();
-      });
-      viewDialog.querySelector('.close').addEventListener('click', function() {
-        viewDialog.close();
-      });
-    },
-
     getDecoded: function() {
-      console.log('Does this ever get called');
       var token = localStorage.getItem('x-access-token');
       var decode = UserStore.getDecodedData();
-      console.log('KWA GET DECODED', decode);
+      var roleResult = RoleStore.getRole();
+      if (decode.message === 'You are not authenticated user') {
+        console.log('AS IN!!!!');
+        toastr.error('You must be logged in bitte :)', {timeout: 3000});
+        this.history.pushState(null, '/');
+      }
+      DocumentAction.userDocuments(token);
+      DocumentAction.ownerDocuments(token, decode._id);
+
+      console.log('roleresult', roleResult);
       this.setState({
         user: {
           name: {
@@ -111,17 +110,10 @@
             last: decode.name.last
           },
           username: decode.username,
-          email: decode.email
+          email: decode.email,
+          role: roleResult
         }
       });
-      console.log('DECODE', decode._id);
-      DocumentAction.userDocuments(token);
-      DocumentAction.ownerDocuments(token, decode._id);
-      if (decode.message === 'You are not authenticated user') {
-        console.log('AS IN!!!!');
-        toastr.error('You must be logged in bitte :)', {timeout: 3000});
-        this.history.pushState(null, '/');
-      }
     },
 
     logout: function() {
@@ -137,9 +129,10 @@
     },
 
     Change: function(value) {
+      var roleResult = RoleStore.getRole();
+      console.log('Haha', roleResult);
       if (value === 'My Documents') {
         var userDocuments = DocumentStore.getOwnerDocs();
-        console.log('USER DOCUMENTS KWA DASHBOARD', userDocuments);
         if(userDocuments.message) {
           toastr.warning('You do not have any Documents');
         }
@@ -174,11 +167,11 @@
     },
 
     saveDocument: function() {
-      console.log('Ndio hii doc', this.state.document);
       var token = localStorage.getItem('x-access-token');
       DocumentAction.createDocument(this.state.document, token);
-      toastr.success('Document successfully created', {timeout: 1500});
+     toastr.success('Document successfully created', {timeout: 1500});
     },
+
     render: function() {
       return (
         <div id="drawer" className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
@@ -202,6 +195,7 @@
                 <p>{this.state.user.name.last}</p>
                 <p>{this.state.user.username}</p>
                 <p>{this.state.user.email}</p>
+                <p>{this.state.user.role}</p>
                   <div className="mdl-grid">
                     <div className="mdl-cell mdl-cell--6-col">
                       <button type="button" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Close</button>
@@ -236,7 +230,7 @@
             </div>
           </div>
           <hr />
-          <Documents documents={this.state.documents}/>
+          <Documents click={this.onClick} documents={this.state.documents} />
         </main>
     </div>
       );

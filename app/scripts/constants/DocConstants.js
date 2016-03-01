@@ -7,6 +7,8 @@
     USER_DECODE: null,
     GET_DOCS: null,
     OWNER_DOCS: null,
-    CREATE_DOCS: null
+    CREATE_DOCS: null,
+    DELETE_DOC: null,
+    GET_ROLE: null
   });
 })();

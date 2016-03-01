@@ -9,7 +9,7 @@
         .get(url)
         .set('x-access-token', token)
         .end(function(err, result) {
-          console.log('BASI KWA DISPATCHER NDIO HAO SISI', result);
+          console.log('Iko kweli', result);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body
@@ -29,14 +29,16 @@
         });
     },
 
-    delete: function(url, data, actionType) {
+    delete: function(url, actionType, token) {
+      console.log('TOKEN', token);
       request
         .delete(url)
-        .send(data || {})
+        .set('x-access-token', token)
         .end(function(err, result) {
+          console.log('CONFUSION', result.body);
           AppDispatcher.dispatch({
             actionType: actionType,
-            datat: result.body
+            data: result.body
           });
         });
     },
@@ -47,8 +49,6 @@
         .set('x-access-token', token)
         .send(data)
         .end(function(err, result) {
-          console.log('DATA', data);
-          console.log('DATA', result.body);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body
