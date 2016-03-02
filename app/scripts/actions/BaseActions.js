@@ -9,7 +9,6 @@
         .get(url)
         .set('x-access-token', token)
         .end(function(err, result) {
-          console.log('Iko kweli', result);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body

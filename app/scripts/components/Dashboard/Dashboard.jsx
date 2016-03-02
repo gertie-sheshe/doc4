@@ -3,6 +3,7 @@
   var ReactDOM = require('react-dom');
   var History = require('react-router').History;
   var Documents = require('../Documents/Documents.jsx');
+  var Public = require('../Documents/PublicDocs.jsx');
   var DocumentStore = require('../../stores/DocumentStore');
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
@@ -29,9 +30,11 @@
           },
           username: '',
           email: '',
-          role: ''
+          role: '',
         },
-        documents: [],
+        ownerId: '',
+        ownerDocuments: [],
+        userDocuments: [],
         document: {
           title: '',
           content: ''
@@ -50,18 +53,22 @@
     componentDidMount: function() {
       this.dialogInit();
       this.profileInit();
-      DocumentStore.addChangeListener(this.Change, 'owner');
-      var roleResult = RoleStore.getRole();
+      // this.getUsers();
+      // this.getDecoded();
+      // this.setDecoded();
+      DocumentStore.addChangeListener(this.getOwnerDocuments, 'owner');
+      // DocumentStore.addChangeListener(this.saveDocument, 'owner');
+      DocumentStore.addChangeListener(this.getUserDocuments, 'documents');
+      // setInterval(this.getDecoded, 4000);
+      // setInterval(this.getOwnerDocuments, 7000);
     },
 
     componentWillMount: function() {
       var token = localStorage.getItem('x-access-token');
+      UserStore.addChangeListener(this.getUsers, 'users');
+      UserStore.addChangeListener(this.getDecoded, 'decode');
       UserAction.decode(token);
       UserAction.userData(token);
-      UserStore.addChangeListener(this.getUsers, 'users');
-      DocumentStore.addChangeListener(this.getDocuments, 'documents');
-      UserStore.addChangeListener(this.getDecoded, 'decode');
-      this.Change();
 
     },
 
@@ -93,65 +100,84 @@
       });
     },
 
-    getDecoded: function() {
-      var token = localStorage.getItem('x-access-token');
-      var decode = UserStore.getDecodedData();
+    // editInit: function() {
+    //   var editDialog = document.querySelector('.edit-dialog');
+    //   var editDialogButton = document.querySelector('.show-edit-dialog');
+    //   if (!editDialog.showModal) {
+    //     dialogPolyfill.registerDialog(editDialog);
+    //   }
+    //   editDialogButton.addEventListener('click', function() {
+    //     editDialog.showModal();
+    //   });
+    //   editDialog.querySelector('.close').addEventListener('click', function() {
+    //     editDialog.close();
+    //   });
+    // },
 
-      if (decode.message === 'You are not authenticated user') {
-        toastr.error('You must be logged in bitte :)', {timeout: 3000});
-        this.history.pushState(null, '/');
-      }
-      DocumentAction.userDocuments(token);
-      DocumentAction.ownerDocuments(token, decode._id);
-
-      this.setState({
-        user: {
-          name: {
-            first: decode.name.first,
-            last: decode.name.last
-          },
-          username: decode.username,
-          email: decode.email
-        }
-      });
-    },
+    // getDecoded: function() {
+    //   var token = localStorage.getItem('x-access-token');
+    //   var decode = UserStore.getDecodedData();
+    //   // this.setState({ownerId: decode._id});
+      //
+      // if (decode.message === 'You are not authenticated user') {
+      //   toastr.error('You must be logged in bitte :)', {timeout: 3000});
+      //   this.history.pushState(null, '/');
+      // }
+      // DocumentAction.userDocuments(token);
+      // DocumentAction.ownerDocuments(token, this.state.ownerId);
+      // this.setState({
+      //   user: {
+      //     name: {
+      //       first: decode.name.first,
+      //       last: decode.name.last
+      //     },
+      //     username: decode.username,
+      //     email: decode.email
+      //   }
+      // });
+    // },
 
     logout: function() {
       localStorage.removeItem('x-access-token');
       this.history.pushState(null, '/');
     },
 
-    getDocuments: function() {
-      var userDocuments = DocumentStore.getUserDocs();
-
+    getOwnerDocuments: function() {
+      var token = localStorage.getItem('x-access-token');
+      var ownDocs = DocumentStore.getOwnerDocs(token, this.state.ownerId);
+      console.log('Returned owner documents', ownDocs);
       this.setState({
-        documents: userDocuments
+        ownerDocuments: ownDocs
       });
     },
 
-    Change: function(value) {
-      var roleResult = RoleStore.getRole();
-      if (value === 'My Documents') {
-        var userDocuments = DocumentStore.getOwnerDocs();
-        if(userDocuments.message) {
-          toastr.warning('You do not have any Documents');
-        }
-        if (userDocuments.length) {
-          this.setState({
-            documents: userDocuments
-          });
-        }
-      }
-      if (value === 'Public Documents') {
-        var userDocs = DocumentStore.getUserDocs();
-        this.setState({
-          documents: userDocs
-        });
+    getUserDocuments: function() {
+      var userDocs = DocumentStore.getUserDocs();
+      console.log('Returned user documents', userDocs);
+      this.setState({
+        userDocuments: userDocs
+      });
+    },
+
+    getDecoded: function() {
+      var decoded = UserStore.getDecodedData();
+      console.log('decoded ndio hii', decoded);
+      if (decoded.message === 'You are not authenticated user') {
+        toastr.error('You must be logged in bitte :)', {timeout: 3000});
+        this.history.pushState(null, '/');
+      } else {
+        this.setState({ownerId: decoded._id});
+        var token = localStorage.getItem('x-access-token');
+        DocumentAction.userDocuments(token);
+        console.log(this.state.ownerId);
+        DocumentAction.ownerDocuments(token, this.state.ownerId);
       }
     },
 
+
     getUsers: function() {
       var updatedUsers = UserStore.getUserData();
+      console.log('Returned users', updatedUsers);
       this.setState({
         users: updatedUsers
       });
@@ -161,16 +187,12 @@
       var field = event.target.name;
       var value = event.target.value;
       this.state.document[field] = value;
-      // this.state.user[field] = value;
       this.setState({document: this.state.document});
     },
 
     saveDocument: function() {
       var token = localStorage.getItem('x-access-token');
       DocumentAction.createDocument(this.state.document, token);
-      // var userDocuments = DocumentStore.getOwnerDocs();
-      // this.setState({document: this.state.document});
-      this.refs.other.forceUpdate();
      toastr.success('Document successfully created', {timeout: 1500});
     },
 
@@ -219,20 +241,14 @@
            </nav>
          </div>
         <main className="mdl-layout__content">
-          <div id="dash-heading" className="mdl-grid">
-            <div className="mdl-cell mdl-cell--8-col">
-              <h2>Documents</h2>
+          <div className="mdl-grid">
+            <div id="ownerdoc" className="mdl-cell mdl-cell--8-col">
+              <Documents documents={this.state.ownerDocuments} />
             </div>
-            <div className="mdl-cell mdl-cell--4-col">
-              <Select
-                name="option_id"
-                placeholder="View Which Documents"
-                options={this.state.options}
-                onChange={this.Change} />
+            <div id="userdoc" className="mdl-cell mdl-cell--4-col">
+              <Public documents={this.state.userDocuments} />
             </div>
           </div>
-          <hr />
-          <Documents documents={this.state.documents} />
         </main>
     </div>
       );

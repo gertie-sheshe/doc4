@@ -6,10 +6,25 @@
   var DocumentStore = require('../../stores/DocumentStore.js');
   var toastr = require('toastr');
   var ReactDOM = require('react-dom');
+  var Modal = require('react-modal');
 
 module.exports = new React.createClass({
+  getInitialState: function() {
+  return { modalIsOpen: false };
+  },
+
+  openModal: function() {
+    console.log(this.state.modalIsOpen);
+    this.setState({modalIsOpen: true});
+    console.log(this.state.modalIsOpen);
+  },
+
+  closeModal: function() {
+    this.setState({modalIsOpen: false});
+  },
   render: function() {
-    var docNode = this.props.documents.map(function(doc) {
+    var open = this.openModal;
+    var docNode = this.props.documents.map(function(doc, index) {
       var token = localStorage.getItem('x-access-token');
       var docContent = function() {
         popups.modal({
@@ -20,6 +35,7 @@ module.exports = new React.createClass({
       var deleteDoc = function() {
         popups.confirm({
           content:     '<h1>Are you sure you want to delete this document?</h1>',
+          placeholder: '>>>',
           labelOk:     'Yes',
           labelCancel: 'No',
           onSubmit: function() {
@@ -37,11 +53,28 @@ module.exports = new React.createClass({
           }
         });
       };
+
+      var editDoc = function() {
+        var cont = doc.content;
+        popups.modal({
+          content: '<div className="dropper-form aligned">Edit Document</div> ' +
+          '<div class="dropper-form-group">' +
+          '<label for="doctitle">Title</label>' +
+          '<input type="text" value=' + doc.title + ' name="" id="title">' +
+          '</div>' +
+          '<div class="dropper-form-group">' +
+          '<label for="doccontent">Content</label>' +
+          '<input type="text" value=' + cont + ' name="" id="content">' +
+          '</div>',
+          labelOk:     'Yes',
+          labelCancel: 'No',
+        });
+      };
       return (
-        <div className="mdl-cell mdl-cell--6-col">
+        <div className="mdl-cell mdl-cell--6-col" key={index}>
           <div className="demo-card-square mdl-card mdl-shadow--2dp">
             <div className="mdl-card__title mdl-card--expand">
-              <h1 className="mdl-card__title-text">Title:  {doc.title}</h1>
+              <h1 className="mdl-card__title-text">Title:&nbsp;  {doc.title}</h1>
             </div>
             <div className="mdl-card__supporting-text">
               {doc.content}
@@ -53,7 +86,7 @@ module.exports = new React.createClass({
               <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={deleteDoc}>
                 Delete Document
               </a>
-              <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={editDoc}>
                 Edit Document
               </a>
             </div>

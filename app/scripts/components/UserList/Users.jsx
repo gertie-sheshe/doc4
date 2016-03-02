@@ -7,7 +7,7 @@ module.exports = new React.createClass({
   render: function() {
     var renderUser = function(user) {
       return (
-        <li className="mdl-list__item">
+        <li className="mdl-list__item" key={user._id}>
           <span className="mdl-list__item-primary-content">
             <i className="material-icons mdl-list__item-icon">person</i>
             {user.username}

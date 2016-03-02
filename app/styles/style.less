@@ -127,7 +127,6 @@
   color: #fff;
   background:
      bottom right 15% no-repeat #46B6AC;
-     height: 12px;
 }
 @media (max-width: 839px) {
   .mdl-card {
@@ -147,12 +146,20 @@
 }
 
 .documents {
-  .mdl-card__supporting-text {
+  .mdl-card__supporting-text, .doc-content {
     text-overflow: ellipsis;
     height: 50px;
+    overflow: hidden;
     white-space: nowrap;
+    max-width: 100%;
   }
 
+}
+
+.documents {
+    .mdl-list, .mdl-list__item-primary-content {
+    max-width: 90%;
+  }
 }
 
 #document-form {
@@ -181,4 +188,21 @@ header {
 }
 #text {
   width: 150%;
+}
+#ownerdoc {
+
+}
+#userdoc {
+  position: fixed;
+  overflow-y: scroll;
+  height: 100%;
+  top: 64px;
+  border-left: solid 1px #eee;
+}
+
+#userdoc li {
+  list-style: none;
+}
+#dash-heading {
+  max-height: 64px;
 }

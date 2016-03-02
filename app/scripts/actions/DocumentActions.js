@@ -8,6 +8,7 @@
       BaseActions.get('/api/documents', DocConstants.GET_DOCS, token);
     },
     ownerDocuments: function(token, id) {
+      console.log('owner documents');
       BaseActions.get('/api/users/' + id +'/documents', DocConstants.OWNER_DOCS, token);
     },
     createDocument: function(doc, token) {

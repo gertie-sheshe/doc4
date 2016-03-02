@@ -21,6 +21,7 @@
     },
 
     setOwnerDocs: function(ownerDocs) {
+      console.log('owner docs set', ownerDocs);
       this.ownerDocs = ownerDocs;
       this.emitChange('owner');
     },
@@ -40,8 +41,7 @@
         return null;
       }
     },
-
-    createDoc: function(createDoc) {
+    createDocs: function(createDoc) {
       this.createDoc = createDoc;
     }
   });
@@ -55,7 +55,7 @@
       DocumentStore.setOwnerDocs(action.data);
       break;
       case DocConstants.CREATE_DOCS:
-      DocumentStore.createDoc(action.data);
+      DocumentStore.createDocs(action.data);
       break;
       case DocConstants.DELETE_DOC:
       DocumentStore.deleteDoc(action.data);
