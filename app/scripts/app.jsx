@@ -11,13 +11,18 @@
     Main = require('./components/LandingPage/Main.jsx'),
     Landing = require('./components/LandingPage/LandingPage.jsx'),
     NotFound = require('./components/NotFound/NotFound.jsx'),
-    Dashboard = require('./components/Dashboard/Page.jsx');
+    Document = require('./components/Documents/Document.jsx'),
+    Create = require('./components/Documents/Create.jsx'),
+    Kwanza = require('./components/LandingPage/Kwanza.jsx'),
+    Dashboard = require('./components/Dashboard/Dashboard.jsx');
 
     ReactDOM.render((
       <Router history={createBrowserHistory()}>
         <Route path="/" component={Main} >
           <IndexRoute component={Landing} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dash" component={Kwanza} />
+          <Route path="/:id" component={Document} />
           <Route path="*" component={NotFound} />
         </Route>
       </Router>

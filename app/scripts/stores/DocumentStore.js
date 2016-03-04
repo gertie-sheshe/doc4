@@ -10,6 +10,7 @@
     ownerDocs: null,
     createdDoc: null,
     deleted: null,
+    selected: null,
 
     setUserDocs: function(userDocs) {
       this.userDocs = userDocs;
@@ -43,6 +44,14 @@
     },
     createDocs: function(createDoc) {
       this.createDoc = createDoc;
+    },
+    setSelectedDoc: function(selected) {
+      this.selected = selected;
+      this.emitChange('doc');
+      console.log(selected);
+    },
+    getSelectedDoc: function() {
+      return this.selected;
     }
   });
 
@@ -59,6 +68,9 @@
       break;
       case DocConstants.DELETE_DOC:
       DocumentStore.deleteDoc(action.data);
+      break;
+      case DocConstants.ONE_DOCS:
+      DocumentStore.setSelectedDoc(action.data);
       break;
     default:
     }

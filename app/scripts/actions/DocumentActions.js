@@ -14,9 +14,11 @@
     createDocument: function(doc, token) {
       BaseActions.post('/api/documents', doc, DocConstants.CREATE_DOCS, token);
     },
-
     deleteDocument: function(id, token) {
       BaseActions.delete('/api/documents/' + id, DocConstants.DELETE_DOC, token);
+    },
+    setDoc: function(id, token) {
+      BaseActions.get('/api/documents/' + id, DocConstants.ONE_DOCS, token);
     }
   };
 })();

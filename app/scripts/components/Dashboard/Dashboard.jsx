@@ -51,8 +51,8 @@
     },
 
     componentDidMount: function() {
-      this.dialogInit();
-      this.profileInit();
+      // this.dialogInit();
+      // this.profileInit();
       // this.getUsers();
       // this.getDecoded();
       // this.setDecoded();
@@ -198,59 +198,14 @@
 
     render: function() {
       return (
-        <div id="drawer" className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-          mdl-layout--fixed-header" ref="other">
-        <header className="mdl-layout__header">
-          <div className="mdl-layout__header-row">
-            <span className="mdl-layout-title">doc 4.0</span>
-            <div className="mdl-layout-spacer"></div>
-            <nav className="mdl-navigation">
-              <button id="show-doc-dialog" className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                <i className="material-icons">add</i>
-              </button>
-              <dialog id="doc-dialog" className="mdl-dialog">
-                <NewDoc onChange={this.fetchInputValues} saveDoc={this.saveDocument} />
-              </dialog>
-              <button  className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored show-prof-dialog">
-                <i className="material-icons">person</i>
-              </button>
-              <dialog className="mdl-dialog prof-dialog">
-                <p>{this.state.user.name.first}</p>
-                <p>{this.state.user.name.last}</p>
-                <p>{this.state.user.username}</p>
-                <p>{this.state.user.email}</p>
-                <p>{this.state.user.role}</p>
-                  <div className="mdl-grid">
-                    <div className="mdl-cell mdl-cell--6-col">
-                      <button type="button" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Close</button>
-                    </div>
-                  </div>
-              </dialog>
-              <button id="show-doc-dialog" className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" onClick={this.logout}>
-                <i className="material-icons">launch</i>
-              </button>
-            </nav>
+        <div className="mdl-grid">
+          <div id="ownerdoc" className="mdl-cell mdl-cell--8-col">
+            <Documents documents={this.state.ownerDocuments} />
           </div>
-        </header>
-        <div className="mdl-layout__drawer">
-          <span className="mdl-layout-title">users</span>
-          <nav className="mdl-navigation">
-            <ul className="demo-list-icon mdl-list">
-            <Users users={this.state.users}/>
-            </ul>
-           </nav>
-         </div>
-        <main className="mdl-layout__content">
-          <div className="mdl-grid">
-            <div id="ownerdoc" className="mdl-cell mdl-cell--8-col">
-              <Documents documents={this.state.ownerDocuments} />
-            </div>
-            <div id="userdoc" className="mdl-cell mdl-cell--4-col">
-              <Public documents={this.state.userDocuments} />
-            </div>
+          <div id="userdoc" className="mdl-cell mdl-cell--4-col">
+            <Public documents={this.state.userDocuments} />
           </div>
-        </main>
-    </div>
+        </div>
       );
     }
   });
