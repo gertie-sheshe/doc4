@@ -10,6 +10,7 @@
     CREATE_DOCS: null,
     DELETE_DOC: null,
     GET_ROLE: null,
-    ONE_DOCS: null
+    ONE_DOCS: null,
+    UPDATE_DOC: null
   });
 })();

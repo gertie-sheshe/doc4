@@ -11,6 +11,7 @@
     createdDoc: null,
     deleted: null,
     selected: null,
+    updated: null,
 
     setUserDocs: function(userDocs) {
       this.userDocs = userDocs;
@@ -52,6 +53,15 @@
     },
     getSelectedDoc: function() {
       return this.selected;
+    },
+
+    setUpdatedDoc: function(updated) {
+      console.log('Updated doc store', updated);
+      this.updated = updated;
+    },
+
+    getUpdatedDoc: function() {
+      return this.updated;
     }
   });
 
@@ -71,6 +81,9 @@
       break;
       case DocConstants.ONE_DOCS:
       DocumentStore.setSelectedDoc(action.data);
+      break;
+      case DocConstants.UPDATE_DOC:
+      DocumentStore.setUpdatedDoc(action.data);
       break;
     default:
     }

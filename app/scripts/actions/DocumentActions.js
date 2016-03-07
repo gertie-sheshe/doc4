@@ -19,6 +19,10 @@
     },
     setDoc: function(id, token) {
       BaseActions.get('/api/documents/' + id, DocConstants.ONE_DOCS, token);
+    },
+    updateDoc: function(id, doc, token) {
+      console.log('kwa actions', doc);
+      BaseActions.put('/api/documents/' + id, doc, DocConstants.UPDATE_DOC, token);
     }
   };
 })();

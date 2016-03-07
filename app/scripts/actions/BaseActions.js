@@ -16,11 +16,23 @@
         });
     },
 
-    put: function(url, data, actionType) {
+    getUser: function(url, token) {
+      request
+        .get(url)
+        .set('x-access-token', token)
+        .end(function(err, result) {
+          return result;
+        });
+    },
+
+    put: function(url, data, actionType, token) {
+      console.log('put request', data);
       request
         .put(url)
+        .set('x-access-token', token)
         .send(data)
         .end(function(err, result) {
+          console.log('PUT', result);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body

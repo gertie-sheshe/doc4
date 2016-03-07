@@ -17,26 +17,6 @@ module.exports = new React.createClass({
           content: '<h4> ' + doc.content + '</h4>'
         });
       };
-      var deleteDoc = function() {
-        popups.confirm({
-          content:     '<h1>Are you sure you want to delete this document?</h1>',
-          labelOk:     'Yes',
-          labelCancel: 'No',
-          onSubmit: function() {
-            var token = localStorage.getItem('x-access-token');
-            DocumentActions.deleteDocument(doc._id, token);
-            var result = DocumentStore.getDeleted();
-            if (result === null) {
-              toastr.success('You are not allowed to delete this document', {timeout: 1000});
-            } else {
-              toastr.success('Document has been deleted', {timeout: 1000});
-            }
-          },
-          onClose: function() {
-            console.log(':( kwi kwi');
-          }
-        });
-      };
       return (
 
           <li className="mdl-list__item mdl-list__item--three-line" key={index}>
@@ -49,7 +29,7 @@ module.exports = new React.createClass({
                 <button className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " onClick ={docContent}>
                   Read More
                 </button>
-                Added by: Gertrude Nyenyeshi Date Added: 2 days ago
+                Added by: {doc.owner} Date Added: 2 days ago
               </span>
               <hr/>
             </span>

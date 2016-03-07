@@ -3,7 +3,38 @@
 
   var React = require('react');
   var ReactDOM = require('react-dom');
+  var History = require('react-router').History;
+  var UserStore = require('../../stores/UserStore');
     module.exports = React.createClass({
+      mixins: [History],
+      getInitialState: function() {
+        return {
+          link: '',
+          buttonClass: ''
+        };
+      },
+      componentDidMount: function() {
+        this.handleSession();
+      },
+
+      handleSession: function() {
+      var token = localStorage.getItem('x-access-token');
+      if(token) {
+        this.setState({
+          link: 'Logout',
+          buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+        });
+      } else {
+        window.location.assign('/');
+      }
+      },
+
+      logout: function() {
+        localStorage.removeItem('x-access-token');
+        window.location.assign('/');
+        // this.history.pushState(null, '/');
+      },
+
       render: function() {
         return (
           <div>
@@ -12,12 +43,9 @@
              <div className="mdl-layout__header-row">
                <span className="mdl-layout-title">Title</span>
                <div className="mdl-layout-spacer"></div>
-               <nav className="mdl-navigation mdl-layout--large-screen-only">
-                 <a className="mdl-navigation__link" href="">Link</a>
-                 <a className="mdl-navigation__link" href="">Link</a>
-                 <a className="mdl-navigation__link" href="">Link</a>
-                 <a className="mdl-navigation__link" href="">Link</a>
-               </nav>
+                 <a className={this.state.buttonClass} onClick={this.logout}>
+                    {this.state.link}
+                 </a>
              </div>
            </header>
            <div className="mdl-layout__drawer">

@@ -11,11 +11,13 @@
     create: function(req, res) {
         var document = new Document();
         document.ownerId = req.decoded._doc._id;
+        document.owner = req.decoded._doc.username;
         document.title = req.body.title;
         document.content = req.body.content;
-        document.dateCreated = Date.now();
+        document.dateCreated = new Date();
         document.lastModified = Date.now();
         document.accessType = req.body.accessType || "None";
+
 
       // Get RoleId of the role assigned to the document
       Role.find({
@@ -54,6 +56,7 @@
         jwt.verify(tokenOne, secretKey, function(err, decoded) {
           if (!err) {
             req.decoded = decoded;
+            console.log('DECODED', req.decoded);
             next();
           } else {
             return res.status(401).send({
@@ -153,57 +156,32 @@
       Document.find({
         _id: req.params.document_id
       }).exec(function(err, documents) {
-        console.log('Ndio hapa', documents);
-        if (documents === undefined) {
-           return res.status(404).json({
-             'message' : 'No documents are available'
-           });
-         } else {
-           if (documents[0].id !== req.decoded._doc.roleId) {
-             Document.find({
-               _id : req.params.document_id,
-               accessId: req.decoded._doc.roleId,
-               accessType: 'None'
-             }).exec(function(err, docs) {
-               if (docs.length < 1) {
-                 return res.status(200).json({
-                   'message': 'This document does not exist or you are  not allowed to view it'
-                 });
-               }
-               if (err) {
-                 return res.status(500).send(err.errmessage || err);
-               } else {
-                 return res.status(200).json(docs);
-               }
-             });
-           }
-         }
-        // if (documents[0].id !== req.decoded._doc.roleId) {
-        //   Document.find({
-        //     _id : req.params.document_id,
-        //     accessId: req.decoded._doc.roleId,
-        //     accessType: 'None'
-        //   }).exec(function(err, docs) {
-        //     if (docs.length < 1) {
-        //       return res.status(200).json({
-        //         'message': 'This document does not exist or you are  not allowed to view it'
-        //       });
-        //     }
-        //     if (err) {
-        //       return res.status(500).send(err.errmessage || err);
-        //     } else {
-        //       return res.status(200).json(docs);
-        //     }
-        //   });
-        // } else {
-        //   if (documents.length < 1) {
-        //     return res.status(404).json({
-        //       'message' : 'No documents are available'
-        //     });
-        //   } else {
-        //     return res.status(200).json(documents);
-        //   }
-        // }
+        return res.status(200).json(documents);
+        // console.log('Ndio hapa', documents);
+        // if (documents === undefined) {
+        //    return res.status(404).json({
+        //      'message' : 'No documents are available'
+        //    });
+        //  } else {
+        //    if (documents[0].id !== req.decoded._doc.roleId) {
+        //      Document.find({
+        //        _id : req.params.document_id,
+        //        accessId: req.decoded._doc.roleId,
+        //        accessType: 'None'
+        //      }).exec(function(err, docs) {
+        //        if (docs.length < 1) {
+        //          return res.status(200).json({
+        //            'message': 'This document does not exist or you are  not allowed to view it'
+        //          });
+        //        }
+        //        if (err) {
+        //          return res.status(500).send(err.errmessage || err);
+        //        } else {
+        //          return res.status(200).json(docs);
+        //        }
+        //      });
+        //    }
+        //  }
       });
     },
 
@@ -255,12 +233,13 @@
     },
 
     update: function(req, res) {
+      console.log('TUNAANZA ');
       Document.findById(req.params.document_id, function(err, doc) {
         if (err) {
           return res.status(500).send(err.errmessage || err);
         } else {
           // Users can only edit documents available to their role or they are the owner
-          if (doc.accessId == req.decoded._doc.roleId || doc.ownerId === req.decoded._doc._id) {
+        
             if (req.body.title) {
               doc.title = req.body.title;
             }
@@ -274,7 +253,7 @@
                 return res.status(200).json(doc);
               }
             });
-          }
+
         }
       });
     }

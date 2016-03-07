@@ -39,25 +39,11 @@
           title: '',
           content: ''
         },
-        options: [
-          {
-          value: 'My Documents', label: 'My Documents'
-          },
-          {
-            value: 'Public Documents', label: 'Public Documents'
-          }
-        ]
       };
     },
 
     componentDidMount: function() {
-      // this.dialogInit();
-      // this.profileInit();
-      // this.getUsers();
-      // this.getDecoded();
-      // this.setDecoded();
       DocumentStore.addChangeListener(this.getOwnerDocuments, 'owner');
-      // DocumentStore.addChangeListener(this.saveDocument, 'owner');
       DocumentStore.addChangeListener(this.getUserDocuments, 'documents');
       // setInterval(this.getDecoded, 4000);
       // setInterval(this.getOwnerDocuments, 7000);
@@ -100,43 +86,6 @@
       });
     },
 
-    // editInit: function() {
-    //   var editDialog = document.querySelector('.edit-dialog');
-    //   var editDialogButton = document.querySelector('.show-edit-dialog');
-    //   if (!editDialog.showModal) {
-    //     dialogPolyfill.registerDialog(editDialog);
-    //   }
-    //   editDialogButton.addEventListener('click', function() {
-    //     editDialog.showModal();
-    //   });
-    //   editDialog.querySelector('.close').addEventListener('click', function() {
-    //     editDialog.close();
-    //   });
-    // },
-
-    // getDecoded: function() {
-    //   var token = localStorage.getItem('x-access-token');
-    //   var decode = UserStore.getDecodedData();
-    //   // this.setState({ownerId: decode._id});
-      //
-      // if (decode.message === 'You are not authenticated user') {
-      //   toastr.error('You must be logged in bitte :)', {timeout: 3000});
-      //   this.history.pushState(null, '/');
-      // }
-      // DocumentAction.userDocuments(token);
-      // DocumentAction.ownerDocuments(token, this.state.ownerId);
-      // this.setState({
-      //   user: {
-      //     name: {
-      //       first: decode.name.first,
-      //       last: decode.name.last
-      //     },
-      //     username: decode.username,
-      //     email: decode.email
-      //   }
-      // });
-    // },
-
     logout: function() {
       localStorage.removeItem('x-access-token');
       this.history.pushState(null, '/');
@@ -145,7 +94,6 @@
     getOwnerDocuments: function() {
       var token = localStorage.getItem('x-access-token');
       var ownDocs = DocumentStore.getOwnerDocs(token, this.state.ownerId);
-      console.log('Returned owner documents', ownDocs);
       this.setState({
         ownerDocuments: ownDocs
       });
@@ -153,7 +101,6 @@
 
     getUserDocuments: function() {
       var userDocs = DocumentStore.getUserDocs();
-      console.log('Returned user documents', userDocs);
       this.setState({
         userDocuments: userDocs
       });
@@ -161,15 +108,16 @@
 
     getDecoded: function() {
       var decoded = UserStore.getDecodedData();
-      console.log('decoded ndio hii', decoded);
       if (decoded.message === 'You are not authenticated user') {
         toastr.error('You must be logged in bitte :)', {timeout: 3000});
         this.history.pushState(null, '/');
-      } else {
+      } if (decoded.message === 'Failed to Authenticate. You are not logged in.') {
+        window.location.assign('/');
+      }
+      else {
         this.setState({ownerId: decoded._id});
         var token = localStorage.getItem('x-access-token');
         DocumentAction.userDocuments(token);
-        console.log(this.state.ownerId);
         DocumentAction.ownerDocuments(token, this.state.ownerId);
       }
     },
@@ -177,7 +125,6 @@
 
     getUsers: function() {
       var updatedUsers = UserStore.getUserData();
-      console.log('Returned users', updatedUsers);
       this.setState({
         users: updatedUsers
       });

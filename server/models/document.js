@@ -11,6 +11,10 @@
       type: String,
       required: true
     },
+    owner: {
+      type: String,
+      required: true
+    },
     title: {
       type: String,
       required: true,

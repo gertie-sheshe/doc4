@@ -75,14 +75,16 @@
     handleRoleSelect: function(value) {
       console.log('HAIJAJAJA', this.state);
       console.log('VIOLIIN', value);
+      var s = value;
+      console.log('Pia hii?', s);
       if(value) {
         var name = value;
         this.setState({
-          lo: name
-        });
-        console.log('ROOOOL', this.state.lo);
+          lo: s
+        }, this.handleRoleSelect);
       }
     },
+
     handleLogin: function() {
       var data = UserStore.getLoginData();
        if(data.error) {
@@ -90,8 +92,10 @@
       } else {
         //local storage token
         localStorage.setItem('x-access-token', data.token);
+        console.log('We have logged in');
         // toastr.success('Success');
-        this.history.pushState(null, '/dashboard');
+        // this.history.pushState(null, '/dashboard');
+          window.location.assign('/dashboard');
       }
     },
 
