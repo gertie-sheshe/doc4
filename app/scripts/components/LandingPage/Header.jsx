@@ -3,8 +3,8 @@
 
   var React = require('react');
   var ReactDOM = require('react-dom');
+  var localStorage = require('localStorage');
   var History = require('react-router').History;
-  var UserStore = require('../../stores/UserStore');
     module.exports = React.createClass({
       mixins: [History],
       getInitialState: function() {
@@ -25,7 +25,7 @@
           buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
         });
       } else {
-        // window.location.assign('/');
+        // window.location.assign('/dashboard');
       }
       },
 
