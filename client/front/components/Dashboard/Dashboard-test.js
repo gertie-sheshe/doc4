@@ -61,15 +61,15 @@
     expect(dashboard.state().ownerDocuments[0].title).to.eql('No Documents found');
     expect(dashboard.state().ownerDocuments[0].content).to.eql('U la la');
     // expect(dashboard.state().ownerDocuments).to.eq(true);
-  });
-  it('sets the correct state if the store is updated with public documents', function() {
-  var dashboard = enzyme.mount(<Dashboard />);
-  DocumentStore.setUserDocs([{title: 'Checkpoint four', content: 'Why you not getting complete?'}]);
-  expect(DocumentStore.getUserDocs().length).to.eql(1);
-  expect(DocumentStore.getUserDocs()[0]).to.be.a('object');
-  expect(dashboard.state().userDocuments[0].title).to.eql('Checkpoint four');
-  expect(dashboard.state().userDocuments[0].content).to.eql('Why you not getting complete?');
-  // expect(dashboard.state().ownerDocuments).to.eq(true);
-});
+    });
+    it('sets the correct state if the store is updated with public documents', function() {
+    var dashboard = enzyme.mount(<Dashboard />);
+    DocumentStore.setUserDocs([{title: 'Checkpoint four', content: 'Why you not getting complete?'}]);
+    expect(DocumentStore.getUserDocs().length).to.eql(1);
+    expect(DocumentStore.getUserDocs()[0]).to.be.a('object');
+    expect(dashboard.state().userDocuments[0].title).to.eql('Checkpoint four');
+    expect(dashboard.state().userDocuments[0].content).to.eql('Why you not getting complete?');
+    // expect(dashboard.state().ownerDocuments).to.eq(true);
+    });
   });
 })();
