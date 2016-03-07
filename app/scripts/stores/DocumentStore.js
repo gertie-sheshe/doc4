@@ -24,8 +24,19 @@
 
     setOwnerDocs: function(ownerDocs) {
       console.log('owner docs set', ownerDocs);
-      this.ownerDocs = ownerDocs;
-      this.emitChange('owner');
+      if(ownerDocs.message === 'No documents found') {
+        console.log('Hakunaaa docs');
+        var sampleDoc = {
+          title: 'Example Title',
+          content: 'This is an Example document. Please create your first document :)'
+        };
+        this.ownerDocs = [sampleDoc];
+        console.log('sample dodc', this.ownerDocs);
+        this.emitChange('owner');
+      } else {
+        this.ownerDocs = ownerDocs;
+        this.emitChange('owner');
+      }
     },
 
     getOwnerDocs: function() {

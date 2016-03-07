@@ -43,9 +43,9 @@
     },
 
     componentDidMount: function() {
-      this.dialog();
       UserStore.addChangeListener(this.handleLogin, 'login');
       UserStore.addChangeListener(this.handleSignUp, 'signup');
+      // this.dialog();
     },
 
     handleSignUp: function() {
@@ -60,6 +60,7 @@
 
     dialog: function() {
       var landingDialog = document.querySelector('#landing-dialog');
+      console.log('dialog', landingDialog);
       var showDialogButton = document.querySelector('#show-dialog');
       if (!landingDialog.showModal) {
         dialogPolyfill.registerDialog(landingDialog);

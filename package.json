@@ -6,7 +6,7 @@
   "scripts": {
     "test:back": "node seeder/clear; mocha test",
     "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/**/*test.js",
-    "test": "npm run test:front && npm run test:back"
+    "test": "npm run test:front"
   },
   "config": {
     "blanket": {
@@ -47,6 +47,7 @@
     "jquery": "^2.2.0",
     "jsonwebtoken": "^5.5.4",
     "keymirror": "^0.1.1",
+    "localStorage": "^1.0.3",
     "mongodb": "^2.1.3",
     "mongoose": "^4.2.9",
     "morgan": "^1.6.1",

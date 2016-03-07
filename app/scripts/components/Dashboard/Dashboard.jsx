@@ -4,6 +4,7 @@
   var History = require('react-router').History;
   var Documents = require('../Documents/Documents.jsx');
   var Public = require('../Documents/PublicDocs.jsx');
+  var localStorage = require('localStorage');
   var DocumentStore = require('../../stores/DocumentStore');
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
@@ -45,8 +46,6 @@
     componentDidMount: function() {
       DocumentStore.addChangeListener(this.getOwnerDocuments, 'owner');
       DocumentStore.addChangeListener(this.getUserDocuments, 'documents');
-      // setInterval(this.getDecoded, 4000);
-      // setInterval(this.getOwnerDocuments, 7000);
     },
 
     componentWillMount: function() {

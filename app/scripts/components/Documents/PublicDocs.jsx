@@ -5,6 +5,7 @@
   var DocumentActions = require('../../actions/DocumentActions.js');
   var DocumentStore = require('../../stores/DocumentStore.js');
   var toastr = require('toastr');
+  var localStorage = require('localStorage');
   var ReactDOM = require('react-dom');
 
 module.exports = new React.createClass({

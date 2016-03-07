@@ -25,7 +25,7 @@
           buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
         });
       } else {
-        window.location.assign('/');
+        // window.location.assign('/');
       }
       },
 
