@@ -1,0 +1,184 @@
+@font-face {
+  font-family: 'learningcurve';
+  src: url('../fonts/LearningCurve.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GeosansLight';
+  src: url('../fonts/GeosansLight.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'learningcurvedashed';
+  src: url('../fonts/LearningCurveDashed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+#back {
+  background: url("../images/bg.jpeg");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+}
+.img > h1 {
+  color: #fff;
+}
+.img {
+  background: #000;
+}
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 40%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.content h1 {
+  color: #fff;
+  font-size: 5em;
+  font-family: learningcurve;
+}
+.content h2 {
+  color: #fff;
+  font-size: 3em;
+  font-family: GeosansLight;
+}
+.content .mdl-cell {
+  padding: 10px 5px;
+}
+.back {
+  opacity: 0.2%;
+}
+@media (max-width: 960px) {
+  .content {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .mdl-navigation .icon {
+    padding: 10px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen) > .mdl-layout__header {
+    width: 100% !important;
+    margin-left: 0 !important;
+    position: fixed;
+  }
+  .mdl-layout__drawer {
+    position: fixed;
+    padding-bottom: 70px;
+  }
+  .mdl-layout__content {
+    top: 64px;
+  }
+  .mdl-navigation .icon {
+    padding: 20px;
+  }
+}
+.mdl-dialog {
+  width: 50%;
+  max-height: 100%;
+}
+.mdl-dialog h3 {
+  font-family: learningcurve;
+}
+.mdl-layout-title {
+  font-family: learningcurve;
+  font-size: 40px;
+}
+.mdl-textfield--floating-label {
+  width: 70%;
+}
+.mdl-layout__header-row {
+  background-color: #000;
+}
+.mdl-layout__drawer-button {
+  background-color: #000 !important;
+}
+.mdl-navigation .icon {
+  padding: 20px;
+}
+.demo-list-icon {
+  width: 300px;
+}
+.mdl-card {
+  width: auto !important;
+  height: auto;
+}
+.demo-card-square > .mdl-card__title {
+  color: #fff;
+  background: bottom right 15% no-repeat #46B6AC;
+}
+@media (max-width: 839px) {
+  .mdl-card {
+    width: 95vw !important;
+    height: auto;
+  }
+}
+.mdl-layout__content h2 {
+  text-align: left;
+  padding-left: 4%;
+  font-family: learningcurve;
+}
+.mdl-layout__content h1 {
+  font: bold;
+}
+.documents .mdl-card__supporting-text,
+.documents .doc-content {
+  text-overflow: ellipsis;
+  height: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.documents .mdl-list,
+.documents .mdl-list__item-primary-content {
+  max-width: 90%;
+}
+#document-form .mdl-button {
+  margin-left: 40%;
+}
+#new-doc {
+  text-align: center;
+}
+header {
+  position: fixed;
+}
+#drawer {
+  height: 100vh;
+}
+#dash-heading h2,
+#dash-heading > .mdl-cell {
+  margin: auto;
+}
+#show-doc-dialog {
+  margin: 20px;
+}
+#form-document {
+  margin-left: 20%;
+}
+#text {
+  width: 150%;
+}
+#userdoc {
+  position: fixed;
+  overflow-y: scroll;
+  height: 100%;
+  top: 64px;
+  border-left: solid 1px #eee;
+}
+#userdoc li {
+  list-style: none;
+}
+#dash-heading {
+  max-height: 64px;
+}
