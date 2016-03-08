@@ -30,7 +30,7 @@ module.exports = new React.createClass({
                 <button className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " onClick ={docContent}>
                   Read More
                 </button>
-                Added by: {doc.owner} Date Added: 2 days ago
+                Added by: {doc.owner}
               </span>
               <hr/>
             </span>

@@ -45,7 +45,7 @@
     componentDidMount: function() {
       UserStore.addChangeListener(this.handleLogin, 'login');
       UserStore.addChangeListener(this.handleSignUp, 'signup');
-      // this.dialog();
+      this.dialog();
     },
 
     handleSignUp: function() {

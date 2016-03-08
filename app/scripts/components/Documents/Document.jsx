@@ -15,6 +15,7 @@
   var popups = require('popups');
   var NewDoc = require('../Documents/NewDoc.jsx');
   var Select = require('react-select');
+  var localStorage = require('localStorage');
 
 
   var Dashboard = new React.createClass({

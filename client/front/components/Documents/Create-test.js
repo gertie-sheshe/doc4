@@ -5,6 +5,8 @@
   sinon = require('sinon'),
   expect = require('chai').expect,
   enzyme = require('enzyme'),
+  DocumentAction = require('../../../../app/scripts/actions/DocumentActions'),
+
   Create = require(createPath);
 
   describe('Create Document', function() {
@@ -14,10 +16,6 @@
       console.log(create.debug());
       expect(create.find('.mdl-grid')).to.have.length(1);
     });
-    // it('Renders accurate content', function() {
-    //   expect(enzyme.shallow(<Landing />).text()).to.have.string('Doc 4.0');
-    //   expect(enzyme.shallow(<Landing />).text()).to.have.string('The place to go to create, manage and edit documents. Get started today ');
-    // });
     it('Renders child components', function() {
       var create = enzyme.shallow(<Create />);
       // console.log(landing.debug());
@@ -47,12 +45,12 @@
      instance.fetchInputValues.restore();
    });
 
-    // it('test onclick', function() {
-    //   var create = enzyme.mount(<Create />);
-    //   var instance = create.instance();
-    //   sinon.stub(instance, 'saveDocument').returns(true);
-    //   create.find('#createdoc').simulate('click');
-    //   expect(instance.saveDocument.called).to.equal(true);
-    // });
+    it('test onclick', function() {
+      var create = enzyme.mount(<Create />);
+      var instance = create.instance();
+      sinon.stub(DocumentAction, 'createDocument').returns(true);
+      create.find('#createdoc').simulate('click');
+      expect(DocumentAction.createDocument.called).to.equal(true);
+    });
   });
 })();
