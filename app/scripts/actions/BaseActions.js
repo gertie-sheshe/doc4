@@ -26,7 +26,6 @@
     },
 
     put: function(url, data, actionType, token) {
-      console.log('put request', data);
       request
         .put(url)
         .set('x-access-token', token)
