@@ -8,7 +8,6 @@
       BaseActions.get('/api/documents', DocConstants.GET_DOCS, token);
     },
     ownerDocuments: function(token, id) {
-      console.log('owner documents');
       BaseActions.get('/api/users/' + id +'/documents', DocConstants.OWNER_DOCS, token);
     },
     createDocument: function(doc, token) {
@@ -21,7 +20,6 @@
       BaseActions.get('/api/documents/' + id, DocConstants.ONE_DOCS, token);
     },
     updateDoc: function(id, doc, token) {
-      console.log('kwa actions', doc);
       BaseActions.put('/api/documents/' + id, doc, DocConstants.UPDATE_DOC, token);
     }
   };

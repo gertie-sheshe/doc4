@@ -30,6 +30,7 @@
       var token = localStorage.getItem('x-access-token');
       DocumentAction.createDocument(this.state.document, token);
       toastr.success('Document successfully created', {timeout: 1500});
+      window.location.assign('/dashboard');
       // this.history.pushState(null, '/dashboard');
     },
 

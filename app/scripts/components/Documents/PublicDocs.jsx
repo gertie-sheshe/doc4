@@ -19,7 +19,6 @@ module.exports = new React.createClass({
         });
       };
       return (
-
           <li className="mdl-list__item mdl-list__item--three-line" key={index}>
             <span className="mdl-list__item-primary-content">
               <i className="material-icons mdl-list__item-avatar">description</i>

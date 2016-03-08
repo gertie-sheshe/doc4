@@ -10,7 +10,10 @@
   Create = require(createPath);
 
   describe('Create Document', function() {
-
+    window.location = {};
+    before(function() {
+       window.location.assign = sinon.spy();
+   });
     it('renders the Landing component', function() {
       var create = enzyme.shallow(<Create />);
       console.log(create.debug());
