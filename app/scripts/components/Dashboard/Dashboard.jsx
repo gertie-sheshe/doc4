@@ -14,7 +14,6 @@
   var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
   var popups = require('popups');
-  var NewDoc = require('../Documents/NewDoc.jsx');
   var Select = require('react-select');
 
 
