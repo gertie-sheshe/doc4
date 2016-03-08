@@ -16,15 +16,6 @@
         });
     },
 
-    getUser: function(url, token) {
-      request
-        .get(url)
-        .set('x-access-token', token)
-        .end(function(err, result) {
-          return result;
-        });
-    },
-
     put: function(url, data, actionType, token) {
       request
         .put(url)

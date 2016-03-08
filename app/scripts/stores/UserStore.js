@@ -31,7 +31,6 @@ var UserStore = assign({}, BaseStore, {
 
   setDecodedData: function(decodedData) {
     this.decodedData = decodedData;
-    console.log('Set decoded', this.decodedData);
     this.emitChange('decode');
   },
 
@@ -41,7 +40,6 @@ var UserStore = assign({}, BaseStore, {
 
   setUserData: function(usersData) {
     this.usersData = usersData;
-    console.log('These are users', this.usersData);
     this.emitChange('users');
   },
 
