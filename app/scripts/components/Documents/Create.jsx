@@ -2,6 +2,7 @@
   var React = require('react');
   var ReactDOM = require('react-dom');
   var History = require('react-router').History;
+  var localStorage = require('localStorage');
   var DocumentAction = require('../../actions/DocumentActions');
   var toastr = require('toastr');
 
@@ -28,8 +29,9 @@
     saveDocument: function() {
       var token = localStorage.getItem('x-access-token');
       DocumentAction.createDocument(this.state.document, token);
-     toastr.success('Document successfully created', {timeout: 1500});
-     this.history.pushState(null, '/dashboard');
+      toastr.success('Document successfully created', {timeout: 1500});
+      window.location.assign('/dashboard');
+      // this.history.pushState(null, '/dashboard');
     },
 
     render: function() {
@@ -50,7 +52,7 @@
               </form>
           </div>
           <div className="mdl-card__actions mdl-card--border">
-            <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.saveDocument}>
+            <a id="createdoc" className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.saveDocument}>
               CREATE
             </a>
             <a href={'/dashboard'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">

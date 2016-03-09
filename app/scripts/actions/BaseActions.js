@@ -16,17 +16,7 @@
         });
     },
 
-    getUser: function(url, token) {
-      request
-        .get(url)
-        .set('x-access-token', token)
-        .end(function(err, result) {
-          return result;
-        });
-    },
-
     put: function(url, data, actionType, token) {
-      console.log('put request', data);
       request
         .put(url)
         .set('x-access-token', token)
@@ -45,7 +35,6 @@
         .delete(url)
         .set('x-access-token', token)
         .end(function(err, result) {
-          console.log('CONFUSION', result.body);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body

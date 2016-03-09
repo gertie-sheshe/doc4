@@ -19,7 +19,6 @@ module.exports = new React.createClass({
         });
       };
       return (
-
           <li className="mdl-list__item mdl-list__item--three-line" key={index}>
             <span className="mdl-list__item-primary-content">
               <i className="material-icons mdl-list__item-avatar">description</i>
@@ -30,7 +29,7 @@ module.exports = new React.createClass({
                 <button className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " onClick ={docContent}>
                   Read More
                 </button>
-                Added by: {doc.owner} Date Added: 2 days ago
+                Added by: {doc.owner}
               </span>
               <hr/>
             </span>

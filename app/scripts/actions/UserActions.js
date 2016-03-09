@@ -11,11 +11,9 @@
       BaseActions.post('/api/users', user, DocConstants.USER_SIGNUP);
     },
     decode: function(token) {
-      console.log('decoding token');
       BaseActions.get('/api/users/decode', DocConstants.USER_DECODE, token);
     },
     userData: function(token) {
-      console.log('Getting users');
       BaseActions.get('/api/users', DocConstants.USER_DATA, token);
     }
   };

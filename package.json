@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:back": "node seeder/clear; mocha test",
-    "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/**/*test.js",
+    "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/components/**/*test.js",
     "test": "npm run test:front"
   },
   "config": {
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andela-gnyenyeshi/docmanagement.git"
+    "url": "git+https://github.com/andela-gnyenyeshi/doc4.git"
   },
   "author": "",
   "license": "ISC",
@@ -59,7 +59,6 @@
     "request-json": "^0.5.5",
     "superagent": "^1.3.0",
     "supertest": "^1.1.0",
-    "supertest-as-promised": "^3.0.0",
     "supervisor": "^0.9.1",
     "toastr": "^2.1.2"
   },
@@ -83,7 +82,6 @@
     "jsdom": "^8.0.4",
     "mocha": "^2.3.4",
     "path": "^0.12.7",
-    "popup": "0.0.3",
     "popups": "^1.1.3",
     "react-addons-test-utils": "^0.14.7",
     "react-modal": "^0.6.1",

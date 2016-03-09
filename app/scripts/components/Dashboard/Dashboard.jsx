@@ -8,13 +8,10 @@
   var DocumentStore = require('../../stores/DocumentStore');
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
-  var RoleAction = require('../../actions/RoleAction');
   var UserStore = require('../../stores/UserStore');
-  var RoleStore = require('../../stores/RoleStore');
   var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
   var popups = require('popups');
-  var NewDoc = require('../Documents/NewDoc.jsx');
   var Select = require('react-select');
 
 
