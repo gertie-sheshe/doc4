@@ -23,7 +23,6 @@
     },
 
     setOwnerDocs: function(ownerDocs) {
-      console.log('owner docs set', ownerDocs);
       if(ownerDocs.message === 'No documents found') {
         console.log('Hakunaaa docs');
         var sampleDoc = {
@@ -48,7 +47,7 @@
     },
 
     getDeleted: function() {
-      if(this.deleted === 'Document has been deleted') {
+      if(this.deleted.message === 'Document has been deleted') {
         return this.deleted;
       } else {
         return null;

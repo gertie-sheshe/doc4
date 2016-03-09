@@ -76,7 +76,7 @@
     //   sinon.spy(UserStore, 'setUserData');
     //   var userAction = {
     //     actionType: 'USER_DATA',
-    //     data: {}
+    //     data: []
     //   };
     //   AppDispatcher.dispatch(userAction);
     //   expect(UserStore.setUserData.called).to.equal(true);

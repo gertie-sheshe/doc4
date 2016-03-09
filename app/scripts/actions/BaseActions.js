@@ -35,7 +35,6 @@
         .delete(url)
         .set('x-access-token', token)
         .end(function(err, result) {
-          console.log('CONFUSION', result.body);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body
