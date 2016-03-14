@@ -7,7 +7,7 @@
   var app = require('../app.js');
 
   describe('User tests', function() {
-    var user, admin, token, token1;
+    var user, user2, admin, token, token1;
     describe('User', function() {
       it('A new user can be created', function(done) {
         request(app)
@@ -114,6 +114,20 @@
             done();
           });
       });
+      it('User cannot update another\'s details', function(done) {
+        request(app)
+          .put('/api/users/' + '6754323478')
+          .set('x-access-token', token)
+          .send({
+            lastname: 'Smaug'
+          })
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 403);
+            assert.strictEqual(res.body.message, 'Sorry. Only the Owner can update the profile');
+            expect(res.body.message).to.be.a('string');
+            done();
+          });
+      });
 
       it('User can view all documents he/she created. User without document.', function(done) {
         request(app)
@@ -122,6 +136,26 @@
           .end(function(err, res) {
             assert.strictEqual(res.status, 404);
             assert.strictEqual(res.body.message, 'No documents found');
+            done();
+          });
+      });
+      it('User cannot view a document that does not exist', function(done) {
+        request(app)
+          .get('/api/users/' + '676554378990' + '/documents')
+          .set('x-access-token', token)
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 404);
+            assert.strictEqual(res.body.message, 'Document not found');
+            done();
+          });
+      });
+      it('User can view his own profile', function(done) {
+        request(app)
+          .get('/api/users/' + user._id)
+          .set('x-access-token', token)
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 200);
+            expect(res.body).to.be.a('object');
             done();
           });
       });
