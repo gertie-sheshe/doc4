@@ -7,7 +7,7 @@
     "pretest": "node seeder/clear",
     "test:back": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
     "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/components/**/*test.js",
-    "coverage": "cat coverage/lcov.info | coveralls",
+    "coverage": "cat coverage/lcov.info | codecov",
     "test": "npm run test:back && npm run test:front"
   },
   "config": {
@@ -24,7 +24,7 @@
     }
   },
   "bin": {
-    "coveralls": "./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "./bin/coveralls.js"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
     "chai": "^3.5.0",
+    "codecov": "^1.0.1",
     "cookie-parser": "^1.4.0",
     "coveralls": "^2.11.8",
     "express": "^4.13.3",
