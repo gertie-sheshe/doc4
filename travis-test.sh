@@ -8,8 +8,4 @@ npm test
 # Now that the tests have passed, gather coverage data.
 set +o errexit
 NODE_ENV=test
-./node_modules/mocha/bin/mocha \
-  --require blanket \
-  --reporter mocha-lcov-reporter \
-  client/front/components/**/*test.js \
-  | ./node_modules/coveralls/bin/coveralls.js
+./node_modules/mocha/bin/mocha --require blanket --reporter mocha-lcov-reporter client/front/components/**/*test.js ./node_modules/coveralls/bin/coveralls.js
