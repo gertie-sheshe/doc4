@@ -10,7 +10,6 @@
 
   describe('Document Actions', function() {
     var token = 'gerrarahia',
-    word = [],
     payload = {},
     id = 6;
 
