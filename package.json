@@ -6,9 +6,9 @@
   "scripts": {
     "pretest": "node seeder/clear",
     "test:back": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
-    "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/components/**/*test.js",
+    "test:front": "istanbul cover ./node_modules/mocha/bin/_mocha --compilers client/compiler.js client/testdom.js  client/front/components/**/*test.js",
     "coverage": "cat coverage/lcov.info | codecov",
-    "test": "npm run test:back && npm run test:front"
+    "test": "npm run test:front"
   },
   "config": {
     "blanket": {
