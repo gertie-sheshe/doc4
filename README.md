@@ -2,9 +2,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/andela-gnyenyeshi/doc4/badge.svg?branch=develop)](https://coveralls.io/github/andela-gnyenyeshi/doc4?branch=develop)
 
-[![codecov.io](https://codecov.io/github/andela-gnyenyeshi/doc4/coverage.svg?branch=develop)](https://codecov.io/github/andela-gnyenyeshi/doc4?branch=develop)
+[![codecov.io](https://codecov.io/github/andela-gnyenyeshi/doc4/coverage.svg?branch=master)](https://codecov.io/github/andela-gnyenyeshi/doc4?branch=master)
 
-[![codecov.io](https://codecov.io/github/andela-gnyenyeshi/doc4/coverage.svg?branch=develop)](https://codecov.io/github/andela-gnyenyeshi/doc4?branch=develop)
 
 DOCUMENT MANAGEMENT SYSTEM
 ==========================
