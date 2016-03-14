@@ -8,6 +8,12 @@
 
   var Create = new React.createClass({
     mixins: [History],
+    componentWillMount: function() {
+      var token = localStorage.getItem('x-access-token');
+      if(!token) {
+        window.location.assign('/dashboard');
+      }
+    },
 
     getInitialState: function() {
       return {

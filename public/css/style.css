@@ -182,3 +182,26 @@ header {
 #dash-heading {
   max-height: 64px;
 }
+#logout {
+  color: #fff;
+}
+#newdoc {
+  margin-left: 24px;
+}
+.details {
+  padding-left: 10px;
+}
+#userdoc .documents {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.owner-details {
+  font-style: italic;
+  font-size: 0.95em;
+}
+.details > a {
+  text-decoration: none;
+}
+.details .doc-content {
+  padding: 5px 0;
+}

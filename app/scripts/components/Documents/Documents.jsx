@@ -16,7 +16,7 @@ module.exports = new React.createClass({
           <div className="demo-card-square mdl-card mdl-shadow--2dp">
             <div className="mdl-card__title mdl-card--expand">
 
-              <h1 className="mdl-card__title-text">Added by:&nbsp;  {doc.dateCreated}</h1>
+              <h1 className="mdl-card__title-text">{doc.title}</h1>
             </div>
             <div className="mdl-card__supporting-text">
               {doc.content}

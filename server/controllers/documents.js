@@ -49,14 +49,11 @@
     },
 
     session: function(req, res, next) {
-      console.log('SESSION');
       var tokenOne = req.headers['x-access-token'];
-      console.log('DOCS TOKEN', tokenOne);
       if(tokenOne) {
         jwt.verify(tokenOne, secretKey, function(err, decoded) {
           if (!err) {
             req.decoded = decoded;
-            console.log('DECODED', req.decoded);
             next();
           } else {
             return res.status(401).send({
@@ -65,7 +62,6 @@
           }
         });
       } else {
-        console.log('DOCS TOKEN', tokenOne);
         return res.status(401).send({message: 'You are not authenticated documents'});
       }
     },
@@ -233,13 +229,12 @@
     },
 
     update: function(req, res) {
-      console.log('TUNAANZA ');
       Document.findById(req.params.document_id, function(err, doc) {
         if (err) {
           return res.status(500).send(err.errmessage || err);
         } else {
           // Users can only edit documents available to their role or they are the owner
-        
+
             if (req.body.title) {
               doc.title = req.body.title;
             }

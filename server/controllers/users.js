@@ -25,10 +25,8 @@
     },
 
     decode: function(req, res) {
-      console.log('IDDDD', typeof req.decoded._doc._id);
       User.findById(req.decoded._doc._id)
       .then(function(user) {
-        console.log('USEEEER', user);
         if (user && user.loggedIn) {
           user.password = null;
           return res.send(user);
@@ -42,20 +40,17 @@
 
     session: function(req, res, next) {
       var token = req.headers['x-access-token'];
-      console.log('userS TOKEN', token);
       if(token) {
         jwt.verify(token, secretKey, function(err, decoded) {
           if (!err) {
             req.decoded = decoded;
             req.token = token;
-            console.log('DECODED', req.decoded);
             // // Check in loggedIn has been set to true
             User.findById(req.decoded._doc._id, function(err, user){
               if (err) {
                 return res.status(401).send(err.errmessage || err);
               } else {
                 if (user && user.loggedIn) {
-                  console.log('NEEEEXT');
                   next();
                 } else {
                   return res.status(401).json({
@@ -128,7 +123,6 @@
 
     getDocs: function(req, res) {
       // Get all the documents that belong to the user
-      console.log('KWA CONTROLLER YA USERS', req.decoded);
       if (req.params.user_id === req.decoded._doc._id) {
         Documents.find({
           ownerId: req.params.user_id

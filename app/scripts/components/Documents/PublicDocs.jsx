@@ -19,25 +19,23 @@ module.exports = new React.createClass({
         });
       };
       return (
-          <li className="mdl-list__item mdl-list__item--three-line" key={index}>
-            <span className="mdl-list__item-primary-content">
-              <i className="material-icons mdl-list__item-avatar">description</i>
-              <span>Title:  {doc.title}</span>
-              <span className="mdl-list__item-text-body">
-                <span className="doc-content"> {doc.content} </span>
-                <br/>
-                <button className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " onClick ={docContent}>
+          <div className="mdl-cell--12-col" key={index}>
+              <div className="mdl-cell--12-col mdl-typography--title">
+                  Title:  {doc.title}
+              </div>
+              <div className="details mdl-cell--12-col">
+                <span className="owner-details">Added by: {doc.owner} <br/></span>
+                <span className="doc-content"> {doc.content} <br/></span>
+                <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " onClick ={docContent}>
                   Read More
-                </button>
-                Added by: {doc.owner}
-              </span>
+                </a>
+              </div>
               <hr/>
-            </span>
-          </li>
+          </div>
       );
 
     });
-    return(<div className="documents mdl-grid"><ul className="demo-list-three mdl-list">{docNode}</ul></div>)
+    return(<div className="documents mdl-grid">{docNode}</div>)
   }
 });
 })();
