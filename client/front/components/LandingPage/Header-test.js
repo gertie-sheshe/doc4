@@ -11,7 +11,6 @@
 
     it('renders the Landing component', function() {
       var header = enzyme.shallow(<Header />);
-      console.log(header.debug());
       expect(header.find('.mdl-layout__header')).to.have.length(1);
     });
     it('Renders accurate content', function() {

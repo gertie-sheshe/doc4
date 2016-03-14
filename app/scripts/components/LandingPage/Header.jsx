@@ -22,7 +22,7 @@
       if(token) {
         this.setState({
           link: 'Logout',
-          buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+          buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect"
         });
       } else {
         // window.location.assign('/dashboard');
@@ -43,7 +43,7 @@
              <div className="mdl-layout__header-row">
                <span className="mdl-layout-title">Title</span>
                <div className="mdl-layout-spacer"></div>
-                 <a className={this.state.buttonClass} onClick={this.logout}>
+                 <a id="logout" className={this.state.buttonClass} onClick={this.logout}>
                     {this.state.link}
                  </a>
              </div>

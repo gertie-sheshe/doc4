@@ -14,7 +14,6 @@
   describe('Document', function() {
     it('renders the Document component', function() {
       var document = enzyme.mount(<Document />);
-      console.log(document.debug());
       // expect(document.find('.mdl-grid')).to.have.length(1);
     });
     // it('Component has the correct states', function() {

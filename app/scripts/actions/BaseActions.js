@@ -22,7 +22,6 @@
         .set('x-access-token', token)
         .send(data)
         .end(function(err, result) {
-          console.log('PUT', result);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body

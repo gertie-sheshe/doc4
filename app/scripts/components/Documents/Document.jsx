@@ -32,8 +32,6 @@
       var pathArray = window.location.pathname.split('/')[1];
       var token = localStorage.getItem('x-access-token');
       DocumentAction.setDoc(pathArray, token);
-      console.log(pathArray);
-
     },
 
     componentDidMount: function() {
@@ -44,12 +42,10 @@
     handleSelected: function() {
       var selectDoc = DocumentStore.getSelectedDoc();
       var doc = [].concat(selectDoc);
-      console.log('mydoc',selectDoc);
       this.setState({
         document: doc
       });
       this.editInit();
-      console.log('WOOOO', this.state.document);
     },
 
     editInit: function() {
@@ -68,7 +64,6 @@
 
     update: function() {
       var newDoc = this.state.updatedDoc;
-      console.log('updated doc function', newDoc);
       var token = localStorage.getItem('x-access-token');
       var docId = window.location.pathname.split('/')[1];
       DocumentAction.updateDoc(docId, newDoc, token);
@@ -106,7 +101,7 @@
           return (
             <div className="mdl-grid" key={doc._id}>
               <div id="ownerdoc" className="mdl-cell mdl-cell--12-col">
-                <div className="mdl-cell mdl-cell--6-col">
+                <div className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
                   <div className="demo-card-square mdl-card mdl-shadow--2dp">
                     <div className="mdl-card__title mdl-card--expand">
                       <h1 className="mdl-card__title-text">Title:&nbsp;  {doc.title}</h1>

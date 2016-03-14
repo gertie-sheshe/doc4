@@ -142,6 +142,11 @@
     render: function() {
       return (
         <div className="mdl-grid">
+          <div className="mdl-cell mdl-cell--12-col">
+            <a id="newdoc" href="/create" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >
+              NEW DOCUMENT
+            </a>
+          </div>
           <div id="ownerdoc" className="mdl-cell mdl-cell--8-col">
             <Documents documents={this.state.ownerDocuments} />
           </div>

@@ -24,13 +24,11 @@
 
     setOwnerDocs: function(ownerDocs) {
       if(ownerDocs.message === 'No documents found') {
-        console.log('Hakunaaa docs');
         var sampleDoc = {
           title: 'Example Title',
           content: 'This is an Example document. Please create your first document :)'
         };
         this.ownerDocs = [sampleDoc];
-        console.log('sample dodc', this.ownerDocs);
         this.emitChange('owner');
       } else {
         this.ownerDocs = ownerDocs;
@@ -59,14 +57,12 @@
     setSelectedDoc: function(selected) {
       this.selected = selected;
       this.emitChange('doc');
-      console.log(selected);
     },
     getSelectedDoc: function() {
       return this.selected;
     },
 
     setUpdatedDoc: function(updated) {
-      console.log('Updated doc store', updated);
       this.updated = updated;
     },
 

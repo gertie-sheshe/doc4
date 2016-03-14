@@ -2,6 +2,7 @@
   'use strict';
   var AppDispatcher = require('../../../../app/scripts/dispatcher/AppDispatcher');
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
+  var emitChange = require('../../../../app/scripts/stores/DocumentStore').setUserDocs;
   var constants = require('../../../../app/scripts/constants/DocConstants');
   var sinon = require('sinon');
   var expect = require('chai').expect;
@@ -23,6 +24,7 @@
 
     it('Get User Docs', function() {
       sinon.spy(DocumentStore, 'setUserDocs');
+      sinon.spy(emitChange, 'emitChange');
       var userAction = {
         actionType: 'GET_DOCS',
         data: {
@@ -32,6 +34,7 @@
       };
       AppDispatcher.dispatch(userAction);
       expect(DocumentStore.setUserDocs.called).to.equal(true);
+      expect(emitChange.emitChange.called).to.equal(true);
       var docData = DocumentStore.getUserDocs();
       expect(docData).to.equal(userAction.data);
     });
