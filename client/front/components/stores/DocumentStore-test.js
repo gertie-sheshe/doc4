@@ -24,7 +24,6 @@
 
     it('Get User Docs', function() {
       sinon.spy(DocumentStore, 'setUserDocs');
-      sinon.spy(emitChange, 'emitChange');
       var userAction = {
         actionType: 'GET_DOCS',
         data: {
@@ -34,7 +33,6 @@
       };
       AppDispatcher.dispatch(userAction);
       expect(DocumentStore.setUserDocs.called).to.equal(true);
-      expect(emitChange.emitChange.called).to.equal(true);
       var docData = DocumentStore.getUserDocs();
       expect(docData).to.equal(userAction.data);
     });

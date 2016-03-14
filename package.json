@@ -6,7 +6,7 @@
   "scripts": {
     "test:back": "node seeder/clear; mocha test",
     "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/components/**/*test.js",
-    "test": "npm run test:back"
+    "test": "npm run test:front"
   },
   "config": {
     "blanket": {

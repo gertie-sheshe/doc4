@@ -16,14 +16,14 @@
     url = 'one/two',
     data = {};
 
-    before(function() {
+    beforeEach(function() {
       sinon.stub(AppDispatcher, 'dispatch');
       sinon.stub(request.Request.prototype, 'end', function(callback) {
         callback(null, response);
       });
     });
 
-    after(function() {
+    afterEach(function() {
       AppDispatcher.dispatch.restore();
       request.Request.prototype.end.restore();
     });
