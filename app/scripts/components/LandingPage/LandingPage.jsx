@@ -5,8 +5,10 @@
   var Login = require('../LoginForm/LoginForm.jsx');
   var UserStore = require('../../stores/UserStore');
   var History = require('react-router').History;
+  var localStorage = require('localStorage');
   var UserAction = require('../../actions/UserActions');
   var toastr = require('toastr');
+  var dialog = require('../../../scripts/dialog');
   var Select = require('react-select');
 
   var Landing = new React.createClass({
@@ -28,61 +30,31 @@
           role: ''
         },
 
-        lo : '',
-
-        roles: [
-          {
-            value: 'Admin', label: 'Admin'
-          }, {
-            value: 'Viewer', label: 'Viewer'
-          }, {
-            value: 'Staff', label: 'Staff'
-          }
-        ]
+        panel: {
+          login:"mdl-tabs__panel",
+          signup:"mdl-tabs__panel is-active"
+        }
       };
     },
 
     componentDidMount: function() {
       UserStore.addChangeListener(this.handleLogin, 'login');
       UserStore.addChangeListener(this.handleSignUp, 'signup');
-      // this.dialog();
+      dialog.one();
     },
 
     handleSignUp: function() {
       var info = UserStore.getSignUpData();
-      console.log('BUUG', info);
       if(info.error) {
         toastr.warning('Sign up failed. This Email or Username is already in use', {timeout: 5000});
       } else {
-        toastr.success('Success');
-      }
-    },
-
-    dialog: function() {
-      var landingDialog = document.querySelector('#landing-dialog');
-      console.log('dialog', landingDialog);
-      var showDialogButton = document.querySelector('#show-dialog');
-      if (!landingDialog.showModal) {
-        dialogPolyfill.registerDialog(landingDialog);
-      }
-      showDialogButton.addEventListener('click', function() {
-        landingDialog.showModal();
-      });
-      landingDialog.querySelector('.close').addEventListener('click', function() {
-        landingDialog.close();
-      });
-    },
-
-    handleRoleSelect: function(value) {
-      console.log('HAIJAJAJA', this.state);
-      console.log('VIOLIIN', value);
-      var s = value;
-      console.log('Pia hii?', s);
-      if(value) {
-        var name = value;
+        toastr.success('Success. Please proceed by logging in :)');
         this.setState({
-          lo: s
-        }, this.handleRoleSelect);
+          panel: {
+            signup: "mdl-tabs__panel",
+            login: "mdl-tabs__panel is-active"
+          }
+        });
       }
     },
 
@@ -153,16 +125,14 @@
                       <a href="#signup-panel" className="mdl-tabs__tab ">SIGN UP</a>
                       <a href="#login-panel" className="mdl-tabs__tab">LOGIN</a>
                     </div>
-                    <div className="mdl-tabs__panel is-active" id="signup-panel">
+                    <div className={this.state.panel.signup} id="signup-panel">
                       <SignUp
                         onChange={this.fetchValues}
                         onSubmit={this.handleSignUpAction}
                         onClick={this.handleSignUpAction}
-                        roles={this.state.roles}
-                        info={this.state.info}
-                        select={this.handleRoleSelect}/>
+                        info={this.state.info} />
                    </div>
-                   <div className="mdl-tabs__panel" id="login-panel">
+                   <div className={this.state.panel.login} id="login-panel">
                      <Login
                       onChange={this.fetchValues}
                       onSubmit={this.handleLoginAction}

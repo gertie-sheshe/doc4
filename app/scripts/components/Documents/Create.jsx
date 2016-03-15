@@ -19,7 +19,8 @@
       return {
         document: {
           title: '',
-          content: ''
+          content: '',
+          access: ''
         }
       };
     },
@@ -43,17 +44,31 @@
     render: function() {
       return (
         <div className="mdl-grid">
-        <div className="mdl-cell mdl-cell--12-col">
+        <div id="create-doc" className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
         <div className="demo-card-square mdl-card mdl-shadow--2dp">
           <div className="mdl-card__supporting-text">
             <form id ="form-document" action="post">
-              <div className="mdl-textfield mdl-js-textfield  mdl-cell--8-col">
+              <div className="mdl-textfield mdl-js-textfield  mdl-cell--12-col">
                   <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={this.fetchInputValues}/>
-                  <label className="mdl-textfield__label" htmlFor="title">Title</label>
+                  <label className="mdl-textfield__label" htmlFor="title">Document Title</label>
               </div>
-              <div className="mdl-textfield mdl-js-textfield">
-                <textarea className="mdl-textfield__input" type="text" rows= "3" id="text" name="content" onChange={this.fetchInputValues}></textarea>
-                <label className="mdl-textfield__label" htmlFor="text">Text lines...</label>
+              <div className="mdl-textfield mdl-js-textfield mdl-cell--12-col">
+                <textarea className="mdl-textfield__input" type="text" rows= "20" id="text" name="content" onChange={this.fetchInputValues}></textarea>
+                <label className="mdl-textfield__label" htmlFor="text">Content</label>
+              </div>
+              <div className="mdl-grid">
+                <div className="mdl-cell--3-col">
+                  <input id="roles" type="radio" name="access" value="Admin" onChange={this.fetchInputValues}>Admin</input>
+                </div>
+                <div className="mdl-cell--3-col">
+                  <input id="roles" type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>Staff</input>
+                </div>
+                <div className="mdl-cell--3-col">
+                  <input id="roles" type="radio" name="access" value="Viewer" onChange={this.fetchInputValues}>Viewer</input>
+                </div>
+                <div className="mdl-cell--3-col">
+                  <input id="roles" type="radio" name="access" value="None" onChange={this.fetchInputValues}>None</input>
+                </div>
               </div>
               </form>
           </div>

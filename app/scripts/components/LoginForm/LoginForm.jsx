@@ -20,7 +20,7 @@ module.exports = new React.createClass({
           </form>
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--6-col">
-              <button type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Log In</button>
+              <button id="login" type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Log In</button>
             </div>
             <div className="mdl-cell mdl-cell--6-col">
               <button type="button" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Cancel</button>

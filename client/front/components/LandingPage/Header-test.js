@@ -1,11 +1,11 @@
 (function() {
   'use strict';
-  var headerPath = '../../../../app/scripts/components/LandingPage/Header.jsx',
+  var Header = require('../../../../app/scripts/components/LandingPage/Header.jsx'),
   React = require('react'),
   sinon = require('sinon'),
   expect = require('chai').expect,
-  enzyme = require('enzyme'),
-  Header = require(headerPath);
+  enzyme = require('enzyme');
+  // Header = require(headerPath);
 
   describe('Header', function() {
 

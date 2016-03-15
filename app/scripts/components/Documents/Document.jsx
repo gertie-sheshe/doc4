@@ -23,7 +23,8 @@
         document: [],
         updatedDoc: {
           title: '',
-          content: ''
+          content: '',
+          access: ''
         }
       };
     },
@@ -74,8 +75,10 @@
     fetchInputValues: function(event) {
       var field = event.target.name;
       var value = event.target.value;
+      console.log('update',value);
       this.state.updatedDoc[field] = value;
       this.setState({updatedDoc: this.state.updatedDoc});
+      console.log('updated doc', this.state.updatedDoc);
     },
 
     render: function() {
@@ -100,7 +103,7 @@
           };
           return (
             <div className="mdl-grid" key={doc._id}>
-              <div id="ownerdoc" className="mdl-cell mdl-cell--12-col">
+              <div id="single-doc" className="mdl-cell mdl-cell--12-col">
                 <div className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
                   <div className="demo-card-square mdl-card mdl-shadow--2dp">
                     <div className="mdl-card__title mdl-card--expand">
@@ -115,13 +118,27 @@
                       </a>
                         <dialog id="edit-dialog" className="mdl-dialog">
                           <form id ="form-document" >
-                            <div className="mdl-textfield mdl-js-textfield  mdl-cell--8-col">
+                            <div className="mdl-textfield mdl-js-textfield  mdl-cell--11-col">
                                 <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={that.fetchInputValues} />
-                                <label className="mdl-textfield__label" htmlFor="title" >Title</label>
+                                <label className="mdl-textfield__label" htmlFor="title" >{doc.title}</label>
                             </div>
-                            <div className="mdl-textfield mdl-js-textfield">
-                              <textarea className="mdl-textfield__input" type="text" rows= "3" id="text" name="content" onChange={that.fetchInputValues}>{doc.content}</textarea>
-                              <label className="mdl-textfield__label" htmlFor="text" ></label>
+                            <div className="mdl-textfield mdl-js-textfield mdl-cell--11-col">
+                              <textarea className="mdl-textfield__input" type="text" rows= "6" id="text" name="content" onChange={that.fetchInputValues}>{doc.content}</textarea>
+                              <label className="mdl-textfield__label" htmlFor="text" >Content</label>
+                            </div>
+                            <div className="mdl-grid">
+                              <div className="mdl-cell--3-col">
+                                <input id="roles" type="radio" name="access" value="Admin" onChange={that.fetchInputValues}>Admin</input>
+                              </div>
+                              <div className="mdl-cell--3-col">
+                                <input id="roles" type="radio" name="access" value="Staff" onChange={that.fetchInputValues}>Staff</input>
+                              </div>
+                              <div className="mdl-cell--3-col">
+                                <input id="roles" type="radio" name="access" value="Viewer" onChange={that.fetchInputValues}>Viewer</input>
+                              </div>
+                              <div className="mdl-cell--3-col">
+                                <input id="roles" type="radio" name="access" value="None" onChange={that.fetchInputValues}>None</input>
+                              </div>
                             </div>
                             </form>
                           <div className="mdl-dialog__actions">

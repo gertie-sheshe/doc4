@@ -15,3 +15,8 @@ istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec
 https://github.com/cainus/codecov.io
 
 export CODECOV_TOKEN=f086d79d-37bf-4ebe-8ffb-c6f31bc67e63
+
+
+// lcov for front end
+
+"./node_modules/mocha/bin/mocha --require blanket --reporter html-cov client/front/components/**/*test.js > lcov.info",

@@ -142,15 +142,13 @@
     render: function() {
       return (
         <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--12-col">
-            <a id="newdoc" href="/create" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >
-              NEW DOCUMENT
-            </a>
-          </div>
-          <div id="ownerdoc" className="mdl-cell mdl-cell--8-col">
+        
+          <div id="ownerdoc" className="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop">
             <Documents documents={this.state.ownerDocuments} />
           </div>
-          <div id="userdoc" className="mdl-cell mdl-cell--4-col">
+          <div id="userdoc" className="mdl-cell mdl-cell--12-col mdl-cell--4-col-desktop">
+            <h6 id="public-doc"><strong>Public Documents</strong></h6>
+            <hr/>
             <Public documents={this.state.userDocuments} />
           </div>
         </div>

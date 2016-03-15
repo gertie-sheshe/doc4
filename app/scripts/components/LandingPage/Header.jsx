@@ -9,7 +9,9 @@
       mixins: [History],
       getInitialState: function() {
         return {
-          link: '',
+          logout: '',
+          profile: '',
+          create: '',
           buttonClass: ''
         };
       },
@@ -21,18 +23,17 @@
       var token = localStorage.getItem('x-access-token');
       if(token) {
         this.setState({
-          link: 'Logout',
+          logout: 'Logout',
+          profile: 'Profile',
+          create: 'Create Doc',
           buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect"
         });
-      } else {
-        // window.location.assign('/dashboard');
       }
       },
 
       logout: function() {
         localStorage.removeItem('x-access-token');
         window.location.assign('/');
-        // this.history.pushState(null, '/');
       },
 
       render: function() {
@@ -43,18 +44,31 @@
              <div className="mdl-layout__header-row">
                <span className="mdl-layout-title">Title</span>
                <div className="mdl-layout-spacer"></div>
-                 <a id="logout" className={this.state.buttonClass} onClick={this.logout}>
-                    {this.state.link}
-                 </a>
+               <div className="mdl-grid">
+                 <div className="mdl-cell mdl-cell--4-col">
+                   <a href="/create" id="logout" className={this.state.buttonClass} >
+                     {this.state.create}
+                   </a>
+                 </div>
+                 <div className="mdl-cell mdl-cell--4-col">
+                   <a href="/profile" id="logout" className={this.state.buttonClass} >
+                     {this.state.profile}
+                   </a>
+                 </div>
+                 <div className="mdl-cell mdl-cell--4-col">
+                   <a id="logout" className={this.state.buttonClass} onClick={this.logout}>
+                     {this.state.logout}
+                   </a>
+                 </div>
+               </div>
              </div>
            </header>
            <div className="mdl-layout__drawer">
              <span className="mdl-layout-title">Title</span>
              <nav className="mdl-navigation">
-               <a className="mdl-navigation__link" href="">Link</a>
-               <a className="mdl-navigation__link" href="">Link</a>
-               <a className="mdl-navigation__link" href="">Link</a>
-               <a className="mdl-navigation__link" href="">Link</a>
+               <a className="mdl-navigation__link" href="/create">{this.state.create}</a>
+               <a className="mdl-navigation__link" href="/profile">{this.state.profile}</a>
+               <a className="mdl-navigation__link" onClick={this.logout}>{this.state.logout}</a>
              </nav>
            </div>
           <main className="mdl-layout__content">

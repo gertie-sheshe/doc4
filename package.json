@@ -19,7 +19,7 @@
         "node_modules",
         "client",
         "test",
-        "app/scripts/components"
+        "app/scripts/dialog-polyfill.js"
       ],
       "loader": "../../../client/blanket-stub-jsx.js"
     }

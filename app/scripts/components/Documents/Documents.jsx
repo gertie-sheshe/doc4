@@ -12,7 +12,7 @@ module.exports = new React.createClass({
   render: function() {
     var docNode = this.props.documents.map(function(doc, index) {
       return (
-        <div className="mdl-cell mdl-cell--6-col" key={index}>
+        <div className="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop" key={index}>
           <div className="demo-card-square mdl-card mdl-shadow--2dp">
             <div className="mdl-card__title mdl-card--expand">
 

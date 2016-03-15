@@ -234,21 +234,31 @@
           return res.status(500).send(err.errmessage || err);
         } else {
           // Users can only edit documents available to their role or they are the owner
-
-            if (req.body.title) {
-              doc.title = req.body.title;
-            }
-            if (req.body.content) {
-              doc.content = req.body.content;
-            }
-            doc.save(function(err) {
+          if (req.body.title) {
+            doc.title = req.body.title;
+          }
+          if (req.body.content) {
+            doc.content = req.body.content;
+          }
+          if (req.body.access) {
+            Role.find({
+              title: req.body.access
+            }).exec(function(err, access) {
               if (err) {
-                return res.status(500).send(err.errmessage || err);
+                res.status(500).send(err.errormessage || err);
               } else {
-                return res.status(200).json(doc);
+                doc.accessId = access[0]._id;
+                console.log('updated access', doc);
+                doc.save(function(err, savedDoc) {
+                  if (err) {
+                    return res.status(500).send(err.errmessage || err);
+                  } else {
+                    return res.status(200).json(savedDoc);
+                  }
+                });
               }
             });
-
+          }
         }
       });
     }

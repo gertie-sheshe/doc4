@@ -2,7 +2,6 @@
   'use strict';
   var React = require('react');
   var ReactDOM = require('react-dom');
-  var Select = require('react-select');
 
 module.exports = new React.createClass({
 
@@ -31,12 +30,17 @@ module.exports = new React.createClass({
             <label className="mdl-textfield__label" htmlFor="pword" required="true">Password</label>
           </div>
           <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--8-col">
-            <Select
-              name="role_id"
-              placeholder="Select Role"
-              options={this.props.roles}
-              value={this.props.info.role}
-              onChange={this.props.select}/>
+            <div className="mdl-grid">
+              <div className="mdl-cell--3-col">
+                <input id="roles" type="radio" name="role" value="Admin" onChange={this.props.onChange}>Admin</input>
+              </div>
+              <div className="mdl-cell--3-col">
+                <input id="roles" type="radio" name="role" value="Staff" onChange={this.props.onChange}>Staff</input>
+              </div>
+              <div className="mdl-cell--3-col">
+                <input id="roles" type="radio" name="role" value="Viewer" onChange={this.props.onChange}>Viewer</input>
+              </div>
+            </div>
             </div>
           </form>
           <div className="mdl-grid">
