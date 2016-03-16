@@ -9,7 +9,6 @@
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
   var UserStore = require('../../stores/UserStore');
-  var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
   var popups = require('popups');
   var Select = require('react-select');
@@ -46,50 +45,16 @@
     },
 
     componentWillMount: function() {
+      localStorage.removeItem('document');
       var token = localStorage.getItem('x-access-token');
-      UserStore.addChangeListener(this.getUsers, 'users');
       UserStore.addChangeListener(this.getDecoded, 'decode');
       UserAction.decode(token);
       UserAction.userData(token);
 
     },
 
-    dialogInit: function() {
-      var docDialog = document.querySelector('#doc-dialog');
-      var docDialogButton = document.querySelector('#show-doc-dialog');
-      if (!docDialog.showModal) {
-        dialogPolyfill.registerDialog(docDialog);
-      }
-      docDialogButton.addEventListener('click', function() {
-        docDialog.showModal();
-      });
-      docDialog.querySelector('.close').addEventListener('click', function() {
-        docDialog.close();
-      });
-    },
-
-    profileInit: function() {
-      var profDialog = document.querySelector('.prof-dialog');
-      var profDialogButton = document.querySelector('.show-prof-dialog');
-      if (!profDialog.showModal) {
-        dialogPolyfill.registerDialog(profDialog);
-      }
-      profDialogButton.addEventListener('click', function() {
-        profDialog.showModal();
-      });
-      profDialog.querySelector('.close').addEventListener('click', function() {
-        profDialog.close();
-      });
-    },
-
-    logout: function() {
-      localStorage.removeItem('x-access-token');
-      this.history.pushState(null, '/');
-    },
-
     getOwnerDocuments: function() {
-      var token = localStorage.getItem('x-access-token');
-      var ownDocs = DocumentStore.getOwnerDocs(token, this.state.ownerId);
+      var ownDocs = DocumentStore.getOwnerDocs();
       this.setState({
         ownerDocuments: ownDocs
       });
@@ -118,14 +83,6 @@
       }
     },
 
-
-    getUsers: function() {
-      var updatedUsers = UserStore.getUserData();
-      this.setState({
-        users: updatedUsers
-      });
-    },
-
     fetchInputValues: function(event) {
       var field = event.target.name;
       var value = event.target.value;
@@ -133,16 +90,10 @@
       this.setState({document: this.state.document});
     },
 
-    saveDocument: function() {
-      var token = localStorage.getItem('x-access-token');
-      DocumentAction.createDocument(this.state.document, token);
-     toastr.success('Document successfully created', {timeout: 1500});
-    },
-
     render: function() {
       return (
         <div className="mdl-grid">
-        
+
           <div id="ownerdoc" className="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop">
             <Documents documents={this.state.ownerDocuments} />
           </div>

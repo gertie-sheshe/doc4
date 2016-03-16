@@ -17,9 +17,10 @@
       "data-cover-never": [
         "dist",
         "node_modules",
+        "app/scripts/dialog.js",
         "client",
         "test",
-        "app/scripts/dialog-polyfill.js"
+        "app/js"
       ],
       "loader": "../../../client/blanket-stub-jsx.js"
     }

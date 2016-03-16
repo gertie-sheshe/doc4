@@ -101,6 +101,7 @@
             title: 'Prof Utonium'
           })
           .end(function(err, res) {
+            // console.log('Doc tests', res);
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.title, 'Prof Utonium');
             assert.strictEqual(documents[0].ownerId, user.user._id);

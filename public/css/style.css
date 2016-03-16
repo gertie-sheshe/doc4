@@ -216,6 +216,16 @@ header {
 #create-doc {
   padding-top: 40px;
 }
+#auth {
+  padding-top: 40px;
+}
 #profile {
   padding-top: 40px;
+}
+body {
+  background-color: #fafafa;
+}
+#credentials {
+  font-family: learningcurve;
+  text-align: center;
 }

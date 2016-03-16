@@ -8,10 +8,8 @@
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
   var UserStore = require('../../stores/UserStore');
-  var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
   var popups = require('popups');
-  var Select = require('react-select');
   var localStorage = require('localStorage');
 
 
@@ -30,55 +28,28 @@
     },
 
     componentWillMount: function() {
-      var pathArray = window.location.pathname.split('/')[1];
+      var pathArray = this.props.params.id;
       var token = localStorage.getItem('x-access-token');
+      localStorage.setItem('document', pathArray);
       DocumentAction.setDoc(pathArray, token);
     },
 
     componentDidMount: function() {
       DocumentStore.addChangeListener(this.handleSelected, 'doc');
-
     },
 
     handleSelected: function() {
       var selectDoc = DocumentStore.getSelectedDoc();
+      console.log('selected', selectDoc);
       var doc = [].concat(selectDoc);
       this.setState({
         document: doc
       });
-      this.editInit();
     },
 
-    editInit: function() {
-      var editDialog = document.querySelector('#edit-dialog');
-      var editDialogButton = document.querySelector('#show-edit-dialog');
-      if (!editDialog.showModal) {
-        dialogPolyfill.registerDialog(editDialog);
-      }
-      editDialogButton.addEventListener('click', function() {
-        editDialog.showModal();
-      });
-      editDialog.querySelector('.close').addEventListener('click', function() {
-        editDialog.close();
-      });
-    },
-
-    update: function() {
-      var newDoc = this.state.updatedDoc;
-      var token = localStorage.getItem('x-access-token');
-      var docId = window.location.pathname.split('/')[1];
-      DocumentAction.updateDoc(docId, newDoc, token);
-      toastr.success('Document has been Updated', {timeout: 3000});
-      that.history.pushState(null, '/dashboard');
-    },
-
-    fetchInputValues: function(event) {
-      var field = event.target.name;
-      var value = event.target.value;
-      console.log('update',value);
-      this.state.updatedDoc[field] = value;
-      this.setState({updatedDoc: this.state.updatedDoc});
-      console.log('updated doc', this.state.updatedDoc);
+    back: function() {
+      localStorage.removeItem('document');
+      window.location.assign('/dashboard');
     },
 
     render: function() {
@@ -113,43 +84,13 @@
                       {doc.content}
                     </div>
                     <div className="mdl-card__actions mdl-card--border">
-                      <a id="show-edit-dialog" className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                      <a href={'/update'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
                         Edit
                       </a>
-                        <dialog id="edit-dialog" className="mdl-dialog">
-                          <form id ="form-document" >
-                            <div className="mdl-textfield mdl-js-textfield  mdl-cell--11-col">
-                                <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={that.fetchInputValues} />
-                                <label className="mdl-textfield__label" htmlFor="title" >{doc.title}</label>
-                            </div>
-                            <div className="mdl-textfield mdl-js-textfield mdl-cell--11-col">
-                              <textarea className="mdl-textfield__input" type="text" rows= "6" id="text" name="content" onChange={that.fetchInputValues}>{doc.content}</textarea>
-                              <label className="mdl-textfield__label" htmlFor="text" >Content</label>
-                            </div>
-                            <div className="mdl-grid">
-                              <div className="mdl-cell--3-col">
-                                <input id="roles" type="radio" name="access" value="Admin" onChange={that.fetchInputValues}>Admin</input>
-                              </div>
-                              <div className="mdl-cell--3-col">
-                                <input id="roles" type="radio" name="access" value="Staff" onChange={that.fetchInputValues}>Staff</input>
-                              </div>
-                              <div className="mdl-cell--3-col">
-                                <input id="roles" type="radio" name="access" value="Viewer" onChange={that.fetchInputValues}>Viewer</input>
-                              </div>
-                              <div className="mdl-cell--3-col">
-                                <input id="roles" type="radio" name="access" value="None" onChange={that.fetchInputValues}>None</input>
-                              </div>
-                            </div>
-                            </form>
-                          <div className="mdl-dialog__actions">
-                            <button type="button" className="mdl-button" onClick={that.update}>UPDATE</button>
-                            <button type="button" className="mdl-button close">CANCEL</button>
-                          </div>
-                        </dialog>
                         <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={deleteDoc}>
                            Delete
                         </a>
-                        <a href={'/dashboard'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                        <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={that.back}>
                            Back
                         </a>
                     </div>

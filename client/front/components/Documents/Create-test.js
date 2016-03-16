@@ -15,7 +15,7 @@
    });
     it('renders the Landing component', function() {
       var create = enzyme.shallow(<Create />);
-      expect(create.find('.mdl-grid')).to.have.length(1);
+      expect(create.find('.mdl-grid')).to.have.length(2);
     });
     it('Renders child components', function() {
       var create = enzyme.shallow(<Create />);

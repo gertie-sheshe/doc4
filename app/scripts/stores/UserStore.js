@@ -58,9 +58,6 @@ var UserStore = assign({}, BaseStore, {
       case DocConstants.USER_DECODE:
         UserStore.setDecodedData(action.data);
         break;
-      case DocConstants.USER_DATA:
-        UserStore.setUserData(action.data);
-        break;
       default:
     }
     return true;

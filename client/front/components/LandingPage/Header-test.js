@@ -26,7 +26,9 @@
     });
     it('Component has the correct states', function() {
       var header = enzyme.shallow(<Header />);
-      expect(header.state().link).to.eql('');
+      expect(header.state().logout).to.eql('');
+      expect(header.state().profile).to.eql('');
+      expect(header.state().create).to.eql('');
       expect(header.state().buttonClass).to.eql('');
     });
     it('calls componentDidMount', function() {
