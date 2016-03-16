@@ -1,19 +1,17 @@
 (function() {
   'use strict';
-  var Dashboard = require('../../../../app/scripts/components/Dashboard/Dashboard.jsx'),
-    UserActions = require('../../../../app/scripts/actions/UserActions'),
+  var UserActions = require('../../../../app/scripts/actions/UserActions'),
     UserStore = require('../../../../app/scripts/stores/UserStore'),
     DocumentStore = require('../../../../app/scripts/stores/DocumentStore'),
     localStorage = require('localStorage'),
-    History = require('react-router').History,
+    browserHistory = require('react-router').browserHistory,
     React = require('react'),
     sinon = require('sinon'),
     expect = require('chai').expect,
-    enzyme = require('enzyme');
-  // Dashboard = require(dashboardPath);
+    enzyme = require('enzyme'),
+    Dashboard = require('../../../../app/scripts/components/Dashboard/Dashboard.jsx');
 
   describe('Dashboard', function() {
-    window = {};
 
     it('renders the Dashboard component', function() {
       var dashboard = enzyme.shallow(< Dashboard />);
@@ -37,7 +35,6 @@
     it('Calls the registered Callback', function() {
       sinon.spy(DocumentStore, 'addChangeListener');
       enzyme.mount(< Dashboard />);
-      sinon.spy(localStorage, 'getItem');
       expect(DocumentStore.addChangeListener.called).to.equal(true);
       expect(DocumentStore.addChangeListener.callCount).to.equal(2);
       DocumentStore.addChangeListener.restore();
@@ -173,6 +170,24 @@
       expect(UserStore.getDecodedData()._id).to.eql('56e8b497af2f13033f1d66aa');
       expect(UserStore.getDecodedData()).to.be.a('object');
       expect(dashboard.state().ownerId).to.be.a('string');
+    });
+    it('sets the correct state if the store is updated with an error decoded data', function() {
+      sinon.stub(browserHistory, 'push').returns(true);
+      var dashboard = enzyme.mount(< Dashboard />);
+      UserStore.setDecodedData({
+        "message": "You are not authenticated user",
+      });
+      expect(browserHistory.push.called).to.eql(true);
+      browserHistory.push.restore();
+    });
+    it('sets the correct state if the store is updated with an error decoded data', function() {
+      sinon.stub(browserHistory, 'push').returns(true);
+      var dashboard = enzyme.mount(< Dashboard />);
+      UserStore.setDecodedData({
+        "message": "Failed to Authenticate. You are not logged in.",
+      });
+      expect(browserHistory.push.called).to.eql(true);
+      browserHistory.push.restore();
     });
   });
 })();

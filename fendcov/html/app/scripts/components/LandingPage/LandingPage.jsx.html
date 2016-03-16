@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/scripts/components/LandingPage/LandingPage.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">app/scripts/components/LandingPage/</a> LandingPage.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.31% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>12/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.31% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>12/13</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () { 'use strict';
+&nbsp;
+(function () {
+  var React = require('react');
+  var ReactDOM = require('react-dom');
+  var SignUp = require('../SignUpForm/SignUpForm.jsx');
+  var Login = require('../LoginForm/LoginForm.jsx');
+  var UserStore = require('../../stores/UserStore');
+  var History = require('react-router').History;
+  var localStorage = require('localStorage');
+  var UserAction = require('../../actions/UserActions');
+  var toastr = require('toastr');
+&nbsp;
+  var Landing = new React.createClass({
+&nbsp;
+    render: <span class="fstat-no" title="function not covered" >function render() {</span>
+<span class="cstat-no" title="statement not covered" >      return React.createElement(</span>
+        'div',
+        { className: 'img' },
+        React.createElement('div', { id: 'back' }),
+        React.createElement(
+          'div',
+          { className: 'content' },
+          React.createElement(
+            'div',
+            { className: 'mdl-grid' },
+            React.createElement(
+              'div',
+              { className: 'mdl-cell mdl-cell--12-col' },
+              React.createElement(
+                'h1',
+                null,
+                'Doc 4.0 '
+              ),
+              React.createElement(
+                'h2',
+                null,
+                'The place to go to create, manage and edit documents. Get started today '
+              )
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'mdl-grid' },
+            React.createElement(
+              'div',
+              { className: 'mdl-cell mdl-cell--12-col' },
+              React.createElement(
+                'a',
+                { href: '/auth', type: 'button', className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent' },
+                'GET STARTED'
+              )
+            )
+          )
+        )
+      );
+    }
+  });
+  module.exports = Landing;
+})();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkxhbmRpbmdQYWdlLmpzeCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLENBQUMsWUFBVztBQUNWLE1BQUksUUFBUSxRQUFRLE9BQVIsQ0FBUixDQURNO0FBRVYsTUFBSSxXQUFXLFFBQVEsV0FBUixDQUFYLENBRk07QUFHVixNQUFJLFNBQVMsUUFBUSw4QkFBUixDQUFULENBSE07QUFJVixNQUFJLFFBQVEsUUFBUSw0QkFBUixDQUFSLENBSk07QUFLVixNQUFJLFlBQVksUUFBUSx3QkFBUixDQUFaLENBTE07QUFNVixNQUFJLFVBQVUsUUFBUSxjQUFSLEVBQXdCLE9BQXhCLENBTko7QUFPVixNQUFJLGVBQWUsUUFBUSxjQUFSLENBQWYsQ0FQTTtBQVFWLE1BQUksYUFBYSxRQUFRLDJCQUFSLENBQWIsQ0FSTTtBQVNWLE1BQUksU0FBUyxRQUFRLFFBQVIsQ0FBVCxDQVRNOztBQVdWLE1BQUksVUFBVSxJQUFJLE1BQU0sV0FBTixDQUFrQjs7QUFFbEMsWUFBUSxrQkFBVztBQUNqQixhQUNFOztVQUFLLFdBQVUsS0FBVixFQUFMO1FBQ0UsNkJBQUssSUFBRyxNQUFILEVBQUwsQ0FERjtRQUVFOztZQUFLLFdBQVUsU0FBVixFQUFMO1VBQ0U7O2NBQUssV0FBVSxVQUFWLEVBQUw7WUFDRTs7Z0JBQUssV0FBVSwyQkFBVixFQUFMO2NBQ0U7Ozs7ZUFERjtjQUVFOzs7O2VBRkY7YUFERjtXQURGO1VBT0U7O2NBQUssV0FBVSxVQUFWLEVBQUw7WUFDRTs7Z0JBQUssV0FBVSwyQkFBVixFQUFMO2NBQ0U7O2tCQUFHLE1BQUssT0FBTCxFQUFhLE1BQUssUUFBTCxFQUFjLFdBQVUscUZBQVYsRUFBOUI7O2VBREY7YUFERjtXQVBGO1NBRkY7T0FERixDQURpQjtLQUFYO0dBRkksQ0FBVixDQVhNO0FBa0NWLFNBQU8sT0FBUCxHQUFpQixPQUFqQixDQWxDVTtDQUFYLENBQUQiLCJmaWxlIjoiTGFuZGluZ1BhZ2UuanN4Iiwic291cmNlc0NvbnRlbnQiOlsiKGZ1bmN0aW9uKCkge1xuICB2YXIgUmVhY3QgPSByZXF1aXJlKCdyZWFjdCcpO1xuICB2YXIgUmVhY3RET00gPSByZXF1aXJlKCdyZWFjdC1kb20nKTtcbiAgdmFyIFNpZ25VcCA9IHJlcXVpcmUoJy4uL1NpZ25VcEZvcm0vU2lnblVwRm9ybS5qc3gnKTtcbiAgdmFyIExvZ2luID0gcmVxdWlyZSgnLi4vTG9naW5Gb3JtL0xvZ2luRm9ybS5qc3gnKTtcbiAgdmFyIFVzZXJTdG9yZSA9IHJlcXVpcmUoJy4uLy4uL3N0b3Jlcy9Vc2VyU3RvcmUnKTtcbiAgdmFyIEhpc3RvcnkgPSByZXF1aXJlKCdyZWFjdC1yb3V0ZXInKS5IaXN0b3J5O1xuICB2YXIgbG9jYWxTdG9yYWdlID0gcmVxdWlyZSgnbG9jYWxTdG9yYWdlJyk7XG4gIHZhciBVc2VyQWN0aW9uID0gcmVxdWlyZSgnLi4vLi4vYWN0aW9ucy9Vc2VyQWN0aW9ucycpO1xuICB2YXIgdG9hc3RyID0gcmVxdWlyZSgndG9hc3RyJyk7XG5cbiAgdmFyIExhbmRpbmcgPSBuZXcgUmVhY3QuY3JlYXRlQ2xhc3Moe1xuXG4gICAgcmVuZGVyOiBmdW5jdGlvbigpIHtcbiAgICAgIHJldHVybiAoXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaW1nXCI+XG4gICAgICAgICAgPGRpdiBpZD1cImJhY2tcIj48L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0nY29udGVudCc+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1kbC1ncmlkXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWRsLWNlbGwgbWRsLWNlbGwtLTEyLWNvbFwiPlxuICAgICAgICAgICAgICAgIDxoMT5Eb2MgNC4wIDwvaDE+XG4gICAgICAgICAgICAgICAgPGgyPlRoZSBwbGFjZSB0byBnbyB0byBjcmVhdGUsIG1hbmFnZSBhbmQgZWRpdCBkb2N1bWVudHMuIEdldCBzdGFydGVkIHRvZGF5IDwvaDI+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1kbC1ncmlkXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWRsLWNlbGwgbWRsLWNlbGwtLTEyLWNvbFwiPlxuICAgICAgICAgICAgICAgIDxhIGhyZWY9XCIvYXV0aFwiIHR5cGU9XCJidXR0b25cIiBjbGFzc05hbWU9XCJtZGwtYnV0dG9uIG1kbC1qcy1idXR0b24gbWRsLWJ1dHRvbi0tcmFpc2VkIG1kbC1qcy1yaXBwbGUtZWZmZWN0IG1kbC1idXR0b24tLWFjY2VudFwiPkdFVCBTVEFSVEVEPC9hPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgICk7XG4gICAgfVxuICB9KTtcbiAgbW9kdWxlLmV4cG9ydHMgPSBMYW5kaW5nO1xufSkoKTtcbiJdfQ==
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 16 2016 15:33:18 GMT+0300 (EAT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

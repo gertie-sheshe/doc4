@@ -4,6 +4,10 @@ exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _warning = require('./warning');
+
+var _warning2 = _interopRequireDefault(_warning);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -30,6 +34,10 @@ var RouteContext = {
     return {
       route: this.props.route
     };
+  },
+
+  componentWillMount: function componentWillMount() {
+    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'The `RouteContext` mixin is deprecated. You can provide `this.props.route` on context with your own `contextTypes`. http://tiny.cc/router-routecontextmixin') : undefined;
   }
 
 };

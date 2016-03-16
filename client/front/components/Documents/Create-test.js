@@ -1,25 +1,19 @@
 (function() {
   'use strict';
-  var createPath = '../../../../app/scripts/components/Documents/Create.jsx',
-  React = require('react'),
+  var React = require('react'),
   sinon = require('sinon'),
   expect = require('chai').expect,
   enzyme = require('enzyme'),
   DocumentAction = require('../../../../app/scripts/actions/DocumentActions'),
-  Create = require(createPath);
+  Create = require('../../../../app/scripts/components/Documents/Create.jsx');
 
   describe('Create Document', function() {
-    window.location = {};
-    before(function() {
-       window.location.assign = sinon.spy();
-   });
     it('renders the Landing component', function() {
       var create = enzyme.shallow(<Create />);
       expect(create.find('.mdl-grid')).to.have.length(2);
     });
     it('Renders child components', function() {
       var create = enzyme.shallow(<Create />);
-      // console.log(landing.debug());
       expect(create.find('.mdl-card').length).to.equal(1);
       expect(create.find('.mdl-textfield').length).to.equal(2);
       expect(create.find('.mdl-button').length).to.equal(2);

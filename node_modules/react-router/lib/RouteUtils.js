@@ -15,7 +15,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _warning = require('warning');
+var _warning = require('./warning');
 
 var _warning2 = _interopRequireDefault(_warning);
 

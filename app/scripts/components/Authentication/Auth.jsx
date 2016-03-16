@@ -4,13 +4,12 @@
   var SignUp = require('../SignUpForm/SignUpForm.jsx');
   var Login = require('../LoginForm/LoginForm.jsx');
   var UserStore = require('../../stores/UserStore');
-  var History = require('react-router').History;
+  var browserHistory = require('react-router').browserHistory;
   var localStorage = require('localStorage');
   var UserAction = require('../../actions/UserActions');
   var toastr = require('toastr');
 
   var Dashboard = new React.createClass({
-    mixins: [History],
 
     getInitialState: function() {
       return {
@@ -58,15 +57,14 @@
        if(data.error) {
         toastr.warning('Wrong username and password combination', {timeout: 5000});
       } else {
-        //local storage token
         localStorage.setItem('x-access-token', data.token);
         console.log('We have logged in');
-          window.location.assign('/dashboard');
+        browserHistory.push('/dashboard');
       }
     },
 
     handleLoginAction: function(event) {
-      console.log('Tumeitwa');
+      console.log('what is event though', event);
       var details = this.state.user;
       event.preventDefault();
       if (details.username.length < 1  || details.password.length < 1 ) {
@@ -91,7 +89,6 @@
     fetchValues: function(event) {
       var field = event.target.name;
       var value = event.target.value;
-      console.log(value);
       this.state.info[field] = value;
       this.state.user[field] = value;
       this.setState({user: this.state.user, info: this.state.info});

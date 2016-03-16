@@ -1,17 +1,17 @@
 (function() {
   var React = require('react');
   var ReactDOM = require('react-dom');
-  var History = require('react-router').History;
+  var browserHistory = require('react-router').browserHistory;
   var localStorage = require('localStorage');
   var DocumentAction = require('../../actions/DocumentActions');
   var toastr = require('toastr');
 
   var Create = new React.createClass({
-    mixins: [History],
     componentWillMount: function() {
       var token = localStorage.getItem('x-access-token');
       if(!token) {
-        window.location.assign('/dashboard');
+        // window.location.assign('/dashboard');
+        browserHistory.push('/dashboard');
       }
     },
 
@@ -37,8 +37,8 @@
       var token = localStorage.getItem('x-access-token');
       DocumentAction.createDocument(this.state.document, token);
       toastr.success('Document successfully created', {timeout: 1500});
-      window.location.assign('/dashboard');
-      // this.history.pushState(null, '/dashboard');
+      // window.location.assign('/dashboard');
+      browserHistory.push('/dashboard');
     },
 
     render: function() {

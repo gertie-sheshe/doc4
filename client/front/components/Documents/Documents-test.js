@@ -1,12 +1,11 @@
 (function() {
   'use strict';
-  var documentsPath = '../../../../app/scripts/components/Documents/Documents.jsx',
-  localStorage = require('localStorage'),
+  var localStorage = require('localStorage'),
   React = require('react'),
   sinon = require('sinon'),
   expect = require('chai').expect,
   enzyme = require('enzyme'),
-  Documents = require(documentsPath);
+  Documents = require('../../../../app/scripts/components/Documents/Documents.jsx');
 
   describe('Documents', function() {
     var doc = [{

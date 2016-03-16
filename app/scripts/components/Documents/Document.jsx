@@ -1,7 +1,7 @@
 (function() {
   var React = require('react');
   var ReactDOM = require('react-dom');
-  var History = require('react-router').History;
+  var browserHistory = require('react-router').browserHistory;
   var Documents = require('../Documents/Documents.jsx');
   var Public = require('../Documents/PublicDocs.jsx');
   var DocumentStore = require('../../stores/DocumentStore');
@@ -14,7 +14,6 @@
 
 
   var Dashboard = new React.createClass({
-    mixins: [History],
     getInitialState: function() {
       that = this;
       return {
@@ -49,7 +48,8 @@
 
     back: function() {
       localStorage.removeItem('document');
-      window.location.assign('/dashboard');
+      browserHistory.push('/dashboard');
+      // window.location.assign('/dashboard');
     },
 
     render: function() {

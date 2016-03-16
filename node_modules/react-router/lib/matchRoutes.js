@@ -4,7 +4,7 @@ exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = require('warning');
+var _warning = require('./warning');
 
 var _warning2 = _interopRequireDefault(_warning);
 

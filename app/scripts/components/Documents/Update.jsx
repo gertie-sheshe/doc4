@@ -6,7 +6,7 @@
   DocumentStore = require('../../stores/DocumentStore'),
   DocumentAction = require('../../actions/DocumentActions'),
   toastr = require('toastr'),
-  History = require('react-router').History;
+  browserHistory = require('react-router').History;
 
   var Update = new React.createClass({
     getInitialState: function() {
@@ -21,8 +21,6 @@
         }
       };
     },
-
-    mixins: [History],
 
     componentWillMount: function() {
       var pathArray = localStorage.getItem('document');
@@ -64,6 +62,7 @@
       var docId = localStorage.getItem('document');
       DocumentAction.updateDoc(docId, newDoc, token);
       toastr.success('Document has been Updated', {timeout: 3000});
+      browserHistory.push('/dashboard');
       // window.location.assign('/dashboard');
     },
 

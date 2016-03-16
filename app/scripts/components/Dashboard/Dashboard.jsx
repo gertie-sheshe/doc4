@@ -1,7 +1,7 @@
 (function() {
   var React = require('react');
   var ReactDOM = require('react-dom');
-  var History = require('react-router').History;
+  var browserHistory = require('react-router').browserHistory;
   var Documents = require('../Documents/Documents.jsx');
   var Public = require('../Documents/PublicDocs.jsx');
   var localStorage = require('localStorage');
@@ -15,7 +15,6 @@
 
 
   var Dashboard = new React.createClass({
-    mixins: [History],
 
     getInitialState: function() {
       return {
@@ -71,9 +70,11 @@
       var decoded = UserStore.getDecodedData();
       if (decoded.message === 'You are not authenticated user') {
         toastr.error('You must be logged in bitte :)', {timeout: 3000});
-        this.history.pushState(null, '/');
+        // this.history.pushState(null, '/');
+        browserHistory.push('/');
       } if (decoded.message === 'Failed to Authenticate. You are not logged in.') {
-        window.location.assign('/');
+        // window.location.assign('/');
+        browserHistory.push('/');
       }
       else {
         this.setState({ownerId: decoded._id});
