@@ -6,7 +6,7 @@
   DocumentStore = require('../../stores/DocumentStore'),
   DocumentAction = require('../../actions/DocumentActions'),
   toastr = require('toastr'),
-  browserHistory = require('react-router').History;
+  browserHistory = require('react-router').browserHistory;
 
   var Update = new React.createClass({
     getInitialState: function() {
@@ -95,7 +95,7 @@
           </div>
           </form>
         <div className="mdl-dialog__actions">
-          <button type="button" className="mdl-button" onClick={this.update}>UPDATE</button>
+          <button id="updatedoc" type="button" className="mdl-button" onClick={this.update}>UPDATE</button>
           <a href={'/dashboard'} type="button" className="mdl-button close">CANCEL</a>
         </div>
       </div>

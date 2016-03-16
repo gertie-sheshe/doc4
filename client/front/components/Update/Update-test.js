@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var DocumentActions = require('../../../../app/scripts/actions/DocumentActions'),
+  var DocumentAction = require('../../../../app/scripts/actions/DocumentActions'),
     DocumentStore = require('../../../../app/scripts/stores/DocumentStore'),
     localStorage = require('localStorage'),
     browserHistory = require('react-router').browserHistory,
@@ -35,11 +35,15 @@
       Update.prototype.componentDidMount.restore();
     });
     it('test onclick', function() {
-      var auth = enzyme.mount(<Auth />);
+      var auth = enzyme.mount(<Update />);
       var instance = auth.instance();
+      sinon.stub(browserHistory, 'push').returns(true);
       sinon.stub(DocumentAction, 'updateDoc').returns(true);
-      create.find('#createdoc').simulate('click');
+      auth.find('#updatedoc').simulate('click');
       expect(DocumentAction.updateDoc.called).to.equal(true);
+      expect(browserHistory.push.called).to.equal(true);
+      browserHistory.push.restore();
+      DocumentAction.updateDoc.restore();
     });
     // it('calls the owner changeListener', function() {
     //   var dashboard = enzyme.mount(< Dashboard />);
