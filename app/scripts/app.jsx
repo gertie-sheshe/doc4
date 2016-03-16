@@ -13,6 +13,9 @@
     NotFound = require('./components/NotFound/NotFound.jsx'),
     Document = require('./components/Documents/Document.jsx'),
     Create = require('./components/Documents/Create.jsx'),
+    Profile = require('./components/Profile/Profile.jsx'),
+    Auth = require('./components/Authentication/Auth.jsx'),
+    Update = require('./components/Documents/Update.jsx'),
     Dashboard = require('./components/Dashboard/Dashboard.jsx');
 
     ReactDOM.render((
@@ -20,6 +23,9 @@
         <Route path="/" component={Header} >
           <IndexRoute component={Landing} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/update" component={Update} />
+          <Route path="/auth" component={Auth} />
+          <Route path="/profile" component={Profile} />
           <Route path="/create" component={Create} />
           <Route path="/:id" component={Document} />
           <Route path="*" component={NotFound} />

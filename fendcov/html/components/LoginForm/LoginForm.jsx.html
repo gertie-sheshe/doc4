@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for components/LoginForm/LoginForm.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">components/LoginForm/</a> LoginForm.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/5</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () { 'use strict';
+&nbsp;
+(function () {
+  'use strict';
+&nbsp;
+  var React = require('react');
+  var ReactDOM = require('react-dom');
+&nbsp;
+  module.exports = new React.createClass({
+&nbsp;
+    render: <span class="fstat-no" title="function not covered" >function render() {</span>
+<span class="cstat-no" title="statement not covered" >      return React.createElement(</span>
+        'div',
+        null,
+        React.createElement(
+          'form',
+          { action: 'post' },
+          React.createElement(
+            'div',
+            { className: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--8-col' },
+            React.createElement('input', { className: 'mdl-textfield__input', type: 'text', id: 'uname', name: 'username', onChange: this.props.onChange }),
+            React.createElement(
+              'label',
+              { className: 'mdl-textfield__label', htmlFor: 'uname' },
+              'Username'
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--8-col' },
+            React.createElement('input', { className: 'mdl-textfield__input', type: 'password', id: 'pword', name: 'password', onChange: this.props.onChange }),
+            React.createElement(
+              'label',
+              { className: 'mdl-textfield__label', htmlFor: 'pword' },
+              'Password'
+            )
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'mdl-grid' },
+          React.createElement(
+            'div',
+            { className: 'mdl-cell mdl-cell--6-col' },
+            React.createElement(
+              'button',
+              { id: 'login', type: 'button', className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent', onClick: this.props.onClick },
+              'Log In'
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'mdl-cell mdl-cell--6-col' },
+            React.createElement(
+              'button',
+              { type: 'button', className: 'mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent' },
+              'Cancel'
+            )
+          )
+        )
+      );
+    }
+  });
+})();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkxvZ2luRm9ybS5qc3giXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxDQUFDLFlBQVc7QUFDVixlQURVOztBQUVWLE1BQUksUUFBUSxRQUFRLE9BQVIsQ0FBUixDQUZNO0FBR1YsTUFBSSxXQUFXLFFBQVEsV0FBUixDQUFYLENBSE07O0FBS1osU0FBTyxPQUFQLEdBQWlCLElBQUksTUFBTSxXQUFOLENBQWtCOztBQUVyQyxZQUFRLGtCQUFXO0FBQ2pCLGFBQ0U7OztRQUNFOztZQUFNLFFBQU8sTUFBUCxFQUFOO1VBQ0U7O2NBQUssV0FBVSw4RUFBVixFQUFMO1lBQ0ksK0JBQU8sV0FBVSxzQkFBVixFQUFpQyxNQUFLLE1BQUwsRUFBWSxJQUFHLE9BQUgsRUFBVyxNQUFLLFVBQUwsRUFBZ0IsVUFBVSxLQUFLLEtBQUwsQ0FBVyxRQUFYLEVBQXpGLENBREo7WUFFSTs7Z0JBQU8sV0FBVSxzQkFBVixFQUFpQyxTQUFRLE9BQVIsRUFBeEM7O2FBRko7V0FERjtVQUtFOztjQUFLLFdBQVUsOEVBQVYsRUFBTDtZQUNJLCtCQUFPLFdBQVUsc0JBQVYsRUFBaUMsTUFBSyxVQUFMLEVBQWdCLElBQUcsT0FBSCxFQUFXLE1BQUssVUFBTCxFQUFnQixVQUFVLEtBQUssS0FBTCxDQUFXLFFBQVgsRUFBN0YsQ0FESjtZQUVJOztnQkFBTyxXQUFVLHNCQUFWLEVBQWlDLFNBQVEsT0FBUixFQUF4Qzs7YUFGSjtXQUxGO1NBREY7UUFXSTs7WUFBSyxXQUFVLFVBQVYsRUFBTDtVQUNFOztjQUFLLFdBQVUsMEJBQVYsRUFBTDtZQUNFOztnQkFBUSxJQUFHLE9BQUgsRUFBVyxNQUFLLFFBQUwsRUFBYyxXQUFVLHFGQUFWLEVBQWdHLFNBQVMsS0FBSyxLQUFMLENBQVcsT0FBWCxFQUExSTs7YUFERjtXQURGO1VBSUU7O2NBQUssV0FBVSwwQkFBVixFQUFMO1lBQ0U7O2dCQUFRLE1BQUssUUFBTCxFQUFjLFdBQVUsMkZBQVYsRUFBdEI7O2FBREY7V0FKRjtTQVhKO09BREYsQ0FEaUI7S0FBWDtHQUZPLENBQWpCLENBTFk7Q0FBWCxDQUFEIiwiZmlsZSI6IkxvZ2luRm9ybS5qc3giLCJzb3VyY2VzQ29udGVudCI6WyIoZnVuY3Rpb24oKSB7XG4gICd1c2Ugc3RyaWN0JztcbiAgdmFyIFJlYWN0ID0gcmVxdWlyZSgncmVhY3QnKTtcbiAgdmFyIFJlYWN0RE9NID0gcmVxdWlyZSgncmVhY3QtZG9tJyk7XG5cbm1vZHVsZS5leHBvcnRzID0gbmV3IFJlYWN0LmNyZWF0ZUNsYXNzKHtcblxuICByZW5kZXI6IGZ1bmN0aW9uKCkge1xuICAgIHJldHVybiAoXG4gICAgICA8ZGl2PlxuICAgICAgICA8Zm9ybSBhY3Rpb249XCJwb3N0XCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtZGwtdGV4dGZpZWxkIG1kbC1qcy10ZXh0ZmllbGQgbWRsLXRleHRmaWVsZC0tZmxvYXRpbmctbGFiZWwgbWRsLWNlbGwtLTgtY29sXCI+XG4gICAgICAgICAgICAgIDxpbnB1dCBjbGFzc05hbWU9XCJtZGwtdGV4dGZpZWxkX19pbnB1dFwiIHR5cGU9XCJ0ZXh0XCIgaWQ9XCJ1bmFtZVwiIG5hbWU9XCJ1c2VybmFtZVwiIG9uQ2hhbmdlPXt0aGlzLnByb3BzLm9uQ2hhbmdlfS8+XG4gICAgICAgICAgICAgIDxsYWJlbCBjbGFzc05hbWU9XCJtZGwtdGV4dGZpZWxkX19sYWJlbFwiIGh0bWxGb3I9XCJ1bmFtZVwiPlVzZXJuYW1lPC9sYWJlbD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1kbC10ZXh0ZmllbGQgbWRsLWpzLXRleHRmaWVsZCBtZGwtdGV4dGZpZWxkLS1mbG9hdGluZy1sYWJlbCBtZGwtY2VsbC0tOC1jb2xcIj5cbiAgICAgICAgICAgICAgPGlucHV0IGNsYXNzTmFtZT1cIm1kbC10ZXh0ZmllbGRfX2lucHV0XCIgdHlwZT1cInBhc3N3b3JkXCIgaWQ9XCJwd29yZFwiIG5hbWU9XCJwYXNzd29yZFwiIG9uQ2hhbmdlPXt0aGlzLnByb3BzLm9uQ2hhbmdlfS8+XG4gICAgICAgICAgICAgIDxsYWJlbCBjbGFzc05hbWU9XCJtZGwtdGV4dGZpZWxkX19sYWJlbFwiIGh0bWxGb3I9XCJwd29yZFwiPlBhc3N3b3JkPC9sYWJlbD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Zvcm0+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtZGwtZ3JpZFwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtZGwtY2VsbCBtZGwtY2VsbC0tNi1jb2xcIj5cbiAgICAgICAgICAgICAgPGJ1dHRvbiBpZD1cImxvZ2luXCIgdHlwZT1cImJ1dHRvblwiIGNsYXNzTmFtZT1cIm1kbC1idXR0b24gbWRsLWpzLWJ1dHRvbiBtZGwtYnV0dG9uLS1yYWlzZWQgbWRsLWpzLXJpcHBsZS1lZmZlY3QgbWRsLWJ1dHRvbi0tYWNjZW50XCIgb25DbGljaz17dGhpcy5wcm9wcy5vbkNsaWNrfT5Mb2cgSW48L2J1dHRvbj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtZGwtY2VsbCBtZGwtY2VsbC0tNi1jb2xcIj5cbiAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIgY2xhc3NOYW1lPVwibWRsLWJ1dHRvbiBjbG9zZSBtZGwtanMtYnV0dG9uIG1kbC1idXR0b24tLXJhaXNlZCBtZGwtanMtcmlwcGxlLWVmZmVjdCBtZGwtYnV0dG9uLS1hY2NlbnRcIj5DYW5jZWw8L2J1dHRvbj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgKTtcbiAgfVxufSk7XG59KSgpO1xuIl19
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 17 2016 01:25:07 GMT+0300 (EAT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

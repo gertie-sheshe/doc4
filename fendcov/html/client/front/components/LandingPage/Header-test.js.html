@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for client/front/components/LandingPage/Header-test.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">client/front/components/LandingPage/</a> Header-test.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>32/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>32/32</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () { 'use strict';
+&nbsp;
+(function () {
+  'use strict';
+&nbsp;
+  var React = require('react'),
+      sinon = require('sinon'),
+      expect = require('chai').expect,
+      enzyme = require('enzyme'),
+      browserHistory = require('react-router').browserHistory,
+      Header = require('../../../../app/scripts/components/LandingPage/Header.jsx');
+&nbsp;
+  describe('Header', function () {
+&nbsp;
+    it('renders the Landing component', function () {
+      var header = enzyme.shallow(React.createElement(Header, null));
+      expect(header.find('.mdl-layout__header')).to.have.length(1);
+    });
+    it('Renders accurate content', function () {
+      expect(enzyme.shallow(React.createElement(Header, null)).text()).to.have.string('Title');
+    });
+    it('Renders child components', function () {
+      var header = enzyme.shallow(React.createElement(Header, null));
+      // console.log(header.debug());
+      expect(header.find('.mdl-layout__header')).to.have.length(1);
+      expect(header.find('.mdl-layout-spacer')).to.have.length(1);
+      expect(header.find('.mdl-layout__drawer')).to.have.length(1);
+      expect(header.find('.mdl-navigation')).to.have.length(1);
+    });
+    it('Component has the correct states', function () {
+      var header = enzyme.shallow(React.createElement(Header, null));
+      expect(header.state().logout).to.eql('');
+      expect(header.state().profile).to.eql('');
+      expect(header.state().create).to.eql('');
+      expect(header.state().buttonClass).to.eql('');
+    });
+    it('calls componentDidMount', function () {
+      sinon.spy(Header.prototype, 'componentDidMount');
+      enzyme.mount(React.createElement(Header, null));
+      expect(Header.prototype.componentDidMount.calledOnce).to.equal(true);
+      Header.prototype.componentDidMount.restore();
+    });
+    it('Calls logout function', function () {
+      var header = enzyme.mount(React.createElement(Header, null));
+      var instance = header.instance();
+      sinon.stub(browserHistory, 'push').returns(true);
+      header.find('#logout').simulate('click');
+      expect(browserHistory.push.called).to.equal(true);
+      browserHistory.push.restore();
+    });
+  });
+})();
+//# sourceMappingURL=data:application/json;base64,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QVgsQ0FBOUIsQ0F4QjRCO0FBOEI1QixPQUFHLHVCQUFILEVBQTRCLFlBQVc7QUFDckMsVUFBSSxTQUFTLE9BQU8sS0FBUCxDQUFhLG9CQUFDLE1BQUQsT0FBYixDQUFULENBRGlDO0FBRXJDLFVBQUksV0FBVyxPQUFPLFFBQVAsRUFBWCxDQUZpQztBQUdyQyxZQUFNLElBQU4sQ0FBVyxjQUFYLEVBQTJCLE1BQTNCLEVBQW1DLE9BQW5DLENBQTJDLElBQTNDLEVBSHFDO0FBSXJDLGFBQU8sSUFBUCxDQUFZLFNBQVosRUFBdUIsUUFBdkIsQ0FBZ0MsT0FBaEMsRUFKcUM7QUFLckMsYUFBTyxlQUFlLElBQWYsQ0FBb0IsTUFBcEIsQ0FBUCxDQUFtQyxFQUFuQyxDQUFzQyxLQUF0QyxDQUE0QyxJQUE1QyxFQUxxQztBQU1yQyxxQkFBZSxJQUFmLENBQW9CLE9BQXBCLEdBTnFDO0tBQVgsQ0FBNUIsQ0E5QjRCO0dBQVgsQ0FBbkIsQ0FUVTtDQUFYLENBQUQiLCJmaWxlIjoiSGVhZGVyLXRlc3QuanMiLCJzb3VyY2VzQ29udGVudCI6WyIoZnVuY3Rpb24oKSB7XG4gICd1c2Ugc3RyaWN0JztcbiAgdmFyIFJlYWN0ID0gcmVxdWlyZSgncmVhY3QnKSxcbiAgc2lub24gPSByZXF1aXJlKCdzaW5vbicpLFxuICBleHBlY3QgPSByZXF1aXJlKCdjaGFpJykuZXhwZWN0LFxuICBlbnp5bWUgPSByZXF1aXJlKCdlbnp5bWUnKSxcbiAgYnJvd3Nlckhpc3RvcnkgPSByZXF1aXJlKCdyZWFjdC1yb3V0ZXInKS5icm93c2VySGlzdG9yeSxcbiAgSGVhZGVyID0gcmVxdWlyZSgnLi4vLi4vLi4vLi4vYXBwL3NjcmlwdHMvY29tcG9uZW50cy9MYW5kaW5nUGFnZS9IZWFkZXIuanN4Jyk7XG5cbiAgZGVzY3JpYmUoJ0hlYWRlcicsIGZ1bmN0aW9uKCkge1xuXG4gICAgaXQoJ3JlbmRlcnMgdGhlIExhbmRpbmcgY29tcG9uZW50JywgZnVuY3Rpb24oKSB7XG4gICAgICB2YXIgaGVhZGVyID0gZW56eW1lLnNoYWxsb3coPEhlYWRlciAvPik7XG4gICAgICBleHBlY3QoaGVhZGVyLmZpbmQoJy5tZGwtbGF5b3V0X19oZWFkZXInKSkudG8uaGF2ZS5sZW5ndGgoMSk7XG4gICAgfSk7XG4gICAgaXQoJ1JlbmRlcnMgYWNjdXJhdGUgY29udGVudCcsIGZ1bmN0aW9uKCkge1xuICAgICAgZXhwZWN0KGVuenltZS5zaGFsbG93KDxIZWFkZXIgLz4pLnRleHQoKSkudG8uaGF2ZS5zdHJpbmcoJ1RpdGxlJyk7XG4gICAgfSk7XG4gICAgaXQoJ1JlbmRlcnMgY2hpbGQgY29tcG9uZW50cycsIGZ1bmN0aW9uKCkge1xuICAgICAgdmFyIGhlYWRlciA9IGVuenltZS5zaGFsbG93KDxIZWFkZXIgLz4pO1xuICAgICAgLy8gY29uc29sZS5sb2coaGVhZGVyLmRlYnVnKCkpO1xuICAgICAgZXhwZWN0KGhlYWRlci5maW5kKCcubWRsLWxheW91dF9faGVhZGVyJykpLnRvLmhhdmUubGVuZ3RoKDEpO1xuICAgICAgZXhwZWN0KGhlYWRlci5maW5kKCcubWRsLWxheW91dC1zcGFjZXInKSkudG8uaGF2ZS5sZW5ndGgoMSk7XG4gICAgICBleHBlY3QoaGVhZGVyLmZpbmQoJy5tZGwtbGF5b3V0X19kcmF3ZXInKSkudG8uaGF2ZS5sZW5ndGgoMSk7XG4gICAgICBleHBlY3QoaGVhZGVyLmZpbmQoJy5tZGwtbmF2aWdhdGlvbicpKS50by5oYXZlLmxlbmd0aCgxKTtcbiAgICB9KTtcbiAgICBpdCgnQ29tcG9uZW50IGhhcyB0aGUgY29ycmVjdCBzdGF0ZXMnLCBmdW5jdGlvbigpIHtcbiAgICAgIHZhciBoZWFkZXIgPSBlbnp5bWUuc2hhbGxvdyg8SGVhZGVyIC8+KTtcbiAgICAgIGV4cGVjdChoZWFkZXIuc3RhdGUoKS5sb2dvdXQpLnRvLmVxbCgnJyk7XG4gICAgICBleHBlY3QoaGVhZGVyLnN0YXRlKCkucHJvZmlsZSkudG8uZXFsKCcnKTtcbiAgICAgIGV4cGVjdChoZWFkZXIuc3RhdGUoKS5jcmVhdGUpLnRvLmVxbCgnJyk7XG4gICAgICBleHBlY3QoaGVhZGVyLnN0YXRlKCkuYnV0dG9uQ2xhc3MpLnRvLmVxbCgnJyk7XG4gICAgfSk7XG4gICAgaXQoJ2NhbGxzIGNvbXBvbmVudERpZE1vdW50JywgZnVuY3Rpb24oKSB7XG4gICAgc2lub24uc3B5KEhlYWRlci5wcm90b3R5cGUsICdjb21wb25lbnREaWRNb3VudCcpO1xuICAgIGVuenltZS5tb3VudCg8SGVhZGVyIC8+KTtcbiAgICBleHBlY3QoSGVhZGVyLnByb3RvdHlwZS5jb21wb25lbnREaWRNb3VudC5jYWxsZWRPbmNlKS50by5lcXVhbCh0cnVlKTtcbiAgICBIZWFkZXIucHJvdG90eXBlLmNvbXBvbmVudERpZE1vdW50LnJlc3RvcmUoKTtcbiAgICB9KTtcbiAgICBpdCgnQ2FsbHMgbG9nb3V0IGZ1bmN0aW9uJywgZnVuY3Rpb24oKSB7XG4gICAgICB2YXIgaGVhZGVyID0gZW56eW1lLm1vdW50KDxIZWFkZXIgLz4pO1xuICAgICAgdmFyIGluc3RhbmNlID0gaGVhZGVyLmluc3RhbmNlKCk7XG4gICAgICBzaW5vbi5zdHViKGJyb3dzZXJIaXN0b3J5LCAncHVzaCcpLnJldHVybnModHJ1ZSk7XG4gICAgICBoZWFkZXIuZmluZCgnI2xvZ291dCcpLnNpbXVsYXRlKCdjbGljaycpO1xuICAgICAgZXhwZWN0KGJyb3dzZXJIaXN0b3J5LnB1c2guY2FsbGVkKS50by5lcXVhbCh0cnVlKTtcbiAgICAgIGJyb3dzZXJIaXN0b3J5LnB1c2gucmVzdG9yZSgpO1xuICAgIH0pO1xuICB9KTtcbn0pKCk7XG4iXX0=
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 17 2016 01:30:31 GMT+0300 (EAT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

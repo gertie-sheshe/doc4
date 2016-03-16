@@ -20,12 +20,12 @@
             user = res.body;
             token = res.body.token;
             request(app)
-              .get('/api/documents/' + '?from=2016-03-09&to=2016-09-11')
+              .get('/api/documents/' + '?from=2016-03-10&to=2016-09-11')
               .set('x-access-token', token)
               .end(function(err, res) {
-                assert.strictEqual(res.body.length, 2);
+                assert.strictEqual(res.body.length, 1);
                 assert.strictEqual(res.status, 200);
-                expect(res.body).to.have.length(2);
+                expect(res.body).to.have.length(1);
                 done();
               });
           });

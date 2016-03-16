@@ -19,7 +19,13 @@
           });
         }
         if (user) {
-          return res.status(200).json(user);
+          var token = jwt.sign(user, req.app.get('superSecret'), {
+            expireIn: '24h'
+          });
+          return res.status(200).json({
+            user: user,
+            token: token
+          });
         }
       })(req, res, next);
     },

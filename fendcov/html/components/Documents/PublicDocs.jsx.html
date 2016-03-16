@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for components/Documents/PublicDocs.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">components/Documents/</a> PublicDocs.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>9/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>9/15</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () { 'use strict';
+&nbsp;
+(function () {
+  'use strict';
+&nbsp;
+  var React = require('react');
+  var popups = require('popups');
+  var DocumentActions = require('../../actions/DocumentActions.js');
+  var DocumentStore = require('../../stores/DocumentStore.js');
+  var toastr = require('toastr');
+  var localStorage = require('localStorage');
+  var ReactDOM = require('react-dom');
+&nbsp;
+  module.exports = new React.createClass({
+    render: <span class="fstat-no" title="function not covered" >function render() {</span>
+<span class="cstat-no" title="statement not covered" >      var docNode = this.props.documents.map(<span class="fstat-no" title="function not covered" >function (doc, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var token = localStorage.getItem('x-access-token');</span>
+<span class="cstat-no" title="statement not covered" >        var docContent = <span class="fstat-no" title="function not covered" >function docContent() {</span></span>
+<span class="cstat-no" title="statement not covered" >          popups.modal({</span>
+            title: doc.title,
+            content: {
+              tag: "div.mdl-card__supporting-text",
+              html: doc.content
+            }
+          });
+        };
+<span class="cstat-no" title="statement not covered" >        return React.createElement(</span>
+          'div',
+          { className: 'mdl-cell--12-col', key: index },
+          React.createElement(
+            'div',
+            { className: 'mdl-cell--12-col mdl-typography--title' },
+            'Title:  ',
+            doc.title
+          ),
+          React.createElement(
+            'div',
+            { className: 'details mdl-cell--12-col' },
+            React.createElement(
+              'span',
+              { className: 'owner-details' },
+              'Added by: ',
+              doc.owner,
+              ' ',
+              React.createElement('br', null)
+            ),
+            React.createElement(
+              'span',
+              { className: 'doc-content' },
+              ' ',
+              doc.content,
+              ' ',
+              React.createElement('br', null)
+            ),
+            React.createElement(
+              'a',
+              { className: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ', onClick: docContent },
+              'Read More'
+            )
+          ),
+          React.createElement('hr', null)
+        );
+      });
+<span class="cstat-no" title="statement not covered" >      return React.createElement(</span>
+        'div',
+        { className: 'documents mdl-grid' },
+        docNode
+      );
+    }
+  });
+})();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlB1YmxpY0RvY3MuanN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsQ0FBQyxZQUFXO0FBQ1YsZUFEVTs7QUFFVixNQUFJLFFBQVEsUUFBUSxPQUFSLENBQVIsQ0FGTTtBQUdWLE1BQUksU0FBUyxRQUFRLFFBQVIsQ0FBVCxDQUhNO0FBSVYsTUFBSSxrQkFBa0IsUUFBUSxrQ0FBUixDQUFsQixDQUpNO0FBS1YsTUFBSSxnQkFBZ0IsUUFBUSwrQkFBUixDQUFoQixDQUxNO0FBTVYsTUFBSSxTQUFTLFFBQVEsUUFBUixDQUFULENBTk07QUFPVixNQUFJLGVBQWUsUUFBUSxjQUFSLENBQWYsQ0FQTTtBQVFWLE1BQUksV0FBVyxRQUFRLFdBQVIsQ0FBWCxDQVJNOztBQVVaLFNBQU8sT0FBUCxHQUFpQixJQUFJLE1BQU0sV0FBTixDQUFrQjtBQUNyQyxZQUFRLGtCQUFXO0FBQ2pCLFVBQUksVUFBVSxLQUFLLEtBQUwsQ0FBVyxTQUFYLENBQXFCLEdBQXJCLENBQXlCLFVBQVMsR0FBVCxFQUFjLEtBQWQsRUFBcUI7QUFDMUQsWUFBSSxRQUFRLGFBQWEsT0FBYixDQUFxQixnQkFBckIsQ0FBUixDQURzRDtBQUUxRCxZQUFJLGFBQWEsU0FBYixVQUFhLEdBQVc7QUFDMUIsaUJBQU8sS0FBUCxDQUFhO0FBQ1gsbUJBQU8sSUFBSSxLQUFKO0FBQ1AscUJBQVM7QUFDUCxtQkFBSywrQkFBTDtBQUNBLG9CQUFNLElBQUksT0FBSjthQUZSO1dBRkYsRUFEMEI7U0FBWCxDQUZ5QztBQVcxRCxlQUNJOztZQUFLLFdBQVUsa0JBQVYsRUFBNkIsS0FBSyxLQUFMLEVBQWxDO1VBQ0k7O2NBQUssV0FBVSx3Q0FBVixFQUFMOztZQUNhLElBQUksS0FBSjtXQUZqQjtVQUlJOztjQUFLLFdBQVUsMEJBQVYsRUFBTDtZQUNFOztnQkFBTSxXQUFVLGVBQVYsRUFBTjs7Y0FBMkMsSUFBSSxLQUFKO2lCQUEzQztjQUFzRCwrQkFBdEQ7YUFERjtZQUVFOztnQkFBTSxXQUFVLGFBQVYsRUFBTjs7Y0FBZ0MsSUFBSSxPQUFKO2lCQUFoQztjQUE2QywrQkFBN0M7YUFGRjtZQUdFOztnQkFBRyxXQUFVLG9FQUFWLEVBQStFLFNBQVUsVUFBVixFQUFsRjs7YUFIRjtXQUpKO1VBV0ksK0JBWEo7U0FESixDQVgwRDtPQUFyQixDQUFuQyxDQURhO0FBNkJqQixhQUFPOztVQUFLLFdBQVUsb0JBQVYsRUFBTDtRQUFxQyxPQUFyQztPQUFQLENBN0JpQjtLQUFYO0dBRE8sQ0FBakIsQ0FWWTtDQUFYLENBQUQiLCJmaWxlIjoiUHVibGljRG9jcy5qc3giLCJzb3VyY2VzQ29udGVudCI6WyIoZnVuY3Rpb24oKSB7XG4gICd1c2Ugc3RyaWN0JztcbiAgdmFyIFJlYWN0ID0gcmVxdWlyZSgncmVhY3QnKTtcbiAgdmFyIHBvcHVwcyA9IHJlcXVpcmUoJ3BvcHVwcycpO1xuICB2YXIgRG9jdW1lbnRBY3Rpb25zID0gcmVxdWlyZSgnLi4vLi4vYWN0aW9ucy9Eb2N1bWVudEFjdGlvbnMuanMnKTtcbiAgdmFyIERvY3VtZW50U3RvcmUgPSByZXF1aXJlKCcuLi8uLi9zdG9yZXMvRG9jdW1lbnRTdG9yZS5qcycpO1xuICB2YXIgdG9hc3RyID0gcmVxdWlyZSgndG9hc3RyJyk7XG4gIHZhciBsb2NhbFN0b3JhZ2UgPSByZXF1aXJlKCdsb2NhbFN0b3JhZ2UnKTtcbiAgdmFyIFJlYWN0RE9NID0gcmVxdWlyZSgncmVhY3QtZG9tJyk7XG5cbm1vZHVsZS5leHBvcnRzID0gbmV3IFJlYWN0LmNyZWF0ZUNsYXNzKHtcbiAgcmVuZGVyOiBmdW5jdGlvbigpIHtcbiAgICB2YXIgZG9jTm9kZSA9IHRoaXMucHJvcHMuZG9jdW1lbnRzLm1hcChmdW5jdGlvbihkb2MsIGluZGV4KSB7XG4gICAgICB2YXIgdG9rZW4gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgneC1hY2Nlc3MtdG9rZW4nKTtcbiAgICAgIHZhciBkb2NDb250ZW50ID0gZnVuY3Rpb24oKSB7XG4gICAgICAgIHBvcHVwcy5tb2RhbCh7XG4gICAgICAgICAgdGl0bGU6IGRvYy50aXRsZSxcbiAgICAgICAgICBjb250ZW50OiB7XG4gICAgICAgICAgICB0YWc6IFwiZGl2Lm1kbC1jYXJkX19zdXBwb3J0aW5nLXRleHRcIixcbiAgICAgICAgICAgIGh0bWw6IGRvYy5jb250ZW50XG4gICAgICAgICAgfVxuICAgICAgICB9KTtcbiAgICAgIH07XG4gICAgICByZXR1cm4gKFxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWRsLWNlbGwtLTEyLWNvbFwiIGtleT17aW5kZXh9PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1kbC1jZWxsLS0xMi1jb2wgbWRsLXR5cG9ncmFwaHktLXRpdGxlXCI+XG4gICAgICAgICAgICAgICAgICBUaXRsZTogIHtkb2MudGl0bGV9XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImRldGFpbHMgbWRsLWNlbGwtLTEyLWNvbFwiPlxuICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cIm93bmVyLWRldGFpbHNcIj5BZGRlZCBieToge2RvYy5vd25lcn0gPGJyLz48L3NwYW4+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZG9jLWNvbnRlbnRcIj4ge2RvYy5jb250ZW50fSA8YnIvPjwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8YSBjbGFzc05hbWU9XCJtZGwtYnV0dG9uIG1kbC1idXR0b24tLWNvbG9yZWQgbWRsLWpzLWJ1dHRvbiBtZGwtanMtcmlwcGxlLWVmZmVjdCBcIiBvbkNsaWNrID17ZG9jQ29udGVudH0+XG4gICAgICAgICAgICAgICAgICBSZWFkIE1vcmVcbiAgICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8aHIvPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgKTtcblxuICAgIH0pO1xuICAgIHJldHVybig8ZGl2IGNsYXNzTmFtZT1cImRvY3VtZW50cyBtZGwtZ3JpZFwiPntkb2NOb2RlfTwvZGl2PilcbiAgfVxufSk7XG59KSgpO1xuIl19
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 17 2016 01:25:07 GMT+0300 (EAT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,11 +1,11 @@
 (function() {
   'use strict';
-  var headerPath = '../../../../app/scripts/components/LandingPage/Header.jsx',
-  React = require('react'),
+  var React = require('react'),
   sinon = require('sinon'),
   expect = require('chai').expect,
   enzyme = require('enzyme'),
-  Header = require(headerPath);
+  browserHistory = require('react-router').browserHistory,
+  Header = require('../../../../app/scripts/components/LandingPage/Header.jsx');
 
   describe('Header', function() {
 
@@ -26,7 +26,9 @@
     });
     it('Component has the correct states', function() {
       var header = enzyme.shallow(<Header />);
-      expect(header.state().link).to.eql('');
+      expect(header.state().logout).to.eql('');
+      expect(header.state().profile).to.eql('');
+      expect(header.state().create).to.eql('');
       expect(header.state().buttonClass).to.eql('');
     });
     it('calls componentDidMount', function() {
@@ -34,6 +36,14 @@
     enzyme.mount(<Header />);
     expect(Header.prototype.componentDidMount.calledOnce).to.equal(true);
     Header.prototype.componentDidMount.restore();
+    });
+    it('Calls logout function', function() {
+      var header = enzyme.mount(<Header />);
+      var instance = header.instance();
+      sinon.stub(browserHistory, 'push').returns(true);
+      header.find('#logout').simulate('click');
+      expect(browserHistory.push.called).to.equal(true);
+      browserHistory.push.restore();
     });
   });
 })();

@@ -12,7 +12,7 @@
 
     before(function() {
       sinon.stub(DocumentStore, 'emitChange').returns(true);
-      registerSpy = sinon.stub(AppDispatcher, 'register');
+      registerSpy = sinon.stub(AppDispatcher, 'register').returns(true);
       dispatchSpy= sinon.spy(AppDispatcher, 'dispatch');
       registerSpy.onFirstCall().returnsArg(0);
     });
@@ -24,9 +24,8 @@
 
     it('Get User Docs', function() {
       sinon.spy(DocumentStore, 'setUserDocs');
-      sinon.spy(emitChange, 'emitChange');
       var userAction = {
-        actionType: 'GET_DOCS',
+        actionType: constants.GET_DOCS,
         data: {
           title: 'Sheshe',
           content: 'stolen'
@@ -34,28 +33,28 @@
       };
       AppDispatcher.dispatch(userAction);
       expect(DocumentStore.setUserDocs.called).to.equal(true);
-      expect(emitChange.emitChange.called).to.equal(true);
       var docData = DocumentStore.getUserDocs();
       expect(docData).to.equal(userAction.data);
+      DocumentStore.setUserDocs.restore();
     });
+
     it('Get Owner Docs', function() {
       sinon.spy(DocumentStore, 'setOwnerDocs');
       var userAction = {
-        actionType: 'OWNER_DOCS',
-        data: {
-          title: 'Title',
-          content: 'content'
-        }
+        actionType: constants.OWNER_DOCS,
+        data: 'I forgot'
       };
       AppDispatcher.dispatch(userAction);
       expect(DocumentStore.setOwnerDocs.called).to.equal(true);
       var docData = DocumentStore.getOwnerDocs();
       expect(docData).to.equal(userAction.data);
+      DocumentStore.setOwnerDocs.restore();
     });
+
     it('Delete a Doc', function() {
       sinon.spy(DocumentStore, 'deleteDoc');
       var userAction = {
-        actionType: 'DELETE_DOC',
+        actionType: constants.DELETE_DOC,
         data: {
           message: 'Document has been deleted',
         }
@@ -65,6 +64,7 @@
       var docData = DocumentStore.getDeleted();
       expect(docData.message).to.equal(userAction.data.message);
     });
+
     it('Update a Doc', function() {
       sinon.spy(DocumentStore, 'setUpdatedDoc');
       var userAction = {

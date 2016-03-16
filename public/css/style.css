@@ -77,12 +77,21 @@
     position: fixed;
     padding-bottom: 70px;
   }
-  .mdl-layout__content {
-    top: 64px;
-  }
   .mdl-navigation .icon {
     padding: 20px;
   }
+}
+@media (min-width: 840px) {
+  #userdoc {
+    position: fixed;
+    overflow-y: scroll;
+    height: 100%;
+    top: 64px;
+    border-left: solid 1px #eee;
+  }
+}
+.mdl-layout__content {
+  top: 64px;
 }
 .mdl-dialog {
   width: 50%;
@@ -120,12 +129,10 @@
 }
 @media (max-width: 839px) {
   .mdl-card {
-    width: 95vw !important;
     height: auto;
   }
 }
 .mdl-layout__content h2 {
-  text-align: left;
   padding-left: 4%;
   font-family: learningcurve;
 }
@@ -143,6 +150,10 @@
 .documents .mdl-list,
 .documents .mdl-list__item-primary-content {
   max-width: 90%;
+}
+.mdl-layout__header,
+.mdl-layout__header-row {
+  min-height: 64px;
 }
 #document-form .mdl-button {
   margin-left: 40%;
@@ -164,17 +175,7 @@ header {
   margin: 20px;
 }
 #form-document {
-  margin-left: 20%;
-}
-#text {
-  width: 150%;
-}
-#userdoc {
-  position: fixed;
-  overflow-y: scroll;
-  height: 100%;
-  top: 64px;
-  border-left: solid 1px #eee;
+  margin-left: 10%;
 }
 #userdoc li {
   list-style: none;
@@ -204,4 +205,27 @@ header {
 }
 .details .doc-content {
   padding: 5px 0;
+}
+#single-doc .mdl-card__supporting-text,
+#create-doc .mdl-card__supporting-text {
+  min-height: 60vh;
+}
+#public-doc {
+  text-align: center;
+}
+#create-doc {
+  padding-top: 40px;
+}
+#auth {
+  padding-top: 40px;
+}
+#profile {
+  padding-top: 40px;
+}
+body {
+  background-color: #fafafa;
+}
+#credentials {
+  font-family: learningcurve;
+  text-align: center;
 }

@@ -1,85 +1,61 @@
 (function() {
+  'use strict';
   var React = require('react');
   var ReactDOM = require('react-dom');
-  var History = require('react-router').History;
+  var browserHistory = require('react-router').browserHistory;
   var Documents = require('../Documents/Documents.jsx');
   var Public = require('../Documents/PublicDocs.jsx');
   var DocumentStore = require('../../stores/DocumentStore');
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
   var UserStore = require('../../stores/UserStore');
-  var Users = require('../UserList/Users.jsx');
   var toastr = require('toastr');
   var popups = require('popups');
-  var Select = require('react-select');
   var localStorage = require('localStorage');
 
 
   var Dashboard = new React.createClass({
-    mixins: [History],
+
     getInitialState: function() {
-      that = this;
       return {
         document: [],
         updatedDoc: {
           title: '',
-          content: ''
+          content: '',
+          access: ''
         }
       };
     },
 
     componentWillMount: function() {
-      var pathArray = window.location.pathname.split('/')[1];
+      var pathArray = this.props.params.id;
       var token = localStorage.getItem('x-access-token');
+      localStorage.setItem('document', pathArray);
       DocumentAction.setDoc(pathArray, token);
     },
 
     componentDidMount: function() {
       DocumentStore.addChangeListener(this.handleSelected, 'doc');
-
     },
 
     handleSelected: function() {
       var selectDoc = DocumentStore.getSelectedDoc();
+      console.log('selected', selectDoc);
       var doc = [].concat(selectDoc);
       this.setState({
         document: doc
       });
-      this.editInit();
     },
 
-    editInit: function() {
-      var editDialog = document.querySelector('#edit-dialog');
-      var editDialogButton = document.querySelector('#show-edit-dialog');
-      if (!editDialog.showModal) {
-        dialogPolyfill.registerDialog(editDialog);
-      }
-      editDialogButton.addEventListener('click', function() {
-        editDialog.showModal();
-      });
-      editDialog.querySelector('.close').addEventListener('click', function() {
-        editDialog.close();
-      });
-    },
-
-    update: function() {
-      var newDoc = this.state.updatedDoc;
-      var token = localStorage.getItem('x-access-token');
-      var docId = window.location.pathname.split('/')[1];
-      DocumentAction.updateDoc(docId, newDoc, token);
-      toastr.success('Document has been Updated', {timeout: 3000});
-      that.history.pushState(null, '/dashboard');
-    },
-
-    fetchInputValues: function(event) {
-      var field = event.target.name;
-      var value = event.target.value;
-      this.state.updatedDoc[field] = value;
-      this.setState({updatedDoc: this.state.updatedDoc});
+    back: function() {
+      localStorage.removeItem('document');
+      browserHistory.push('/dashboard');
+      // window.location.assign('/dashboard');
     },
 
     render: function() {
       if(this.state.document) {
+        var that = this;
         var data = this.state.document.map(function(doc) {
           var deleteDoc = function() {
             popups.confirm({
@@ -100,7 +76,7 @@
           };
           return (
             <div className="mdl-grid" key={doc._id}>
-              <div id="ownerdoc" className="mdl-cell mdl-cell--12-col">
+              <div id="single-doc" className="mdl-cell mdl-cell--12-col">
                 <div className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
                   <div className="demo-card-square mdl-card mdl-shadow--2dp">
                     <div className="mdl-card__title mdl-card--expand">
@@ -110,29 +86,13 @@
                       {doc.content}
                     </div>
                     <div className="mdl-card__actions mdl-card--border">
-                      <a id="show-edit-dialog" className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                      <a href={'/update'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
                         Edit
                       </a>
-                        <dialog id="edit-dialog" className="mdl-dialog">
-                          <form id ="form-document" >
-                            <div className="mdl-textfield mdl-js-textfield  mdl-cell--8-col">
-                                <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={that.fetchInputValues} />
-                                <label className="mdl-textfield__label" htmlFor="title" >Title</label>
-                            </div>
-                            <div className="mdl-textfield mdl-js-textfield">
-                              <textarea className="mdl-textfield__input" type="text" rows= "3" id="text" name="content" onChange={that.fetchInputValues}>{doc.content}</textarea>
-                              <label className="mdl-textfield__label" htmlFor="text" ></label>
-                            </div>
-                            </form>
-                          <div className="mdl-dialog__actions">
-                            <button type="button" className="mdl-button" onClick={that.update}>UPDATE</button>
-                            <button type="button" className="mdl-button close">CANCEL</button>
-                          </div>
-                        </dialog>
                         <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={deleteDoc}>
                            Delete
                         </a>
-                        <a href={'/dashboard'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                        <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={that.back}>
                            Back
                         </a>
                     </div>

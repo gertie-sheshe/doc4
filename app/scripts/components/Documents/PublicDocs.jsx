@@ -15,7 +15,10 @@ module.exports = new React.createClass({
       var docContent = function() {
         popups.modal({
           title: doc.title,
-          content: '<h4> ' + doc.content + '</h4>'
+          content: {
+            tag: "div.mdl-card__supporting-text",
+            html: doc.content
+          }
         });
       };
       return (

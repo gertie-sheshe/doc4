@@ -108,7 +108,7 @@
     var documents = [{
       title: 'One',
       content: 'Tony Stark',
-      ownerId: user.one._id,
+      ownerId: user.one.user._id,
       owner: 'Kidoti',
       accessType: 'None',
       typeId: type[0]._id,
@@ -118,7 +118,7 @@
     }, {
       title: 'Two',
       content: 'Clark Kent',
-      ownerId: user.one._id,
+      ownerId: user.one.user._id,
       owner: 'Kidoti',
       accessType: 'Private',
       typeId: type[0]._id,
@@ -128,7 +128,7 @@
     }, {
       title: 'Three',
       content: 'Winker Watson',
-      ownerId: user.one._id,
+      ownerId: user.one.user._id,
       owner: 'Kidoti',
       accessType: 'None',
       typeId: type[0]._id,
@@ -138,7 +138,7 @@
     }, {
       title: 'Four',
       content: 'Magnus Bane',
-      ownerId: user.two._id,
+      ownerId: user.two.user._id,
       owner: 'Sheshe',
       accessType: 'None',
       typeId: type[0]._id,
@@ -148,7 +148,7 @@
     }, {
       title: 'Five',
       content: 'Christian Bale',
-      ownerId: user.two._id,
+      ownerId: user.two.user._id,
       owner: 'Sheshe',
       accessType: 'Private',
       typeId: type[1]._id,
@@ -165,7 +165,7 @@
       ' Martha (Joan Plowright), to take care of him. But when burglar ' +
       'Switchblade Sam (Christopher Lloyd) breaks in to steal George\'s gold ' +
       'coin collection, he takes Dennis as a hostage, and crusty George must save the boy.',
-      ownerId: user.two._id,
+      ownerId: user.two.user._id,
       owner: 'Sheshe',
       accessType: 'None',
       typeId: type[2]._id,
@@ -175,7 +175,7 @@
     }, {
       title: 'Seven',
       content: 'Gandalf the White',
-      ownerId: user.three._id,
+      ownerId: user.three.user._id,
       owner: 'Kachuna',
       accessType: 'Private',
       typeId: type[2]._id,
@@ -185,7 +185,7 @@
     }, {
       title: 'Eight',
       content: '221B Baker Street',
-      ownerId: user.three._id,
+      ownerId: user.three.user._id,
       owner: 'Kachuna',
       accessType: 'None',
       typeId: type[2]._id,
@@ -195,7 +195,7 @@
     }, {
       title: 'Nine',
       content: 'Gniper and Gnasher',
-      ownerId: user.three._id,
+      ownerId: user.three.user._id,
       owner: 'Kachuna',
       accessType: 'None',
       typeId: type[3]._id,
@@ -206,7 +206,7 @@
     {
      title: 'Ein',
      content: 'Christian Balerina',
-     ownerId: user.two._id,
+     ownerId: user.two.user._id,
      owner: 'Sheshe',
      accessType: 'Private',
      typeId: type[1]._id,
@@ -217,7 +217,7 @@
    {
     title: 'Zwei',
     content: 'Dead pool',
-    ownerId: user.two._id,
+    ownerId: user.two.user._id,
     owner: 'Sheshe',
     accessType: 'Private',
     typeId: type[1]._id,
@@ -228,7 +228,7 @@
   {
    title: 'Drei',
    content: 'Bad Minton',
-   ownerId: user.two._id,
+   ownerId: user.two.user._id,
    owner: 'Sheshe',
    accessType: 'Private',
    typeId: type[1]._id,
@@ -239,7 +239,7 @@
  {
   title: 'Vier',
   content: 'Closets closets closets closets',
-  ownerId: user.two._id,
+  ownerId: user.two.user._id,
   owner: 'Sheshe',
   accessType: 'Private',
   typeId: type[1]._id,
@@ -252,6 +252,8 @@
       if (err) {
         console.log('Error Inserting New Data');
         if (err.name == 'ValidationError') {
+          console.log(err);
+          return;
           for (field in err.errors) {
             console.log(err.errors[field].message);
           }
