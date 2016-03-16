@@ -116,7 +116,7 @@
           .put('/api/documents/' + documents[0]._id)
           .set('x-access-token', result)
           .send({
-            role: 'Admin'
+            access: 'Admin'
           })
           .end(function(err, res) {
             console.log('Doc tests', res.body);
