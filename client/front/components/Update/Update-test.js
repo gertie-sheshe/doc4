@@ -34,6 +34,13 @@
       expect(Update.prototype.componentDidMount.called).to.equal(true);
       Update.prototype.componentDidMount.restore();
     });
+    it('test onclick', function() {
+      var auth = enzyme.mount(<Auth />);
+      var instance = auth.instance();
+      sinon.stub(DocumentAction, 'updateDoc').returns(true);
+      create.find('#createdoc').simulate('click');
+      expect(DocumentAction.updateDoc.called).to.equal(true);
+    });
     // it('calls the owner changeListener', function() {
     //   var dashboard = enzyme.mount(< Dashboard />);
     //   sinon.spy(DocumentStore, 'getOwnerDocs');

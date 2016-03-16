@@ -8,7 +8,7 @@
     "test:back": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
     "test:front": "karma start karma.conf.js",
     "coverage:back": "cat coverage/lcov.info | codecov",
-    "coverage:front": "cat fendcov/lcov/lcov.info | coveralls",
+    "coverage:front": "karma start karma.conf.js && cat fendcov/lcov/lcov.info | coveralls",
     "test": "npm run test:front"
   },
   "config": {
