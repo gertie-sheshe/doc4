@@ -22,15 +22,12 @@
     },
 
     getUserData: function() {
-      console.log('mu profile');
       var data = UserStore.getDecodedData();
       this.setState({
         userData: data,
         last: data.name.last,
         first: data.name.first
       });
-      console.log('Profile', this.state.userData);
-      console.log(this.state.userData.name.last);
     },
     render: function() {
       return (

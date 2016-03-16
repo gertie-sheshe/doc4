@@ -45,6 +45,22 @@
       browserHistory.push.restore();
       DocumentAction.updateDoc.restore();
     });
+
+    it('Correctly handles Field Change', function() {
+     var update = enzyme.mount(<Update />);
+     var event = {
+       target: {
+         name: 'title',
+         value: 'Global'
+       },
+       preventDefault: function() {}
+     };
+     var instance = update.instance();
+     sinon.spy(instance, 'fetchInputValues');
+     instance.fetchInputValues(event);
+     expect(update.state().updatedDoc[event.target.name]).to.eql(event.target.value);
+     instance.fetchInputValues.restore();
+   });
     // it('calls the owner changeListener', function() {
     //   var dashboard = enzyme.mount(< Dashboard />);
     //   sinon.spy(DocumentStore, 'getOwnerDocs');

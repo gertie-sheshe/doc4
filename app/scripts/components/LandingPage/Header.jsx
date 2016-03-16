@@ -4,9 +4,8 @@
   var React = require('react');
   var ReactDOM = require('react-dom');
   var localStorage = require('localStorage');
-  var History = require('react-router').History;
+  var browserHistory = require('react-router').browserHistory;
     module.exports = React.createClass({
-      mixins: [History],
       getInitialState: function() {
         return {
           logout: '',
@@ -33,7 +32,8 @@
 
       logout: function() {
         localStorage.removeItem('x-access-token');
-        window.location.assign('/');
+        browserHistory.push('/');
+        // window.location.assign('/');
       },
 
       render: function() {
@@ -46,12 +46,12 @@
                <div className="mdl-layout-spacer"></div>
                <div className="mdl-grid">
                  <div className="mdl-cell mdl-cell--4-col">
-                   <a href="/create" id="logout" className={this.state.buttonClass} >
+                   <a href="/create" className={this.state.buttonClass} >
                      {this.state.create}
                    </a>
                  </div>
                  <div className="mdl-cell mdl-cell--4-col">
-                   <a href="/profile" id="logout" className={this.state.buttonClass} >
+                   <a href="/profile"  className={this.state.buttonClass} >
                      {this.state.profile}
                    </a>
                  </div>

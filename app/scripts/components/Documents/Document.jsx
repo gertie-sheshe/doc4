@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   var React = require('react');
   var ReactDOM = require('react-dom');
   var browserHistory = require('react-router').browserHistory;
@@ -14,8 +15,8 @@
 
 
   var Dashboard = new React.createClass({
+
     getInitialState: function() {
-      that = this;
       return {
         document: [],
         updatedDoc: {
@@ -54,6 +55,7 @@
 
     render: function() {
       if(this.state.document) {
+        var that = this;
         var data = this.state.document.map(function(doc) {
           var deleteDoc = function() {
             popups.confirm({
