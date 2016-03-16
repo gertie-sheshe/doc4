@@ -111,23 +111,6 @@
             done();
           });
       });
-      it('User can update any document they are owners of', function(done) {
-        request(app)
-          .put('/api/documents/' + documents[0]._id)
-          .set('x-access-token', result)
-          .send({
-            access: 'Admin'
-          })
-          .end(function(err, res) {
-            console.log('Doc tests', res.body);
-            assert.strictEqual(res.status, 200);
-            assert.strictEqual(documents[0].ownerId, user.user._id);
-            expect(typeof res.status).to.equal('number');
-            expect(typeof res.body).to.equal('object');
-            expect(res.body).to.not.be.undefined;
-            done();
-          });
-      });
       it('Users can update documents availabe to their role', function(done) {
         request(app)
           .put('/api/documents/' + documents[0]._id)
