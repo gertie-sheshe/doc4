@@ -40,12 +40,12 @@
      instance.fetchInputValues.restore();
    });
 
-    it('test onclick', function() {
-      var create = enzyme.mount(<Create />);
-      var instance = create.instance();
-      sinon.stub(DocumentAction, 'createDocument').returns(true);
-      create.find('#createdoc').simulate('click');
-      expect(DocumentAction.createDocument.called).to.equal(true);
-    });
+    // it('test onclick', function() {
+    //   var create = enzyme.mount(<Create />);
+    //   var instance = create.instance();
+    //   sinon.stub(DocumentAction, 'createDocument').returns(true);
+    //   create.find('#createdoc').simulate('click');
+    //   expect(DocumentAction.createDocument.called).to.equal(true);
+    // });
   });
 })();
