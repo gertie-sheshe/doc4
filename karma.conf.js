@@ -5,7 +5,7 @@ module.exports = function(config) {
         files: [
             './app/scripts/**/*.js',
             './app/scripts/**/*.jsx',
-            './client/front/**/*test.js',
+            './client/front/**/*test.js'
         ],
         exclude: ['./app/scripts/app.jsx'],
         preprocessors: {
