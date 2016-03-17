@@ -98,12 +98,14 @@
           .put('/api/documents/' + documents[0]._id)
           .set('x-access-token', result)
           .send({
-            title: 'Prof Utonium'
+            title: 'Prof Utonium',
+            content: 'First Update'
           })
           .end(function(err, res) {
             // console.log('Doc tests', res.body);
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.title, 'Prof Utonium');
+            assert.strictEqual(res.body.content, 'First Update');
             assert.strictEqual(documents[0].ownerId, user.user._id);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
@@ -116,11 +118,14 @@
           .put('/api/documents/' + documents[0]._id)
           .set('x-access-token', result)
           .send({
-            content: 'Jane Doe'
+            content: 'Jane Doe',
+            title: 'Jane Edited',
+            access: 'Admin'
           })
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.content, 'Jane Doe');
+            assert.strictEqual(res.body.title, 'Jane Edited');
             assert.strictEqual(documents[0].accessId, user.user.roleId);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
