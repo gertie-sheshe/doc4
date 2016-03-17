@@ -32,8 +32,8 @@
 
       logout: function() {
         localStorage.removeItem('x-access-token');
-        browserHistory.push('/');
-        // window.location.assign('/');
+        // browserHistory.push('/');
+        window.location.assign('/');
       },
 
       render: function() {

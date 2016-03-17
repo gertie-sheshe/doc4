@@ -41,8 +41,6 @@
         title: doc[0].title,
         content: doc[0].content
       });
-
-      console.log('State', this.state.document[0].content);
     },
 
     fetchInputValues: function(event) {
@@ -62,8 +60,8 @@
       var docId = localStorage.getItem('document');
       DocumentAction.updateDoc(docId, newDoc, token);
       toastr.success('Document has been Updated', {timeout: 3000});
-      browserHistory.push('/dashboard');
-      // window.location.assign('/dashboard');
+      // browserHistory.push('/dashboard');
+      window.location.assign('/dashboard');
     },
 
     render: function() {

@@ -50,8 +50,8 @@
 
     back: function() {
       localStorage.removeItem('document');
-      browserHistory.push('/dashboard');
-      // window.location.assign('/dashboard');
+      // browserHistory.push('/dashboard');
+      window.location.assign('/dashboard');
     },
 
     render: function() {
