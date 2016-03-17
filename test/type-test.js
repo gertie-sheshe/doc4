@@ -119,6 +119,21 @@
             done();
           });
       });
+
+      it('Non-Admin cannot update types', function(done) {
+        request(app)
+          .put('/api/types/' + types[4]._id)
+          .set('x-access-token', token)
+          .send({
+            type: 'Historical'
+          })
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 403);
+            assert.strictEqual(res.body.message, 'You must be an Admin to perform this action');
+            done();
+          });
+      });
+
       it('Admin can delete a type', function(done) {
         request(app)
           .delete('/api/types/' + types[4]._id)
@@ -126,6 +141,35 @@
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.message, 'Type deleted');
+            done();
+          });
+      });
+      it('Non-Admin can delete a type', function(done) {
+        request(app)
+          .delete('/api/types/' + types[4]._id)
+          .set('x-access-token', token)
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 403);
+            assert.strictEqual(res.body.message, 'You must be an Admin to perform this action');
+            done();
+          });
+      });
+      it('Only existing Admin can delete a type', function(done) {
+        request(app)
+          .delete('/api/types/' + types[4]._id)
+          .set('x-access-token', token1 + 'y')
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 401);
+            assert.strictEqual(res.body.message, 'Failed to Authenticate');
+            done();
+          });
+      });
+      it('Only authenticated Admin can delete a type', function(done) {
+        request(app)
+          .delete('/api/types/' + types[4]._id)
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 401);
+            assert.strictEqual(res.body.message, 'You are not authenticated type');
             done();
           });
       });

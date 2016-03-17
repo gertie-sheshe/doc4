@@ -162,6 +162,26 @@
           });
       });
 
+      it('Users can update documents availabe to their role', function(done) {
+        request(app)
+          .put('/api/users/' + user.user._id)
+          .set('x-access-token', token)
+          .send({
+            username: 'Jane Edited',
+            email: 'we@you.com',
+            firstname: 'Jenny'
+          })
+          .end(function(err, res) {
+            console.log('EDITED', res.body);
+            assert.strictEqual(res.status, 200);
+            // assert.strictEqual(res.body.content, 'Jane Doe');
+            assert.strictEqual(res.body.username, 'Jane Edited');
+            assert.strictEqual(res.body.email, 'we@you.com');
+            assert.strictEqual(res.body.name.first, 'Jenny');
+            done();
+          });
+      });
+
       it('User can be deleted, but by Admin only', function(done) {
         request(app)
           .delete('/api/users/' + user.user._id)
