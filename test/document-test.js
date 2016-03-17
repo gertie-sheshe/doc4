@@ -59,6 +59,21 @@
             done();
           });
       });
+      it('You must be an existing user to create a document', function(done) {
+        request(app)
+          .post('/api/documents')
+          .set('x-access-token', result + 'p')
+          .send({
+            title: 'Mega Mind',
+            content: 'TightenVille'
+          })
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 401);
+            assert.strictEqual(res.body.message, 'Failed to Authenticate');
+            expect(res.body.message).to.be.a('string');
+            done();
+          });
+      });
       it('Document title is unique', function(done) {
         request(app)
           .post('/api/documents')

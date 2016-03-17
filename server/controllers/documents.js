@@ -154,23 +154,6 @@
       });
     },
 
-    findByRole: function(req, res) {
-      Document.find({
-        accessId: req.params.access_id,
-        accessType: 'None'
-      }, function(err, doc) {
-        if (err) {
-          return res.status(500).send(err.errmessage || err);
-        } else if (doc && doc.length) {
-          return res.status(200).json(doc);
-        } else {
-          return res.status(404).json({
-            'message': 'No documents found'
-          });
-        }
-      });
-    },
-
     delete: function(req, res) {
       Document.findById(req.params.document_id, function(err, doc) {
         if (err) {
