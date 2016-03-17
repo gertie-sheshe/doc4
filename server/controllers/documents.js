@@ -227,7 +227,6 @@
                 doc.accessId = access[0]._id;
                 doc.title = req.body.title;
                 doc.content = req.body.content;
-                console.log('updated access', doc);
                 doc.save(function(err, savedDoc) {
                   if (err) {
                     return res.status(500).send(err.errmessage || err);

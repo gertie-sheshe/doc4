@@ -118,14 +118,15 @@
           .put('/api/documents/' + documents[0]._id)
           .set('x-access-token', result)
           .send({
-            content: 'Jane Doe',
             title: 'Jane Edited',
+            content: 'Jane Doe',
             access: 'Admin'
           })
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.content, 'Jane Doe');
             assert.strictEqual(res.body.title, 'Jane Edited');
+            expect(typeof res.body.accessId).to.equal('string');
             assert.strictEqual(documents[0].accessId, user.user.roleId);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
