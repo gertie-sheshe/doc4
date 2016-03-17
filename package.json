@@ -1,7 +1,10 @@
 {
-  "name": "check3",
+  "name": "Doc4",
   "version": "1.0.0",
-  "description": "",
+  "description": "Checkpoint 4",
+  "engines": {
+    "node": "4.1.1"
+  },
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
