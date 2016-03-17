@@ -1,6 +1,6 @@
 ######Circle CI : [![Circle CI](https://circleci.com/gh/andela-gnyenyeshi/doc4.svg?style=svg)](https://circleci.com/gh/andela-gnyenyeshi/doc4)
 
-https://travis-ci.org/andela-gnyenyeshi/doc4.svg?branch=master
+[![Build Status](https://travis-ci.org/andela-gnyenyeshi/doc4.svg?branch=master)](https://travis-ci.org/andela-gnyenyeshi/doc4)
 
 [![Coverage Status](https://coveralls.io/repos/github/andela-gnyenyeshi/doc4/badge.svg?branch=master)](https://coveralls.io/github/andela-gnyenyeshi/doc4?branch=master)
 
