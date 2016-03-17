@@ -5,3 +5,6 @@ dependencies:
  post:
   - npm install module-deps
   - npm install gulp -g
+test:
+ post:
+  - npm run coverage:front
