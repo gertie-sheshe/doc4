@@ -67,10 +67,7 @@
     },
 
     render: function() {
-      var content = 'Hello';
-      var docCont = {
-        text: this.state.content
-      };
+      var content = 'Paste content and Edit here :)';
       return (
         <div>
         <form id ="form-document" >
@@ -79,8 +76,8 @@
               <label className="mdl-textfield__label" htmlFor="title" >{this.state.title}</label>
           </div>
           <div className="mdl-textfield mdl-js-textfield mdl-cell--11-col">
-            <textarea className="mdl-textfield__input" type="text" rows= "6" cols="60" id="text" name="content" onChange={this.fetchInputValues}>{content}</textarea>
-            <label className="mdl-textfield__label" htmlFor="text" >Content</label>
+            <textarea className="mdl-textfield__input" type="text" rows= "6" cols="60" id="text" name="content" onChange={this.fetchInputValues}></textarea>
+            <label className="mdl-textfield__label" htmlFor="text" >{content}</label>
           </div>
           <div className="mdl-grid">
             <div className="mdl-cell--3-col">

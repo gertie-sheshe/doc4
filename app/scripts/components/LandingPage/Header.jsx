@@ -42,7 +42,7 @@
           <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <header className="mdl-layout__header">
              <div className="mdl-layout__header-row">
-               <span className="mdl-layout-title">Title</span>
+               <span className="mdl-layout-title">Doc4</span>
                <div className="mdl-layout-spacer"></div>
                <div className="mdl-grid">
                  <div className="mdl-cell mdl-cell--4-col">
@@ -64,7 +64,7 @@
              </div>
            </header>
            <div className="mdl-layout__drawer">
-             <span className="mdl-layout-title">Title</span>
+             <span className="mdl-layout-title">Doc4</span>
              <nav className="mdl-navigation">
                <a className="mdl-navigation__link" href="/create">{this.state.create}</a>
                <a className="mdl-navigation__link" href="/profile">{this.state.profile}</a>

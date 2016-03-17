@@ -30,13 +30,13 @@ Back-End.
 --------
 The Back-End of this application has been tested using [**supertest**](https://www.npmjs.com/package/supertest), which is a Super-agent driven library for testing Node.js HTTP servers using a fluent API and [**Mocha**](https://mochajs.org), which is a feature-rich JavaScript test framework running on Node.js and the browser, making asynchronous testing simple and fun.
 
-Code-coverage has been implemented using JScoverage.
+Code-coverage has been implemented using Istanbul.
 
 Front-End.
 ----------
-The Front-End has been tested using Mocha, sinon, enzyme and chai.
+The Front-End has been tested using [**Mocha**](https://mochajs.org), [**Sinon**](http://sinonjs.org/), Enzyme and chai.
 
-Code-coverage has been implemented using BlanketJS.
+Code-coverage has been implemented using [**Karma**](https://karma-runner.github.io/0.13/index.html).
 
 Installation.
 -------------
@@ -60,5 +60,3 @@ Installation.
   gulp
 
   ```
-  Use [**Postman**](https://www.getpostman.com/) to consume the API.
-7. Well...enjoy.

@@ -14,7 +14,7 @@
       expect(header.find('.mdl-layout__header')).to.have.length(1);
     });
     it('Renders accurate content', function() {
-      expect(enzyme.shallow(<Header />).text()).to.have.string('Title');
+      expect(enzyme.shallow(<Header />).text()).to.have.string('Doc4');
     });
     it('Renders child components', function() {
       var header = enzyme.shallow(<Header />);

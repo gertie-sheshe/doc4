@@ -2,6 +2,7 @@
   'use strict';
   var React = require('react');
   var ReactDOM = require('react-dom');
+  var moment = require('moment');
   var browserHistory = require('react-router').browserHistory;
   var Documents = require('../Documents/Documents.jsx');
   var Public = require('../Documents/PublicDocs.jsx');
@@ -82,7 +83,7 @@
                     <div className="mdl-card__title mdl-card--expand">
                       <h1 className="mdl-card__title-text">Title:&nbsp;  {doc.title}</h1>
                     </div>
-                      <h5 id="docdate"> Added: 24mins ago</h5>
+                      <h5 id="docdate"> Added:&nbsp; {moment(doc.dateCreated).fromNow()} </h5>
                     <div className="mdl-card__supporting-text">
                       {doc.content}
                     </div>
