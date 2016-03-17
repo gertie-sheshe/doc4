@@ -60,8 +60,10 @@
         var data = this.state.document.map(function(doc) {
           var deleteDoc = function() {
             popups.confirm({
-              content:     '<h1>Are you sure you want to delete this document?</h1>',
+              content:     '<h6>Are you sure you want to delete this document?</h6>',
               labelOk:     'Yes',
+              additionalButtonOkClass: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect',
+              additionalButtonCancelClass: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect',
               labelCancel: 'No',
               onSubmit: function() {
                 var id = window.location.pathname.split('/')[1];
@@ -72,7 +74,7 @@
                 // that.history.pushState(null, '/dashboard');
               },
               onClose: function() {
-                console.log(':( kwi kwi');
+                return;
               }
             });
           };
@@ -84,7 +86,7 @@
                     <div className="mdl-card__title mdl-card--expand">
                       <h1 className="mdl-card__title-text">Title:&nbsp;  {doc.title}</h1>
                     </div>
-                      <h5 id="docdate"> Added:&nbsp; {moment(doc.dateCreated).fromNow()} </h5>
+                      <h6 id="docdate"> Added:&nbsp; {moment(doc.dateCreated).fromNow()} </h6>
                     <div className="mdl-card__supporting-text">
                       {doc.content}
                     </div>

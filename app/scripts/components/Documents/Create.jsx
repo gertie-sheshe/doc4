@@ -57,22 +57,20 @@
                 <label className="mdl-textfield__label" htmlFor="text">Content</label>
               </div>
               <div className="mdl-grid">
-                <div className="mdl-cell--3-col">
-                  <input id="roles" type="radio" name="access" value="Admin" onChange={this.fetchInputValues}>Admin</input>
+                <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
+                  <input type="radio" name="access" value="Admin" onChange={this.fetchInputValues}>&nbsp; Admin</input>
                 </div>
-                <div className="mdl-cell--3-col">
-                  <input id="roles" type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>Staff</input>
+                <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
+                  <input type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>&nbsp; Staff</input>
                 </div>
-                <div className="mdl-cell--3-col">
-                  <input id="roles" type="radio" name="access" value="Viewer" onChange={this.fetchInputValues}>Viewer</input>
-                </div>
-                <div className="mdl-cell--3-col">
-                  <input id="roles" type="radio" name="access" value="None" onChange={this.fetchInputValues}>None</input>
+                <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
+                  <input type="radio" name="access" value="Viewer" onChange={this.fetchInputValues}>&nbsp; Viewer</input>
                 </div>
               </div>
               </form>
           </div>
-          <div className="mdl-card__actions mdl-card--border">
+          <div className="mdl-card__actions mdl-card--border mdl-grid">
+            <div className="mdl-cell--6-col mdl-cell--3-offset">
             <a id="createdoc" className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.saveDocument}>
               CREATE
             </a>
@@ -80,6 +78,7 @@
               CANCEL
             </a>
           </div>
+        </div>
         </div>
       </div>
       </div>

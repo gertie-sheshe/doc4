@@ -7,8 +7,8 @@ module.exports = new React.createClass({
 
   render: function() {
     return (
-      <div>
-        <form action="post" onSubmit={this.props.handleSignUpAction}>
+      <div className="mdl-grid">
+        <form action="post" onSubmit={this.props.handleSignUpAction} className="mdl-grid mdl-cell mdl-cell--10-col mdl-cell--2-offset mdl-cell--1-offset-phone">
           <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--8-col">
               <input className="mdl-textfield__input" type="text" id="fname" name="firstname" onChange={this.props.onChange}/>
               <label className="mdl-textfield__label" htmlFor="fname">First Name</label>
@@ -29,26 +29,32 @@ module.exports = new React.createClass({
             <input className="mdl-textfield__input" type="password" id="pword" name="password" onChange={this.props.onChange}/>
             <label className="mdl-textfield__label" htmlFor="pword" required="true">Password</label>
           </div>
-          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--8-col">
+          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <div className="mdl-grid">
-              <div className="mdl-cell--3-col">
-                <input id="roles" type="radio" name="role" value="Admin" onChange={this.props.onChange}>Admin</input>
+              <h6>Select Role: </h6>
+              <div className="mdl-cell--12-col radio">
+                <input id="admin" type="radio" name="role" value="Admin" onChange={this.props.onChange}/>
+                <label htmlFor="admin">&nbsp; Admin</label>
               </div>
-              <div className="mdl-cell--3-col">
-                <input id="roles" type="radio" name="role" value="Staff" onChange={this.props.onChange}>Staff</input>
+              <div className="mdl-cell--12-col radio">
+                <input id="staff" type="radio" name="role" value="Staff" onChange={this.props.onChange}/>
+                  <label htmlFor="staff">&nbsp; Staff </label>
               </div>
-              <div className="mdl-cell--3-col">
-                <input id="roles" type="radio" name="role" value="Viewer" onChange={this.props.onChange}>Viewer</input>
+              <div className="mdl-cell--12-col radio">
+                <input id="viewer" type="radio" name="role" value="Viewer" onChange={this.props.onChange}/>
+                  <label htmlFor="viewer">&nbsp; Viewer</label>
               </div>
             </div>
             </div>
           </form>
-          <div className="mdl-grid">
-            <div className="mdl-cell mdl-cell--6-col">
-              <button type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Sign Up</button>
-            </div>
-            <div className="mdl-cell mdl-cell--6-col">
-              <button type="button" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Cancel</button>
+          <div className="mdl-cell--9-col mdl-cell--3-offset mdl-cell--1-offset-phone">
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--6-col">
+                <button type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Sign Up</button>
+              </div>
+              <div className="mdl-cell mdl-cell--6-col">
+                <a href={'/'} type="button" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Cancel</a>
+              </div>
             </div>
           </div>
       </div>

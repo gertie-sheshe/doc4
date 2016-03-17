@@ -213,7 +213,8 @@ header {
 #public-doc {
   text-align: center;
 }
-#create-doc {
+#create-doc,
+#update-doc {
   padding-top: 40px;
 }
 #auth {
@@ -231,4 +232,13 @@ body {
 }
 #docdate {
   padding-left: 12px;
+}
+#auth .mdl-card__supporting-text {
+  width: auto;
+}
+.radio {
+  padding-top: 10px;
+}
+#popupS-button-cancel {
+  margin-right: 10px;
 }

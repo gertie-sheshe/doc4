@@ -45,17 +45,17 @@
                <span className="mdl-layout-title">Doc4</span>
                <div className="mdl-layout-spacer"></div>
                <div className="mdl-grid">
-                 <div className="mdl-cell mdl-cell--4-col">
+                 <div className="mdl-cell mdl-cell--4-col mdl-cell--hide-phone mdl-cell--hide-tablet">
                    <a href="/create" className={this.state.buttonClass} >
                      {this.state.create}
                    </a>
                  </div>
-                 <div className="mdl-cell mdl-cell--4-col">
+                 <div className="mdl-cell mdl-cell--4-col mdl-cell--hide-phone mdl-cell--hide-tablet">
                    <a href="/profile"  className={this.state.buttonClass} >
                      {this.state.profile}
                    </a>
                  </div>
-                 <div className="mdl-cell mdl-cell--4-col">
+                 <div className="mdl-cell mdl-cell--4-col mdl-cell--hide-phone mdl-cell--hide-tablet">
                    <a id="logout" className={this.state.buttonClass} onClick={this.logout}>
                      {this.state.logout}
                    </a>

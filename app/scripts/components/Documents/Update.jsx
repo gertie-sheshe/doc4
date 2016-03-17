@@ -67,35 +67,38 @@
     render: function() {
       var content = 'Paste content and Edit here :)';
       return (
-        <div>
-        <form id ="form-document" >
-          <div className="mdl-textfield mdl-js-textfield  mdl-cell--11-col">
-              <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={this.fetchInputValues} />
-              <label className="mdl-textfield__label" htmlFor="title" >{this.state.title}</label>
+        <div className="mdl-grid">
+          <div id="update-doc" className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
+            <div className="demo-card-square mdl-card mdl-shadow--2dp">
+              <div className="mdl-card__supporting-text mdl-cell mdl-cell--12-col">
+                <form id ="form-document">
+                  <div className="mdl-textfield mdl-js-textfield  mdl-cell--11-col">
+                      <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={this.fetchInputValues} />
+                      <label className="mdl-textfield__label" htmlFor="title" >{this.state.title}</label>
+                  </div>
+                  <div className="mdl-textfield mdl-js-textfield mdl-cell--11-col">
+                    <textarea className="mdl-textfield__input" type="text" rows= "6" cols="60" id="text" name="content" onChange={this.fetchInputValues}></textarea>
+                    <label className="mdl-textfield__label" htmlFor="text" >{content}</label>
+                  </div>
+                  <div className="mdl-grid">
+                    <div className="mdl-cell--12-col radio">
+                      <input type="radio" name="access" value="Admin" onChange={this.fetchInputValues}>&nbsp; Admin</input>
+                    </div>
+                    <div className="mdl-cell--12-col radio">
+                      <input type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>&nbsp; Staff</input>
+                    </div>
+                    <div className="mdl-cell--12-col radio">
+                      <input type="radio" name="access" value="Viewer" onChange={this.fetchInputValues}>&nbsp; Viewer</input>
+                    </div>
+                  </div>
+                  </form>
+                  <div className="mdl-dialog__actions mdl-cell mdl-cell--11-col">
+                    <button id="updatedoc" type="button" className="mdl-button" onClick={this.update}>UPDATE</button>
+                    <a href={'/dashboard'} type="button" className="mdl-button close">CANCEL</a>
+                  </div>
+                </div>
+              </div>
           </div>
-          <div className="mdl-textfield mdl-js-textfield mdl-cell--11-col">
-            <textarea className="mdl-textfield__input" type="text" rows= "6" cols="60" id="text" name="content" onChange={this.fetchInputValues}></textarea>
-            <label className="mdl-textfield__label" htmlFor="text" >{content}</label>
-          </div>
-          <div className="mdl-grid">
-            <div className="mdl-cell--3-col">
-              <input id="roles" type="radio" name="access" value="Admin" onChange={this.fetchInputValues}>Admin</input>
-            </div>
-            <div className="mdl-cell--3-col">
-              <input id="roles" type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>Staff</input>
-            </div>
-            <div className="mdl-cell--3-col">
-              <input id="roles" type="radio" name="access" value="Viewer" onChange={this.fetchInputValues}>Viewer</input>
-            </div>
-            <div className="mdl-cell--3-col">
-              <input id="roles" type="radio" name="access" value="None" onChange={this.fetchInputValues}>None</input>
-            </div>
-          </div>
-          </form>
-        <div className="mdl-dialog__actions">
-          <button id="updatedoc" type="button" className="mdl-button" onClick={this.update}>UPDATE</button>
-          <a href={'/dashboard'} type="button" className="mdl-button close">CANCEL</a>
-        </div>
       </div>
       );
     }
