@@ -68,7 +68,8 @@
                 var token = localStorage.getItem('x-access-token');
                 DocumentAction.deleteDocument(id, token);
                 toastr.success('Document has been deleted', {timeout: 3000});
-                that.history.pushState(null, '/dashboard');
+                window.location.assign('/dashboard');
+                // that.history.pushState(null, '/dashboard');
               },
               onClose: function() {
                 console.log(':( kwi kwi');
