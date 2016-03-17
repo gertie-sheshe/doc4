@@ -6,7 +6,6 @@
   var DocumentStore = require('../../stores/DocumentStore.js');
   var toastr = require('toastr');
   var ReactDOM = require('react-dom');
-  var Modal = require('react-modal');
 
 module.exports = new React.createClass({
   render: function() {

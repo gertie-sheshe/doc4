@@ -183,8 +183,7 @@ header {
 #dash-heading {
   max-height: 64px;
 }
-#logout,
-#headerbutton {
+.headerbutton {
   color: #fff;
 }
 #newdoc {

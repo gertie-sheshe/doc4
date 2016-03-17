@@ -125,6 +125,7 @@
     "react-select": "^0.9.1",
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
+    "requirejs": "^2.1.22",
     "should": "^8.1.1",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
