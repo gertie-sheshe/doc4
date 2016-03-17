@@ -1,4 +1,4 @@
 module.exports = {
- 'db' : 'mongodb://localhost:27017/dms',
+ 'db' : '  mongodb://sheshe:sheshe@ds015909.mlab.com:15909/doc4',
  'secret' : 'pocahantas'
 };
