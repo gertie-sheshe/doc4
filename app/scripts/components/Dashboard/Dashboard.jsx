@@ -11,8 +11,6 @@
   var UserStore = require('../../stores/UserStore');
   var toastr = require('toastr');
   var popups = require('popups');
-  var Select = require('react-select');
-
 
   var Dashboard = new React.createClass({
 
