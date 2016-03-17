@@ -46,17 +46,17 @@
                <div className="mdl-layout-spacer"></div>
                <div className="mdl-grid">
                  <div className="mdl-cell mdl-cell--4-col">
-                   <a href="/create" className={this.state.buttonClass} >
+                   <a href="/create" id ="headerbutton" className={this.state.buttonClass} >
                      {this.state.create}
                    </a>
                  </div>
                  <div className="mdl-cell mdl-cell--4-col">
-                   <a href="/profile"  className={this.state.buttonClass} >
+                   <a href="/profile" id ="headerbutton" className={this.state.buttonClass} >
                      {this.state.profile}
                    </a>
                  </div>
                  <div className="mdl-cell mdl-cell--4-col">
-                   <a id="logout" className={this.state.buttonClass} onClick={this.logout}>
+                   <a id="logout" id ="headerbutton" className={this.state.buttonClass} onClick={this.logout}>
                      {this.state.logout}
                    </a>
                  </div>

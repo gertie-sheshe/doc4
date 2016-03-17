@@ -183,7 +183,8 @@ header {
 #dash-heading {
   max-height: 64px;
 }
-#logout {
+#logout,
+#headerbutton {
   color: #fff;
 }
 #newdoc {
@@ -228,4 +229,7 @@ body {
 #credentials {
   font-family: learningcurve;
   text-align: center;
+}
+#docdate {
+  padding-left: 12px;
 }

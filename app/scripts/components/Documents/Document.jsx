@@ -82,6 +82,7 @@
                     <div className="mdl-card__title mdl-card--expand">
                       <h1 className="mdl-card__title-text">Title:&nbsp;  {doc.title}</h1>
                     </div>
+                      <h5 id="docdate"> Added: 24mins ago</h5>
                     <div className="mdl-card__supporting-text">
                       {doc.content}
                     </div>
