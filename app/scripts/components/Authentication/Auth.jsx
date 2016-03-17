@@ -59,7 +59,8 @@
       } else {
         localStorage.setItem('x-access-token', data.token);
         console.log('We have logged in');
-        browserHistory.push('/dashboard');
+        window.location.assign('/dashboard');
+        // browserHistory.push('/dashboard');
       }
     },
 
