@@ -69,6 +69,7 @@
     "istanbul": "^0.4.2",
     "jasmine": "^2.4.1",
     "jquery": "^2.2.0",
+    "jscoverage": "^0.6.0",
     "jsonwebtoken": "^5.5.4",
     "keymirror": "^0.1.1",
     "lcov-parse": "0.0.10",

@@ -190,17 +190,7 @@
           return res.status(500).send(err.errmessage || err);
         } else {
           // Users can only edit documents available to their role or they are the owner
-          if(req.body.title && req.body.content) {
-            doc.title = req.body.title;
-            doc.content = req.body.content;
-            doc.save(function(err, savedDoc) {
-              if (err) {
-                return res.status(500).send(err.errmessage || err);
-              } else {
-                return res.status(200).json(savedDoc);
-              }
-            });
-          } else if (req.body.title && req.body.content && req.body.access) {
+           if (req.body.title && req.body.content && req.body.access) {
             Role.find({
               title: req.body.access
             }).exec(function(err, access) {
@@ -210,6 +200,51 @@
                 doc.accessId = access[0]._id;
                 doc.title = req.body.title;
                 doc.content = req.body.content;
+                doc.save(function(err, savedDoc) {
+                  if (err) {
+                    return res.status(500).send(err.errmessage || err);
+                  } else {
+                    return res.status(200).json(savedDoc);
+                  }
+                });
+              }
+            });
+          } else if(req.body.title && req.body.content) {
+            doc.title = req.body.title;
+            doc.content = req.body.content;
+            doc.save(function(err, savedDoc) {
+              if (err) {
+                return res.status(500).send(err.errmessage || err);
+              } else {
+                return res.status(200).json(savedDoc);
+              }
+            });
+          } else if(req.body.content) {
+            doc.content = req.body.content;
+            doc.save(function(err, savedDoc) {
+              if (err) {
+                return res.status(500).send(err.errmessage || err);
+              } else {
+                return res.status(200).json(savedDoc);
+              }
+            });
+          }  else if(req.body.title) {
+            doc.title = req.body.title;
+            doc.save(function(err, savedDoc) {
+              if (err) {
+                return res.status(500).send(err.errmessage || err);
+              } else {
+                return res.status(200).json(savedDoc);
+              }
+            });
+          }  else if(req.body.access) {
+            Role.find({
+              title: req.body.access
+            }).exec(function(err, access) {
+              if (err) {
+                res.status(500).send(err.errormessage || err);
+              } else {
+                doc.accessId = access[0]._id;
                 doc.save(function(err, savedDoc) {
                   if (err) {
                     return res.status(500).send(err.errmessage || err);
