@@ -41,7 +41,7 @@ module.exports = new React.createClass({
                   <label htmlFor="staff">&nbsp; Staff </label>
               </div>
               <div className="mdl-cell--12-col radio">
-                <input id="viewer" type="radio" name="role" value="Viewer" onChange={this.props.onChange}/>
+                <input id="viewer" type="radio" defaultChecked name="role" value="Viewer" onChange={this.props.onChange}/>
                   <label htmlFor="viewer">&nbsp; Viewer</label>
               </div>
             </div>

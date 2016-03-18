@@ -1,5 +1,5 @@
 (function() {
-  'use strict';
+  // 'use strict';
   var React = require('react'),
   ReactDOM = require('react-dom'),
   localStorage = require('localStorage'),
@@ -34,29 +34,26 @@
 
     handleSelected: function() {
       var selectDoc = DocumentStore.getSelectedDoc();
-      console.log('selected kwa updates', selectDoc);
+      console.log('selected kwa updates', selectDoc[0]);
       var doc = [].concat(selectDoc);
       this.setState({
         document: doc,
         title: doc[0].title,
-        content: doc[0].content
+        content: selectDoc[0].content
       });
     },
 
     fetchInputValues: function(event) {
       var field = event.target.name;
       var value = event.target.value;
-      console.log('update',value);
+      console.log(value);
       this.state.updatedDoc[field] = value;
       this.setState({updatedDoc: this.state.updatedDoc});
-      console.log('updated doc', this.state.updatedDoc);
     },
 
     update: function() {
       var newDoc = this.state.updatedDoc;
-      console.log(newDoc);
       var token = localStorage.getItem('x-access-token');
-      console.log('token', token);
       var docId = localStorage.getItem('document');
       DocumentAction.updateDoc(docId, newDoc, token);
       toastr.success('Document has been Updated', {timeout: 3000});
@@ -65,7 +62,7 @@
     },
 
     render: function() {
-      var content = 'Paste content and Edit here :)';
+      var content = 'Paste content and Edit here';
       return (
         <div className="mdl-grid">
           <div id="update-doc" className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
@@ -73,16 +70,16 @@
               <div className="mdl-card__supporting-text mdl-cell mdl-cell--12-col">
                 <form id ="form-document">
                   <div className="mdl-textfield mdl-js-textfield  mdl-cell--11-col">
-                      <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={this.fetchInputValues} />
-                      <label className="mdl-textfield__label" htmlFor="title" >{this.state.title}</label>
+                    <label className="mdl-textfield__label" htmlFor="title" >{this.state.title}</label>
+                    <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={this.fetchInputValues} />
                   </div>
                   <div className="mdl-textfield mdl-js-textfield mdl-cell--11-col">
-                    <textarea className="mdl-textfield__input" type="text" rows= "6" cols="60" id="text" name="content" onChange={this.fetchInputValues}></textarea>
                     <label className="mdl-textfield__label" htmlFor="text" >{content}</label>
+                    <textarea className="mdl-textfield__input" type="text" rows= "6" cols="60" id="text" name="content" onInput={this.fetchInputValues} ></textarea>
                   </div>
                   <div className="mdl-grid">
                     <div className="mdl-cell--12-col radio">
-                      <input type="radio" name="access" value="Admin" onChange={this.fetchInputValues}>&nbsp; Admin</input>
+                      <input type="radio" name="access" value="Admin" defaultChecked onChange={this.fetchInputValues}>&nbsp; Admin</input>
                     </div>
                     <div className="mdl-cell--12-col radio">
                       <input type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>&nbsp; Staff</input>

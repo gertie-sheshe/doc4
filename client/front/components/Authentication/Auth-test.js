@@ -72,8 +72,8 @@
         sinon.stub(browserHistory, 'push').returns(true);
         enzyme.mount(<Auth />); // Mount the component
         UserStore.setLoginData({
-          id: 'weurhkja',
-          token: 'blahblah'});
+          username: 'Sheshe',
+          password: 'blahblah'});
         expect(UserStore.getLoginData.called).to.eql(true);
         browserHistory.push.restore();
         UserStore.getLoginData.restore();
@@ -96,7 +96,7 @@
       var event = {
         target: {
           name: 'username',
-          value: 'password'
+          value: 'Gerty'
         },
         preventDefault: function() {}
       };

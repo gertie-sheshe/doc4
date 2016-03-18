@@ -35,9 +35,21 @@
 
     saveDocument: function() {
       var token = localStorage.getItem('x-access-token');
-      DocumentAction.createDocument(this.state.document, token);
-      toastr.success('Document successfully created', {timeout: 1500});
-      window.location.assign('/dashboard');
+      var doc = this.state.document;
+      console.log('DOCUMENT', doc);
+      if(doc.title.length < 1 && doc.content.length < 1) {
+        toastr.warning('Document needs title and body', {timeout: 1000});
+      }
+      else if(doc.title.length < 1) {
+        toastr.warning('Document needs a title', {timeout: 1000});
+      }
+      else if(doc.content.length < 1) {
+        toastr.warning('Document needs content', {timeout: 1000});
+      } else {
+        DocumentAction.createDocument(this.state.document, token);
+        toastr.success('Document successfully created', {timeout: 100});
+        window.location.assign('/dashboard');
+      }
       // browserHistory.push('/dashboard');
     },
 
@@ -64,7 +76,7 @@
                   <input type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>&nbsp; Staff</input>
                 </div>
                 <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
-                  <input type="radio" name="access" value="Viewer" onChange={this.fetchInputValues}>&nbsp; Viewer</input>
+                  <input type="radio" name="access" value="Viewer" checked="true" onChange={this.fetchInputValues}>&nbsp; Viewer</input>
                 </div>
               </div>
               </form>

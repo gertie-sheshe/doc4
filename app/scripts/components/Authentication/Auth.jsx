@@ -65,7 +65,6 @@
     },
 
     handleLoginAction: function(event) {
-      console.log('what is event though', event);
       var details = this.state.user;
       event.preventDefault();
       if (details.username.length < 1  || details.password.length < 1 ) {
@@ -76,11 +75,18 @@
     },
     handleSignUpAction: function(event) {
       var details = this.state.info;
+      var email = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
       event.preventDefault();
       if (details.username.length < 1 || details.firstname.length < 1 ||
         details.lastname.length < 1 || details.email.length < 1 ||
         details.password.length < 1) {
         toastr.warning('Please fill out all the fields', {timeout: 1000});
+      }
+      if(!email.test(details.email)) {
+        toastr.warning('Please enter a valid Email address', {timeout: 1000});
+      }
+      if(details.password.length < 8) {
+        toastr.warning('Password should be 8 characters', {timeout: 1000});
       }
        else {
         UserAction.signup(this.state.info);
