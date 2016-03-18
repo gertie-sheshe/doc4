@@ -9,7 +9,7 @@
   Create = require('../../../../app/scripts/components/Documents/Create.jsx');
 
   describe('Create Document', function() {
-    it('renders the Landing component', function() {
+    it('renders the Create Document component', function() {
       var create = enzyme.shallow(<Create />);
       expect(create.find('.mdl-grid')).to.have.length(3);
     });

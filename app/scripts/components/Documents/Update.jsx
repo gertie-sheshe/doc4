@@ -46,7 +46,6 @@
     fetchInputValues: function(event) {
       var field = event.target.name;
       var value = event.target.value;
-      console.log(value);
       this.state.updatedDoc[field] = value;
       this.setState({updatedDoc: this.state.updatedDoc});
     },

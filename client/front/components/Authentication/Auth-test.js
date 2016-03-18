@@ -55,6 +55,7 @@
         "token": "eyJ0eXAiOiJK"
       });
       expect(UserStore.getSignUpData.called).to.eql(true);
+      expect(auth.state().panel.login).to.eql('mdl-tabs__panel is-active');
       UserStore.getSignUpData.restore();
     });
 
@@ -65,6 +66,8 @@
         "error": "Sign up failed. This Email or Username is already in use"
       });
       expect(UserStore.getSignUpData.called).to.eql(true);
+      expect(auth.state().panel.login).to.eql('mdl-tabs__panel');
+      UserStore.getSignUpData.restore();
     });
 
     it('calls the user login change listener', function() {

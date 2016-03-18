@@ -27,7 +27,6 @@
   }];
     it('renders the Document component', function() {
       var document = enzyme.mount(<Document params={{id: '76868'}}/>);
-      console.log(document.debug());
     });
     it('Component has the correct states', function() {
       var document = enzyme.shallow(<Document params={{id: '76868'}} documents = {doc} />);

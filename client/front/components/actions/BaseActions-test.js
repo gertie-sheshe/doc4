@@ -17,7 +17,7 @@
     data = {};
 
     beforeEach(function() {
-      sinon.stub(AppDispatcher, 'dispatch');
+      sinon.stub(AppDispatcher, 'dispatch').returns(true);
       sinon.stub(request.Request.prototype, 'end', function(callback) {
         callback(null, response);
       });

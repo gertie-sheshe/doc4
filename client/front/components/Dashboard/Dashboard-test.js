@@ -69,7 +69,7 @@
         {
           "_id": "56e84773a9872b4c39d61fef",
           "title": "Twice",
-          "content": "Winker Watson",
+          "content": "Locked Away",
           "ownerId": "56e84773a9872b4c39d61feb",
           "owner": "Kidoti",
           "typeId": "56e84773a9872b4c39d61fe3",

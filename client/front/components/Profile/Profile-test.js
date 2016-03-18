@@ -28,18 +28,18 @@
       expect(profile.state().first).to.eql('');
       expect(profile.state().last).to.eql('');
     });
-    // it('Change listener called when store is updated', function() {
-    //   sinon.spy(UserStore, 'getDecodedData');
-    //   UserStore.setDecodedData({
-    //     username: 'Sheshe',
-    //     name: {
-    //       first: 'Gertrude',
-    //       last: 'Nyesh'
-    //     },
-    //     email: 'email@email.com'
-    //   });
-    //   expect(UserStore.getDecodedData.called).to.equal(true);
-    //   UserStore.getDecodedData.restore();
-    // });
+    it('Change listener called when store is updated', function() {
+      sinon.spy(UserStore, 'getDecodedData');
+      UserStore.setDecodedData({
+        username: 'Sheshe',
+        name: {
+          first: 'Gertrude',
+          last: 'Nyesh'
+        },
+        email: 'email@email.com'
+      });
+      expect(UserStore.getDecodedData.called).to.equal(true);
+      UserStore.getDecodedData.restore();
+    });
   });
 })();

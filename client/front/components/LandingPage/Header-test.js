@@ -18,7 +18,6 @@
     });
     it('Renders child components', function() {
       var header = enzyme.shallow(<Header />);
-      // console.log(header.debug());
       expect(header.find('.mdl-layout__header')).to.have.length(1);
       expect(header.find('.mdl-layout-spacer')).to.have.length(1);
       expect(header.find('.mdl-layout__drawer')).to.have.length(1);
