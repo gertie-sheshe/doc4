@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">71.43% </span>
+        <span class="strong">80.95% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>30/42</span>
+        <span class='fraction'>34/42</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">63.64% </span>
+        <span class="strong">72.73% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>7/11</span>
+        <span class='fraction'>8/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76.92% </span>
+        <span class="strong">92.31% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>10/13</span>
+        <span class='fraction'>12/13</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">71.43% </span>
+        <span class="strong">80.95% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>30/42</span>
+        <span class='fraction'>34/42</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -207,15 +207,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,7 +220,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">79×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">91×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -238,14 +238,14 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-yes">32×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,12 +310,12 @@
     createDocs: <span class="fstat-no" title="function not covered" >function createDocs(createDoc) {</span>
 <span class="cstat-no" title="statement not covered" >      this.createDoc = createDoc;</span>
     },
-    setSelectedDoc: <span class="fstat-no" title="function not covered" >function setSelectedDoc(selected) {</span>
-<span class="cstat-no" title="statement not covered" >      this.selected = selected;</span>
-<span class="cstat-no" title="statement not covered" >      this.emitChange('doc');</span>
+    setSelectedDoc: function setSelectedDoc(selected) {
+      this.selected = selected;
+      this.emitChange('doc');
     },
-    getSelectedDoc: <span class="fstat-no" title="function not covered" >function getSelectedDoc() {</span>
-<span class="cstat-no" title="statement not covered" >      return this.selected;</span>
+    getSelectedDoc: function getSelectedDoc() {
+      return this.selected;
     },
 &nbsp;
     setUpdatedDoc: function setUpdatedDoc(updated) {
@@ -341,8 +341,8 @@
       case DocConstants.DELETE_DOC:
         DocumentStore.deleteDoc(action.data);
         break;
-<span class="branch-4 cbranch-no" title="branch not covered" >      case DocConstants.ONE_DOCS:</span>
-<span class="cstat-no" title="statement not covered" >        DocumentStore.setSelectedDoc(action.data);</span>
+      case DocConstants.ONE_DOCS:
+        DocumentStore.setSelectedDoc(action.data);
 <span class="cstat-no" title="statement not covered" >        break;</span>
       case DocConstants.UPDATE_DOC:
         DocumentStore.setUpdatedDoc(action.data);
@@ -361,7 +361,7 @@
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 17 2016 10:24:02 GMT+0300 (EAT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 18 2016 10:02:31 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

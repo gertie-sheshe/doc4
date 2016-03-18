@@ -58,9 +58,8 @@
         toastr.warning('Wrong username and password combination', {timeout: 5000});
       } else {
         localStorage.setItem('x-access-token', data.token);
-        console.log('We have logged in');
-        window.location.assign('/dashboard');
-        // browserHistory.push('/dashboard');
+        // window.location.assign('/dashboard');
+        browserHistory.push('/dashboard');
       }
     },
 

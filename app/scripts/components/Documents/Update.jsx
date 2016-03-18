@@ -53,15 +53,15 @@
 
     update: function() {
       var newDoc = this.state.updatedDoc;
-      if (this.state.updatedDoc.title.length < 1 && this.state.updateDoc.content.length < 1 && this.updateDoc.access.length < 1) {
+      if (this.state.updatedDoc.title.length < 1 && this.state.updatedDoc.content.length < 1 && this.state.updatedDoc.access.length < 1) {
         toastr.warning('Please fill out content to be updated');
       }
       var token = localStorage.getItem('x-access-token');
       var docId = localStorage.getItem('document');
       DocumentAction.updateDoc(docId, newDoc, token);
       toastr.success('Document has been Updated', {timeout: 3000});
-      // browserHistory.push('/dashboard');
-      window.location.assign('/dashboard');
+      browserHistory.push('/dashboard');
+      // window.location.assign('/dashboard');
     },
 
     render: function() {

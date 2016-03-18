@@ -68,12 +68,12 @@
       var decoded = UserStore.getDecodedData();
       if (decoded.message === 'You are not authenticated user') {
         toastr.error('You must be logged in bitte :)', {timeout: 3000});
-        // this.history.pushState(null, '/');
-        window.location.assign('/');
-        // browserHistory.push('/');
+        browserHistory.push('/');
+        // window.location.assign('/');
+        browserHistory.push('/');
       } if (decoded.message === 'Failed to Authenticate. You are not logged in.') {
-        window.location.assign('/');
-        // browserHistory.push('/');
+        // window.location.assign('/');
+        browserHistory.push('/');
       }
       else {
         this.setState({ownerId: decoded._id});

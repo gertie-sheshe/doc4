@@ -11,7 +11,7 @@
   describe('Create Document', function() {
     it('renders the Landing component', function() {
       var create = enzyme.shallow(<Create />);
-      expect(create.find('.mdl-grid')).to.have.length(2);
+      expect(create.find('.mdl-grid')).to.have.length(3);
     });
     it('Renders child components', function() {
       var create = enzyme.shallow(<Create />);
@@ -46,6 +46,8 @@
       var instance = create.instance();
       sinon.stub(browserHistory, 'push').returns(true);
       sinon.stub(DocumentAction, 'createDocument').returns(true);
+      create.state().document.title = 'Title';
+      create.state().document.content = 'Content';
       create.find('#createdoc').simulate('click');
       expect(DocumentAction.createDocument.called).to.equal(true);
       browserHistory.push.restore();

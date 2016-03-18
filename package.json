@@ -13,21 +13,7 @@
     "test:front": "mocha --compilers .:client/compiler.js client/testdom.js  client/front/components/**/*test.js",
     "coverage:back": "cat coverage/lcov.info | codecov",
     "coverage:front": "karma start karma.conf.js && cat fendcov/lcov/lcov.info | coveralls",
-    "test": "npm run test:back"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "app/scripts",
-      "data-cover-never": [
-        "dist",
-        "node_modules",
-        "app/scripts/dialog.js",
-        "client",
-        "test",
-        "app/js"
-      ],
-      "loader": "../../../client/blanket-stub-jsx.js"
-    }
+    "test": "npm run test:back npm run test:front"
   },
   "bin": {
     "coveralls": "./bin/coveralls.js"

@@ -7,7 +7,7 @@ module.exports = function(config) {
             './app/scripts/**/*.jsx',
             './client/front/**/*test.js'
         ],
-        exclude: ['./app/scripts/app.jsx'],
+        exclude: ['./app/scripts/app.jsx', './app/scripts/popup.js'],
         preprocessors: {
           "./app/scripts/**/*.js": ["browserify"],
           "./app/scripts/**/*.jsx": ["browserify"],
