@@ -52,9 +52,6 @@ module.exports = new React.createClass({
               <div className="mdl-cell mdl-cell--6-col">
                 <button type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Sign Up</button>
               </div>
-              <div className="mdl-cell mdl-cell--6-col">
-                <a href={'/'} type="button" className="mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Cancel</a>
-              </div>
             </div>
           </div>
       </div>

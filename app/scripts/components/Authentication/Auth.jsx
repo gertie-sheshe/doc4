@@ -9,8 +9,10 @@
   var UserAction = require('../../actions/UserActions');
   var toastr = require('toastr');
 
-  var Dashboard = new React.createClass({
-
+  var Auth = new React.createClass({
+    contextTypes: {
+      router: React.PropTypes.object
+    },
     getInitialState: function() {
       return {
         user: {
@@ -43,13 +45,17 @@
       if(info.error) {
         toastr.warning('Sign up failed. This Email or Username is already in use', {timeout: 5000});
       } else {
-        toastr.success('Success. Please proceed by logging in :)');
+        toastr.success('Success :)');
+        localStorage.setItem('x-access-token', info.token);
+        localStorage.setItem('user', info._id);
         this.setState({
           panel: {
             signup: "mdl-tabs__panel",
             login: "mdl-tabs__panel is-active"
           }
         });
+        // browserHistory.push('/dashboard');
+        this.context.router.push('/dashboard');
       }
     },
     handleLogin: function() {
@@ -58,8 +64,8 @@
         toastr.warning('Wrong username and password combination', {timeout: 5000});
       } else {
         localStorage.setItem('x-access-token', data.token);
-        // window.location.assign('/dashboard');
-        browserHistory.push('/dashboard');
+        localStorage.setItem('user', data.user._id);
+        this.context.router.push('/dashboard');
       }
     },
 
@@ -112,14 +118,14 @@
                     <a href="#signup-panel" className="mdl-tabs__tab ">SIGN UP</a>
                     <a href="#login-panel" className="mdl-tabs__tab">LOGIN</a>
                   </div>
-                  <div className={this.state.panel.signup} id="signup-panel">
+                  <div className="mdl-tabs__panel" id="signup-panel">
                     <SignUp
                       onChange={this.fetchValues}
                       onSubmit={this.handleSignUpAction}
                       onClick={this.handleSignUpAction}
                       info={this.state.info} />
                  </div>
-                 <div className={this.state.panel.login} id="login-panel">
+                 <div className="mdl-tabs__panel is-active" id="login-panel">
                    <Login
                     onChange={this.fetchValues}
                     onSubmit={this.handleLoginAction}
@@ -133,5 +139,5 @@
       );
     }
   });
-  module.exports = Dashboard;
+  module.exports = Auth;
 })();

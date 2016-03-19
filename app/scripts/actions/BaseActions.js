@@ -22,6 +22,7 @@
         .set('x-access-token', token)
         .send(data)
         .end(function(err, result) {
+          console.log('PUT BASE', result);
           AppDispatcher.dispatch({
             actionType: actionType,
             data: result.body

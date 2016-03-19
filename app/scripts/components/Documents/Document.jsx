@@ -16,7 +16,9 @@
 
 
   var Dashboard = new React.createClass({
-
+    contextTypes: {
+      router: React.PropTypes.object
+    },
     getInitialState: function() {
       return {
         document: [],
@@ -50,8 +52,13 @@
 
     back: function() {
       localStorage.removeItem('document');
-      browserHistory.push('/dashboard');
+      this.context.router.push('/dashboard');
+      // browserHistory.push('/dashboard');
       // window.location.assign('/dashboard');
+    },
+
+    update: function() {
+      this.context.router.push('/update');
     },
 
     render: function() {
@@ -70,7 +77,8 @@
                 var token = localStorage.getItem('x-access-token');
                 DocumentAction.deleteDocument(id, token);
                 toastr.success('Document has been deleted', {timeout: 3000});
-                window.location.assign('/dashboard');
+                that.context.router.push('/dashboard');
+                // window.location.assign('/dashboard');
                 // that.history.pushState(null, '/dashboard');
               },
               onClose: function() {
@@ -91,7 +99,7 @@
                       {doc.content}
                     </div>
                     <div className="mdl-card__actions mdl-card--border">
-                      <a href={'/update'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                      <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={that.update}>
                         Edit
                       </a>
                         <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={deleteDoc}>

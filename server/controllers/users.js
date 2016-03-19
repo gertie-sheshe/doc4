@@ -51,8 +51,10 @@
           if (!err) {
             req.decoded = decoded;
             req.token = token;
-            // // Check in loggedIn has been set to true
-            User.findById(req.decoded._doc._id, function(err, user){
+            // // Check if loggedIn has been set to true
+            console.log('DECODED', req.decoded._doc._id);
+            User.findOne(req.decoded._doc._id, function(err, user){
+              console.log('SESSION', user);
               if (err) {
                 return res.status(401).send(err.errmessage || err);
               } else {
@@ -178,8 +180,11 @@
 
     update: function(req, res) {
       User.findById(req.params.user_id, function(err, user) {
+        console.log('PARAMS', req.params.user_id);
+        console.log('DECODED', req.decoded._doc._id);
         if (req.decoded._doc._id === req.params.user_id) {
           if (err) {
+            console.log(err.errmessage);
             return res.status(500).send(err.errmessage || err);
           } else {
             if (req.body.firstname) {
@@ -194,14 +199,14 @@
             if (req.body.email) {
               user.email = req.body.email;
             }
-            if (req.body.password) {
-              user.password = req.body.password;
-            }
             user.save(function(err) {
               if (err) {
+                console.log(err);
                 return res.status(500).send(err.errmessage || err);
               } else {
-                return res.status(200).json(user);
+                return res.status(200).json({
+                  user: user
+                });
               }
             });
           }

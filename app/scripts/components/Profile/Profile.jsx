@@ -8,6 +8,9 @@
   var toastr = require('toastr');
 
   var ProfilePage = new React.createClass({
+    contextTypes: {
+      router: React.PropTypes.object
+    },
     getInitialState: function() {
       return {
         userData: '',
@@ -15,19 +18,49 @@
         first: ''
       };
     },
+
     componentWillMount: function() {
+      var id = localStorage.getItem('user');
       var token = localStorage.getItem('x-access-token');
-      UserStore.addChangeListener(this.getUserData, 'decode');
-      UserAction.decode(token);
+      UserAction.getUser(token, id);
     },
 
-    getUserData: function() {
-      var data = UserStore.getDecodedData();
+    componentDidMount: function() {
+      var token = localStorage.getItem('x-access-token');
+      UserStore.addChangeListener(this.getUserData, 'user');
+      UserStore.addChangeListener(this.getUpdatedUser, 'update');
+      // UserAction.decode(token);
+    },
+
+    getUpdatedUser: function() {
+      var data = UserStore.getUpdatedData();
+      console.log('LISTENER UPDATED REALLY?', data);
       this.setState({
         userData: data,
         last: data.name.last,
         first: data.name.first
       });
+    },
+
+    getUserData: function() {
+      // var data = UserStore.getDecodedData();
+      var data = UserStore.getUser();
+      console.log('LISTENER REALLY?', data);
+      this.setState({
+        userData: data,
+        last: data.name.last,
+        first: data.name.first
+      });
+    },
+
+    updateUserData: function() {
+      // var token = localStorage.getItem('x-access-token');
+      // USserAction.update(token, id);
+      this.context.router.push('/edit');
+    },
+
+    dashboard: function() {
+      this.context.router.push('/dashboard');
     },
     render: function() {
       return (
@@ -53,12 +86,19 @@
                   <h5>Email: </h5>
                   {this.state.userData.email}
                 </div>
+                <div className="mdl-cell mdl-cell--12-col">
+                  <h5>Role: </h5>
+                  {this.state.userData.role}
+                </div>
               </div>
               </form>
           </div>
           <div className="mdl-card__actions mdl-card--border">
-            <a href={'/dashboard'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.dashboard}>
               DASHBOARD
+            </a>
+            <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.updateUserData}>
+              EDIT
             </a>
           </div>
         </div>

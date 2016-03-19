@@ -3,12 +3,17 @@
   var React = require('react'),
   ReactDOM = require('react-dom'),
   localStorage = require('localStorage'),
+  LinkedStateMixin = require('react-addons-linked-state-mixin'),
   DocumentStore = require('../../stores/DocumentStore'),
   DocumentAction = require('../../actions/DocumentActions'),
   toastr = require('toastr'),
   browserHistory = require('react-router').browserHistory;
 
   var Update = new React.createClass({
+    mixins: [LinkedStateMixin],
+    contextTypes: {
+      router: React.PropTypes.object
+    },
     getInitialState: function() {
       return {
         document: [],
@@ -44,6 +49,7 @@
     },
 
     fetchInputValues: function(event) {
+      event.preventDefault();
       var field = event.target.name;
       var value = event.target.value;
       this.state.updatedDoc[field] = value;
@@ -63,8 +69,13 @@
       // window.location.assign('/dashboard');
     },
 
+    dashboard: function() {
+      this.context.router.push('/dashboard');
+    },
+
     render: function() {
-      var content = 'Paste content and Edit here';
+      var title = this.state.title;
+      var content = this.state.content;
       return (
         <div className="mdl-grid">
           <div id="update-doc" className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
@@ -72,29 +83,29 @@
               <div className="mdl-card__supporting-text mdl-cell mdl-cell--12-col">
                 <form id ="form-document">
                   <div className="mdl-textfield mdl-js-textfield  mdl-cell--11-col">
-                    <label className="mdl-textfield__label" htmlFor="title" >{this.state.title}</label>
-                    <input className="mdl-textfield__input" type="text" id="title" name="title" onChange={this.fetchInputValues} />
+                    <label className="mdl-textfield__label" htmlFor="title" >{title}</label>
+                    <input className="mdl-textfield__input" type="text"  id="title" name="title" onInput={this.fetchInputValues} valueLink={this.linkState('title')}/>
                   </div>
                   <div className="mdl-textfield mdl-js-textfield mdl-cell--11-col">
                     <label className="mdl-textfield__label" htmlFor="text" >{content}</label>
-                    <textarea className="mdl-textfield__input" type="text" rows= "6" cols="60" id="text" name="content" onInput={this.fetchInputValues} ></textarea>
+                    <textarea className="mdl-textfield__input" type="text" valueLink={this.linkState('content')} rows= "6" cols="60" id="text" name="content" onInput={this.fetchInputValues} ></textarea>
                   </div>
                   <div className="mdl-grid">
                     <div className="mdl-cell--12-col radio">
-                      <input type="radio" name="access" value="Admin" defaultChecked onChange={this.fetchInputValues}>&nbsp; Admin</input>
+                      <input type="radio" name="access" value="Admin" defaultChecked onInput={this.fetchInputValues}>&nbsp; Admin</input>
                     </div>
                     <div className="mdl-cell--12-col radio">
-                      <input type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>&nbsp; Staff</input>
+                      <input type="radio" name="access" value="Staff" onInput={this.fetchInputValues}>&nbsp; Staff</input>
                     </div>
                     <div className="mdl-cell--12-col radio">
-                      <input type="radio" name="access" value="Viewer" onChange={this.fetchInputValues}>&nbsp; Viewer</input>
+                      <input type="radio" name="access" value="Viewer" onInput={this.fetchInputValues}>&nbsp; Viewer</input>
                     </div>
                   </div>
-                  </form>
                   <div className="mdl-dialog__actions mdl-cell mdl-cell--11-col">
                     <button id="updatedoc" type="button" className="mdl-button" onClick={this.update}>UPDATE</button>
-                    <a href={'/dashboard'} type="button" className="mdl-button close">CANCEL</a>
+                    <a type="button" className="mdl-button close" onClick={this.dashboard}>CANCEL</a>
                   </div>
+                  </form>
                 </div>
               </div>
           </div>

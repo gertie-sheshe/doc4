@@ -13,7 +13,9 @@
   var popups = require('popups');
 
   var Dashboard = new React.createClass({
-
+    contextTypes: {
+      router: React.PropTypes.object
+    },
     getInitialState: function() {
       return {
         users: [],
@@ -39,11 +41,13 @@
     componentDidMount: function() {
       DocumentStore.addChangeListener(this.getOwnerDocuments, 'owner');
       DocumentStore.addChangeListener(this.getUserDocuments, 'documents');
+      console.log('Hello');
     },
 
     componentWillMount: function() {
       localStorage.removeItem('document');
       var token = localStorage.getItem('x-access-token');
+      console.log('Kuna token?', token);
       UserStore.addChangeListener(this.getDecoded, 'decode');
       UserAction.decode(token);
       UserAction.userData(token);
@@ -68,12 +72,14 @@
       var decoded = UserStore.getDecodedData();
       if (decoded.message === 'You are not authenticated user') {
         toastr.error('You must be logged in bitte :)', {timeout: 3000});
-        browserHistory.push('/');
+        this.context.router.push('/');
+        // browserHistory.push('/');
         // window.location.assign('/');
-        browserHistory.push('/');
+        // browserHistory.push('/');
       } if (decoded.message === 'Failed to Authenticate. You are not logged in.') {
+        this.context.router.push('/');
         // window.location.assign('/');
-        browserHistory.push('/');
+        // browserHistory.push('/');
       }
       else {
         this.setState({ownerId: decoded._id});
@@ -93,7 +99,6 @@
     render: function() {
       return (
         <div className="mdl-grid">
-
           <div id="ownerdoc" className="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop">
             <Documents documents={this.state.ownerDocuments} />
           </div>

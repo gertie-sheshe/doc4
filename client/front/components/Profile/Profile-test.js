@@ -11,7 +11,7 @@
     Profile = require('../../../../app/scripts/components/Profile/Profile.jsx');
 
   describe('Profile Page', function() {
-    it('renders the Landing component', function() {
+    it('renders the Profile component', function() {
       var profile = enzyme.shallow( <Profile /> );
       expect(profile.find('.mdl-grid')).to.have.length(2);
     });

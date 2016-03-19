@@ -242,3 +242,10 @@ body {
 #popupS-button-cancel {
   margin-right: 10px;
 }
+#home {
+  text-decoration: none;
+  color: #fff;
+}
+#editfname {
+  margin-left: 20px;
+}

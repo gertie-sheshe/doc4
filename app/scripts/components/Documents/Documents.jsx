@@ -8,7 +8,14 @@
   var ReactDOM = require('react-dom');
 
 module.exports = new React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object
+  },
+  display: function(id) {
+    this.context.router.push('/' + id);
+  },
   render: function() {
+    var that = this;
     var docNode = this.props.documents.map(function(doc, index) {
       return (
         <div className="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop" key={index}>
@@ -20,7 +27,7 @@ module.exports = new React.createClass({
               {doc.content}
             </div>
             <div className="mdl-card__actions mdl-card--border">
-              <a href={'/' + doc._id} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={that.display.bind(that, doc._id)}>
                 Read More
               </a>
             </div>

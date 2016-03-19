@@ -10,7 +10,6 @@
   var toastr = require('toastr');
 
   var Landing = new React.createClass({
-
     render: function() {
       return (
         <div className="img">
@@ -18,7 +17,7 @@
           <div className='content'>
             <div className="mdl-grid">
               <div className="mdl-cell mdl-cell--12-col">
-                <h1>Doc 4.0 </h1>
+                <h2>Doc 4.0 </h2>
                 <h2>The place to go to create, manage and edit documents. Get started today </h2>
               </div>
             </div>

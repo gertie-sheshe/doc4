@@ -24,13 +24,13 @@ module.exports = new React.createClass({
       return (
           <div className="mdl-cell--12-col" key={index}>
               <div className="mdl-cell--12-col mdl-typography--title">
-                  Title:  {doc.title}
+                  {doc.title}
               </div>
               <div className="details mdl-cell--12-col">
                 <span className="owner-details">Added by: {doc.owner} <br/></span>
-                <span className="doc-content"> {doc.content} <br/></span>
+
                 <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " onClick ={docContent}>
-                  Read More
+                  Read
                 </a>
               </div>
               <hr/>

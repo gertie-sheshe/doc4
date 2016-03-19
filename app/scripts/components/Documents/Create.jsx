@@ -7,11 +7,15 @@
   var toastr = require('toastr');
 
   var Create = new React.createClass({
+    contextTypes: {
+      router: React.PropTypes.object
+    },
     componentWillMount: function() {
       var token = localStorage.getItem('x-access-token');
       if(!token) {
+        this.context.router.push('/dashboard');
         // window.location.assign('/dashboard');
-        browserHistory.push('/dashboard');
+        // browserHistory.push('/dashboard');
       }
     },
 
@@ -49,9 +53,13 @@
         DocumentAction.createDocument(this.state.document, token);
         toastr.success('Document successfully created', {timeout: 100});
         // window.location.assign('/dashboard');
-        browserHistory.push('/dashboard');
+        // browserHistory.push('/dashboard');
+        this.context.router.push('/dashboard');
       }
+    },
 
+    dashboard: function() {
+      this.context.router.push('/dashboard');
     },
 
     render: function() {
@@ -71,13 +79,13 @@
               </div>
               <div className="mdl-grid">
                 <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
-                  <input type="radio" name="access" value="Admin" onChange={this.fetchInputValues}>&nbsp; Admin</input>
+                  <input type="radio" name="access" value="Admin" onInput={this.fetchInputValues}>&nbsp; Admin</input>
                 </div>
                 <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
-                  <input type="radio" name="access" value="Staff" onChange={this.fetchInputValues}>&nbsp; Staff</input>
+                  <input type="radio" name="access" value="Staff" onInput={this.fetchInputValues}>&nbsp; Staff</input>
                 </div>
                 <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
-                  <input type="radio" name="access" value="Viewer" checked="true" onChange={this.fetchInputValues}>&nbsp; Viewer</input>
+                  <input type="radio" name="access" value="Viewer" defaultChecked onInput={this.fetchInputValues}>&nbsp; Viewer</input>
                 </div>
               </div>
               </form>
@@ -87,8 +95,8 @@
             <a id="createdoc" className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.saveDocument}>
               CREATE
             </a>
-            <a href={'/dashboard'} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-              CANCEL
+            <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.dashboard}>
+              BACK
             </a>
           </div>
         </div>

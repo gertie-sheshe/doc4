@@ -10,6 +10,8 @@ var UserStore = assign({}, BaseStore, {
   signUpData: null,
   decodedData: null,
   usersData: null,
+  updatedData: null,
+  userData: null,
 
   setLoginData: function(loginData) {
     this.loginData = loginData;
@@ -23,6 +25,7 @@ var UserStore = assign({}, BaseStore, {
   setSignUpData: function(signUpData) {
     this.signUpData = signUpData;
     this.emitChange('signup');
+    console.log('SIGNED UP', signUpData);
   },
 
   getSignUpData: function() {
@@ -44,7 +47,28 @@ var UserStore = assign({}, BaseStore, {
   },
 
   getUserData: function() {
-    return this.usersData;
+    return this.userData;
+  },
+
+  setUpdatedData: function(updatedData) {
+    console.log('UPDATE STORE', updatedData);
+    this.updatedData = updatedData;
+    console.log('UPDATED STORE', updatedData);
+    this.emitChange('update');
+  },
+
+  getUpdatedData: function() {
+    return this.updatedData;
+  },
+
+  setUser: function(userData) {
+    this.userData = userData;
+    this.emitChange('user');
+  },
+
+  getUser: function() {
+    console.log('CALLED', this.userData);
+    return this.userData;
   }
 });
   AppDispatcher.register(function(action) {
@@ -57,6 +81,12 @@ var UserStore = assign({}, BaseStore, {
         break;
       case DocConstants.USER_DECODE:
         UserStore.setDecodedData(action.data);
+        break;
+      case DocConstants.USER_UPDATE:
+        UserStore.setUpdatedData(action.data);
+        break;
+      case DocConstants.GET_USER:
+        UserStore.setUser(action.data);
         break;
       default:
     }

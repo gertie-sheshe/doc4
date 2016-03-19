@@ -41,7 +41,8 @@ module.exports = function(app, passport) {
           newUser.name.last = req.body.lastname;
           newUser.username = req.body.username;
           newUser.email = req.body.email;
-          newUser.loggedIn = false;
+          newUser.role = req.body.role;
+          newUser.loggedIn = true;
           newUser.password = newUser.generateHash(req.body.password);
           Roles.find({
             title: req.body.role || 'Viewer'
