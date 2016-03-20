@@ -43,7 +43,6 @@
 
     handleSelected: function() {
       var selectDoc = DocumentStore.getSelectedDoc();
-      console.log('selected', selectDoc);
       var doc = [].concat(selectDoc);
       this.setState({
         document: doc

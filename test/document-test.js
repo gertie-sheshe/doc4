@@ -52,7 +52,7 @@
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.content, 'TownsVille');
-            assert.strictEqual(res.body.ownerId, user.user._id);
+            assert.strictEqual(res.body.ownerId, user._id);
             assert.strictEqual(res.body.title, 'Utonium');
             expect(res.body).to.not.be.undefined;
             expect(res.body).to.be.a('object');
@@ -97,9 +97,9 @@
           .end(function(err, res) {
             documents = res.body;
             assert.strictEqual(res.status, 200);
-            assert.strictEqual(res.body[0].accessId, user.user.roleId);
-            assert.strictEqual(res.body[1].accessId, user.user.roleId);
-            assert.strictEqual(res.body[2].accessId, user.user.roleId);
+            assert.strictEqual(res.body[0].accessId, user.roleId);
+            assert.strictEqual(res.body[1].accessId, user.roleId);
+            assert.strictEqual(res.body[2].accessId, user.roleId);
             assert.strictEqual(res.body[0].accessType, 'None');
             assert.strictEqual(res.body[1].accessType, 'None');
             assert.strictEqual(res.body[2].accessType, 'None');
@@ -121,7 +121,7 @@
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.title, 'Prof Utonium');
             assert.strictEqual(res.body.content, 'First Update');
-            assert.strictEqual(documents[0].ownerId, user.user._id);
+            assert.strictEqual(documents[0].ownerId, user._id);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
             expect(res.body).to.not.be.undefined;
@@ -139,7 +139,7 @@
             // console.log('Doc tests', res.body);
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.title, 'Locked Away');
-            assert.strictEqual(documents[0].ownerId, user.user._id);
+            assert.strictEqual(documents[0].ownerId, user._id);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
             expect(res.body).to.not.be.undefined;
@@ -157,7 +157,7 @@
             // console.log('Doc tests', res.body);
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.content, 'Locked Away');
-            assert.strictEqual(documents[0].ownerId, user.user._id);
+            assert.strictEqual(documents[0].ownerId, user._id);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
             expect(res.body).to.not.be.undefined;
@@ -175,7 +175,7 @@
             // console.log('Doc tests', res.body);
             assert.strictEqual(res.status, 200);
             expect( typeof res.body.accessId).to.equal('string');
-            assert.strictEqual(documents[0].ownerId, user.user._id);
+            assert.strictEqual(documents[0].ownerId, user._id);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
             expect(res.body).to.not.be.undefined;
@@ -196,7 +196,7 @@
             assert.strictEqual(res.body.content, 'Jane Doe');
             assert.strictEqual(res.body.title, 'Jane Edited');
             expect(typeof res.body.accessId).to.equal('string');
-            assert.strictEqual(documents[0].accessId, user.user.roleId);
+            assert.strictEqual(documents[0].accessId, user.roleId);
             expect(typeof res.status).to.equal('number');
             expect(typeof res.body).to.equal('object');
             expect(res.body).to.not.be.undefined;
@@ -264,19 +264,19 @@
           })
           .end(function(err, res) {
             result1 = res.body.token;
-            user2 = res.body.user;
+            user2 = res.body;
             done();
           });
       });
       it('User can view a different user\'s document that the user has set visible to them', function(done) {
         request(app)
-          .get('/api/users/' + user.user._id + '/documents')
+          .get('/api/users/' + user._id + '/documents')
           .set('x-access-token', result1)
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.length, 1);
             expect(res.body).to.have.length.above(0);
-            expect(res.body[0].ownerId).to.be.equal(user.user._id);
+            expect(res.body[0].ownerId).to.be.equal(user._id);
             expect(res.body[0].accessId).to.be.equal(user2.roleId);
             expect(res.body).to.be.instanceof(Array);
             done();

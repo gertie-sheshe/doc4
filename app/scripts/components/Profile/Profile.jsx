@@ -34,7 +34,6 @@
 
     getUpdatedUser: function() {
       var data = UserStore.getUpdatedData();
-      console.log('LISTENER UPDATED REALLY?', data);
       this.setState({
         userData: data,
         last: data.name.last,
@@ -43,9 +42,7 @@
     },
 
     getUserData: function() {
-      // var data = UserStore.getDecodedData();
       var data = UserStore.getUser();
-      console.log('LISTENER REALLY?', data);
       this.setState({
         userData: data,
         last: data.name.last,
@@ -93,7 +90,7 @@
               </div>
               </form>
           </div>
-          <div className="mdl-card__actions mdl-card--border">
+          <div id="form-document" className="mdl-card__actions mdl-card--border">
             <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.dashboard}>
               DASHBOARD
             </a>

@@ -76,7 +76,7 @@
           .set('x-access-token', token)
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
-            assert.strictEqual(res.body.accessId, user.roleId);
+            assert.strictEqual(res.body[0].accessId, user.roleId);
             done();
           });
       });

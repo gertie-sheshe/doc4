@@ -14,6 +14,7 @@
 
     it('renders the Update component', function() {
       var update = enzyme.mount(<Update />);
+      expect(update.find('.mdl-grid')).to.have.length(2);
     });
     it('Component has the correct states', function() {
       var update = enzyme.shallow(< Update />);

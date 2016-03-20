@@ -41,13 +41,11 @@
     componentDidMount: function() {
       DocumentStore.addChangeListener(this.getOwnerDocuments, 'owner');
       DocumentStore.addChangeListener(this.getUserDocuments, 'documents');
-      console.log('Hello');
     },
 
     componentWillMount: function() {
       localStorage.removeItem('document');
       var token = localStorage.getItem('x-access-token');
-      console.log('Kuna token?', token);
       UserStore.addChangeListener(this.getDecoded, 'decode');
       UserAction.decode(token);
       UserAction.userData(token);
@@ -70,16 +68,15 @@
 
     getDecoded: function() {
       var decoded = UserStore.getDecodedData();
-      if (decoded.message === 'You are not authenticated user') {
+      if (decoded.error === 'You are not authenticated user') {
         toastr.error('You must be logged in bitte :)', {timeout: 3000});
-        this.context.router.push('/');
-        // browserHistory.push('/');
+        // this.context.router.push('/');
+        browserHistory.push('/');
         // window.location.assign('/');
-        // browserHistory.push('/');
-      } if (decoded.message === 'Failed to Authenticate. You are not logged in.') {
-        this.context.router.push('/');
+      } if (decoded.error === 'Failed to Authenticate. You are not logged in.') {
+        // this.context.router.push('/');
         // window.location.assign('/');
-        // browserHistory.push('/');
+        browserHistory.push('/');
       }
       else {
         this.setState({ownerId: decoded._id});

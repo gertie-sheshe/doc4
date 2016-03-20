@@ -25,7 +25,7 @@ var UserStore = assign({}, BaseStore, {
   setSignUpData: function(signUpData) {
     this.signUpData = signUpData;
     this.emitChange('signup');
-    console.log('SIGNED UP', signUpData);
+    // console.log('SIGNED UP', signUpData);
   },
 
   getSignUpData: function() {
@@ -51,9 +51,7 @@ var UserStore = assign({}, BaseStore, {
   },
 
   setUpdatedData: function(updatedData) {
-    console.log('UPDATE STORE', updatedData);
     this.updatedData = updatedData;
-    console.log('UPDATED STORE', updatedData);
     this.emitChange('update');
   },
 
@@ -67,7 +65,6 @@ var UserStore = assign({}, BaseStore, {
   },
 
   getUser: function() {
-    console.log('CALLED', this.userData);
     return this.userData;
   }
 });

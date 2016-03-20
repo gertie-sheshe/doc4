@@ -53,8 +53,8 @@
         DocumentAction.createDocument(this.state.document, token);
         toastr.success('Document successfully created', {timeout: 100});
         // window.location.assign('/dashboard');
-        // browserHistory.push('/dashboard');
-        this.context.router.push('/dashboard');
+        browserHistory.push('/dashboard');
+        // this.context.router.push('/dashboard');
       }
     },
 
@@ -90,15 +90,13 @@
               </div>
               </form>
           </div>
-          <div className="mdl-card__actions mdl-card--border mdl-grid">
-            <div className="mdl-cell--6-col mdl-cell--3-offset">
+          <div id="form-document" className="mdl-card__actions mdl-card--border mdl-grid">
             <a id="createdoc" className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.saveDocument}>
               CREATE
             </a>
             <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.dashboard}>
               BACK
             </a>
-          </div>
         </div>
         </div>
       </div>

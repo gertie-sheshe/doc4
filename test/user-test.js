@@ -17,16 +17,15 @@
             lastname: 'Holmes',
             username: 'Watson',
             email: 'bakerstreet@gmail.com',
-            password: 'gertrudenyenyeshi'
+            password: 'gertrudenyenyeshi',
+            role: 'Staff'
           })
           .end(function(err, res) {
-            console.log('USER TEST', res.body);
             user = res.body;
-            console.log('RES BODY', user.user);
             assert.strictEqual(res.status, 200);
-            assert.strictEqual(user.user.name.first, 'Sherlock');
-            expect(user.user.name.first).to.have.string('Sherlock');
-            expect(user.user.name.first).to.be.a('string');
+            assert.strictEqual(user.name.first, 'Sherlock');
+            expect(user.name.first).to.have.string('Sherlock');
+            expect(user.name.first).to.be.a('string');
             done();
           });
       });
@@ -51,16 +50,16 @@
       });
 
       it('The user has a first and last name', function(done) {
-        assert.strictEqual(user.user.name.first, 'Sherlock');
-        assert.strictEqual(user.user.name.last, 'Holmes');
-        expect(user.user.name.first).to.be.a('string');
-        expect(user.user.name.last).to.be.a('string');
+        assert.strictEqual(user.name.first, 'Sherlock');
+        assert.strictEqual(user.name.last, 'Holmes');
+        expect(user.name.first).to.be.a('string');
+        expect(user.name.last).to.be.a('string');
         done();
       });
 
       it('User created must have a role', function(done) {
-        expect(user.user.roleId).to.not.be.undefined;
-        expect(user.user.roleId).to.be.a('string');
+        expect(user.roleId).to.not.be.undefined;
+        expect(user.roleId).to.be.a('string');
         done();
       });
 
@@ -69,9 +68,9 @@
           .get('/api/users')
           .end(function(err, res) {
             assert.strictEqual(res.status, 401);
-            assert.strictEqual(res.body.message, 'You are not authenticated user');
-            expect(res.body.message).to.be.a('string');
-            expect(res.body.message).to.have.a.string('not authenticated');
+            assert.strictEqual(res.body.error, 'You are not authenticated user');
+            expect(res.body.error).to.be.a('string');
+            expect(res.body.error).to.have.a.string('not authenticated');
             done();
           });
       });
@@ -103,7 +102,7 @@
       });
       it('User can update his/her details', function(done) {
         request(app)
-          .put('/api/users/' + user.user._id)
+          .put('/api/users/' + user._id)
           .set('x-access-token', token)
           .send({
             lastname: 'Smaug'
@@ -133,7 +132,7 @@
 
       it('User can view all documents he/she created. User without document.', function(done) {
         request(app)
-          .get('/api/users/' + user.user._id + '/documents')
+          .get('/api/users/' + user._id + '/documents')
           .set('x-access-token', token)
           .end(function(err, res) {
             assert.strictEqual(res.status, 404);
@@ -153,7 +152,7 @@
       });
       it('User can view his own profile', function(done) {
         request(app)
-          .get('/api/users/' + user.user._id)
+          .get('/api/users/' + user._id)
           .set('x-access-token', token)
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
@@ -164,7 +163,7 @@
 
       it('Users can update documents availabe to their role', function(done) {
         request(app)
-          .put('/api/users/' + user.user._id)
+          .put('/api/users/' + user._id)
           .set('x-access-token', token)
           .send({
             username: 'Jane Edited',
@@ -172,9 +171,7 @@
             firstname: 'Jenny'
           })
           .end(function(err, res) {
-            console.log('EDITED', res.body);
             assert.strictEqual(res.status, 200);
-            // assert.strictEqual(res.body.content, 'Jane Doe');
             assert.strictEqual(res.body.username, 'Jane Edited');
             assert.strictEqual(res.body.email, 'we@you.com');
             assert.strictEqual(res.body.name.first, 'Jenny');
@@ -184,7 +181,7 @@
 
       it('User can be deleted, but by Admin only', function(done) {
         request(app)
-          .delete('/api/users/' + user.user._id)
+          .delete('/api/users/' + user._id)
           .set('x-access-token', token)
           .end(function(err, res) {
             assert.strictEqual(res.status, 403);
@@ -193,25 +190,6 @@
             done();
           });
       });
-
-      it('User can log out', function(done) {
-        request(app)
-          .get('/api/users/logout')
-          .set('x-access-token', token)
-          .end(function(err, res) {
-            assert.strictEqual(res.status, 200);
-            assert.deepEqual(res.body.message, 'You have logged out successfully');
-            request(app)
-              .get('/api/users')
-              .set('x-access-token', token)
-              .end(function(err, res) {
-                assert.strictEqual(res.status, 401);
-                assert.strictEqual(res.body.message, 'Failed to Authenticate. You are not logged in.');
-                done();
-              });
-          });
-      });
-
       it('Admin has the rights to delete any user', function(done) {
         request(app)
           .post('/api/users/login')
@@ -224,7 +202,7 @@
             admin = res.body;
             assert.strictEqual(res.status, 200);
             request(app)
-              .delete('/api/users/' + user.user._id)
+              .delete('/api/users/' + user._id)
               .set('x-access-token', token1)
               .end(function(err, res) {
                 assert.strictEqual(res.status, 200);
@@ -235,12 +213,29 @@
       });
       it('User can view all documents he/she created. User with documents.', function(done) {
         request(app)
-          .get('/api/users/' + admin.user._id + '/documents')
+          .get('/api/users/' + admin._id + '/documents')
           .set('x-access-token', token1)
           .end(function(err, res) {
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.length, 7);
             done();
+          });
+      });
+      it('User can log out', function(done) {
+        request(app)
+          .get('/api/users/logout')
+          .set('x-access-token', token)
+          .end(function(err, res) {
+            assert.strictEqual(res.status, 200);
+            assert.deepEqual(res.body.message, 'You have logged out successfully');
+            request(app)
+              .get('/api/users')
+              .set('x-access-token', token + 'p')
+              .end(function(err, res) {
+                assert.strictEqual(res.status, 401);
+                assert.strictEqual(res.body.error, 'Failed to Authenticate');
+                done();
+              });
           });
       });
     });

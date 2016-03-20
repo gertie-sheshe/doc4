@@ -58,3 +58,8 @@ Installation.
   gulp
 
   ```
+7. Access the app on localhost:4040 or [**here.**](https://doc-4.herokuapp.com/)
+
+Agile
+-----
+This project was managed using [**Pivotal Tracker**](https://www.pivotaltracker.com/n/projects/1493274)

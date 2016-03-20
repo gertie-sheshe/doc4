@@ -39,7 +39,6 @@
 
     handleSelected: function() {
       var selectDoc = DocumentStore.getSelectedDoc();
-      console.log('selected kwa updates', selectDoc[0]);
       var doc = [].concat(selectDoc);
       this.setState({
         document: doc,

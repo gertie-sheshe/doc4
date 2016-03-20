@@ -18,12 +18,8 @@ module.exports = new React.createClass({
               <label className="mdl-textfield__label" htmlFor="pword">Password</label>
           </div>
           </form>
-          <div className="mdl-cell--9-col mdl-cell--3-offset mdl-cell--1-offset-phone">
-            <div className="mdl-grid">
-              <div className="mdl-cell mdl-cell--6-col">
-                <button id="login" type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Log In</button>
-              </div>
-            </div>
+          <div className="mdl-cell--9-col mdl-cell--2-offset mdl-cell--1-offset-phone">
+              <button id="login" type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Log In</button>
           </div>
       </div>
     );

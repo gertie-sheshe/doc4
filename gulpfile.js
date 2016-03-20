@@ -64,7 +64,7 @@ var paths = {
 
  gulp.task('browserify', function() {
    var bundler = browserify({
-     entries: ['./app/scripts/app.jsx', './app/scripts/popup.js'],
+     entries: ['./app/scripts/app.jsx'],
      debug: true,
      fullPaths: true,
      transform: [reactify, babelify]

@@ -22,10 +22,8 @@
           var token = jwt.sign(user, req.app.get('superSecret'), {
             expireIn: '24h'
           });
-          return res.status(200).json({
-            user: user,
-            token: token
-          });
+          user.token = token;
+          return res.status(200).json(user);
         }
       })(req, res, next);
     },
@@ -38,7 +36,7 @@
           return res.send(user);
         } else {
           return res.status(401).send({
-            message: 'Not authenticated'
+            error: 'Not authenticated'
           });
         }
       });
@@ -52,9 +50,7 @@
             req.decoded = decoded;
             req.token = token;
             // // Check if loggedIn has been set to true
-            console.log('DECODED', req.decoded._doc._id);
             User.findOne(req.decoded._doc._id, function(err, user){
-              console.log('SESSION', user);
               if (err) {
                 return res.status(401).send(err.errmessage || err);
               } else {
@@ -62,19 +58,19 @@
                   next();
                 } else {
                   return res.status(401).json({
-                    message: 'Failed to Authenticate. You are not logged in.'
+                    error: 'Failed to Authenticate. You are not logged in.'
                   });
                 }
               }
             });
           } else {
             return res.status(401).send({
-              message: 'Failed to Authenticate'
+              error: 'Failed to Authenticate'
             });
           }
         });
       } else {
-        return res.status(401).send({message: 'You are not authenticated user'});
+        return res.status(401).send({error: 'You are not authenticated user'});
       }
     },
 
@@ -91,10 +87,8 @@
           var token = jwt.sign(user, req.app.get('superSecret'), {
             expireIn: '24h'
           });
-          return res.status(200).json({
-            user: user,
-            token: token
-          });
+          user.token = token;
+          return res.status(200).json(user);
         }
       })(req, res, next);
     },
@@ -180,11 +174,8 @@
 
     update: function(req, res) {
       User.findById(req.params.user_id, function(err, user) {
-        console.log('PARAMS', req.params.user_id);
-        console.log('DECODED', req.decoded._doc._id);
         if (req.decoded._doc._id === req.params.user_id) {
           if (err) {
-            console.log(err.errmessage);
             return res.status(500).send(err.errmessage || err);
           } else {
             if (req.body.firstname) {
@@ -201,12 +192,9 @@
             }
             user.save(function(err) {
               if (err) {
-                console.log(err);
                 return res.status(500).send(err.errmessage || err);
               } else {
-                return res.status(200).json({
-                  user: user
-                });
+                return res.status(200).json(user);
               }
             });
           }

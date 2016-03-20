@@ -28,11 +28,6 @@
           password: '',
           role: ''
         },
-
-        panel: {
-          login:"mdl-tabs__panel",
-          signup:"mdl-tabs__panel is-active"
-        }
       };
     },
     componentDidMount: function() {
@@ -48,14 +43,8 @@
         toastr.success('Success :)');
         localStorage.setItem('x-access-token', info.token);
         localStorage.setItem('user', info._id);
-        this.setState({
-          panel: {
-            signup: "mdl-tabs__panel",
-            login: "mdl-tabs__panel is-active"
-          }
-        });
-        // browserHistory.push('/dashboard');
-        this.context.router.push('/dashboard');
+        browserHistory.push('/dashboard');
+        // this.context.router.push('/dashboard');
       }
     },
     handleLogin: function() {
@@ -64,8 +53,9 @@
         toastr.warning('Wrong username and password combination', {timeout: 5000});
       } else {
         localStorage.setItem('x-access-token', data.token);
-        localStorage.setItem('user', data.user._id);
-        this.context.router.push('/dashboard');
+        localStorage.setItem('user', data._id);
+        browserHistory.push('/dashboard');
+        // this.context.router.push('/dashboard');
       }
     },
 

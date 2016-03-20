@@ -19,9 +19,10 @@
           buttonClass: ''
         };
       },
+
       componentDidMount: function() {
         UserStore.addChangeListener(this.decoded, 'decode');
-        // this.handleToken();
+        this.handleToken();
       },
 
       handleToken: function() {
@@ -34,21 +35,25 @@
             buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect headerbutton"
           });
         }
-        console.log('Current state', this.state.logout);
       },
 
       decoded: function() {
         var decoded = UserStore.getDecodedData();
-        console.log('Listening header', decoded);
-        if (decoded.message === 'You are not authenticated user') {
+        if (decoded.error === 'You are not authenticated user') {
           toastr.error('You must be logged in bitte :)', {timeout: 3000});
-          this.context.router.push('/');
-          // browserHistory.push('/');
+          this.setState({
+            logout: '',
+            profile: '',
+            create: '',
+            buttonClass: ''
+          });
+          // this.context.router.push('/');
+          browserHistory.push('/');
           // window.location.assign('/');
           // browserHistory.push('/');
-        } if (decoded.message === 'Failed to Authenticate. You are not logged in.') {
+        } if (decoded.error === 'Failed to Authenticate. You are not logged in.') {
           this.context.router.push('/');
-        } if (!decoded.message && decoded) {
+        } if (!decoded.error && decoded) {
           this.setState({
             logout: 'Logout',
             profile: 'Profile',
@@ -81,8 +86,8 @@
             buttonClass: ''
           });
         }
-        this.context.router.push('/');
-        // browserHistory.push('/');
+        // this.context.router.push('/');
+        browserHistory.push('/');
         // window.location.assign('/');
       },
 

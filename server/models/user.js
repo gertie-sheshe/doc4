@@ -41,6 +41,10 @@
     loggedIn: {
       type: Boolean,
       Default: false
+    },
+    token: {
+      type: String,
+      required: false
     }
   });
 
