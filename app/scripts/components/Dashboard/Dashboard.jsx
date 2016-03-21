@@ -46,6 +46,9 @@
     componentWillMount: function() {
       localStorage.removeItem('document');
       var token = localStorage.getItem('x-access-token');
+      if(!token) {
+        browserHistory.push('/');
+      }
       UserStore.addChangeListener(this.getDecoded, 'decode');
       UserAction.decode(token);
       UserAction.userData(token);
@@ -70,12 +73,8 @@
       var decoded = UserStore.getDecodedData();
       if (decoded.error === 'You are not authenticated user') {
         toastr.error('You must be logged in bitte :)', {timeout: 3000});
-        // this.context.router.push('/');
         browserHistory.push('/');
-        // window.location.assign('/');
       } if (decoded.error === 'Failed to Authenticate. You are not logged in.') {
-        // this.context.router.push('/');
-        // window.location.assign('/');
         browserHistory.push('/');
       }
       else {

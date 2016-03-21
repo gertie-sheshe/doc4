@@ -5,6 +5,7 @@
   var LinkedStateMixin = require('react-addons-linked-state-mixin');
   var DocumentAction = require('../../actions/DocumentActions');
   var UserAction = require('../../actions/UserActions');
+  var browserHistory = require('react-router').browserHistory;
   var UserStore = require('../../stores/UserStore');
   var toastr = require('toastr');
 
@@ -28,6 +29,10 @@
     componentWillMount: function() {
       var id = localStorage.getItem('user');
       var token = localStorage.getItem('x-access-token');
+      if(!token) {
+        browserHistory.push('/');
+        toastr.error('You must be logged in bitte :)', {timeout: 3000});
+      }
       UserAction.getUser(token, id);
     },
 
