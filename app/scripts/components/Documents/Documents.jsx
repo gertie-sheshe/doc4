@@ -2,6 +2,8 @@
   'use strict';
   var React = require('react');
   var popups = require('popups');
+  var localStorage = require('localStorage');
+  var browserHistory = require('react-router').browserHistory;
   var DocumentActions = require('../../actions/DocumentActions.js');
   var DocumentStore = require('../../stores/DocumentStore.js');
   var toastr = require('toastr');
@@ -10,6 +12,14 @@
 module.exports = new React.createClass({
   contextTypes: {
     router: React.PropTypes.object
+  },
+
+  componentWillMount: function() {
+    var token = localStorage.getItem('x-access-token');
+    if(!token) {
+      browserHistory.push('/');
+      toastr.error('You must be logged in bitte :)', {timeout: 3000});
+    }
   },
   display: function(id) {
     this.context.router.push('/' + id);

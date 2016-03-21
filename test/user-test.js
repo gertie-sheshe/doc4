@@ -41,8 +41,8 @@
             password: 'gertrudenyenyeshi'
           })
           .end(function(err, res) {
-            expect(res.status).to.equal(409);
-            assert.strictEqual(res.status, 409);
+            expect(res.status).to.equal(401);
+            assert.strictEqual(res.status, 401);
             assert.strictEqual(res.body.error, 'Sign up failed. This Email or Username is already in use');
             expect(res.body.error).to.have.string('Sign up failed. This Email or Username is already in use');
             done();

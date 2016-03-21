@@ -25,7 +25,6 @@ var UserStore = assign({}, BaseStore, {
   setSignUpData: function(signUpData) {
     this.signUpData = signUpData;
     this.emitChange('signup');
-    // console.log('SIGNED UP', signUpData);
   },
 
   getSignUpData: function() {

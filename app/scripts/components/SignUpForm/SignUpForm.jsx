@@ -8,7 +8,7 @@ module.exports = new React.createClass({
   render: function() {
     return (
       <div className="mdl-grid">
-        <form action="post" onSubmit={this.props.handleSignUpAction} className="mdl-grid mdl-cell mdl-cell--10-col mdl-cell--2-offset mdl-cell--1-offset-phone">
+        <form action="post" onSubmit={this.props.onClick} className="mdl-grid mdl-cell mdl-cell--10-col mdl-cell--2-offset mdl-cell--1-offset-phone">
           <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--8-col">
               <input className="mdl-textfield__input" type="text" id="fname" name="firstname" onChange={this.props.onChange}/>
               <label className="mdl-textfield__label" htmlFor="fname">First Name</label>
@@ -46,12 +46,10 @@ module.exports = new React.createClass({
               </div>
             </div>
             </div>
-          </form>
-          <div className="mdl-cell--9-col mdl-cell--2-offset mdl-cell--1-offset-phone">
-            <div className="mdl-grid">
-              <button type="button" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.onClick}>Sign Up</button>
+            <div className="mdl-cell--12-col">
+                <button type="submit" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >Sign Up</button>
             </div>
-          </div>
+          </form>
       </div>
     );
   }

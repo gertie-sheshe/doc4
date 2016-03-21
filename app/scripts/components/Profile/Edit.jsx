@@ -39,11 +39,9 @@
     componentDidMount: function() {
       var token = localStorage.getItem('x-access-token');
       UserStore.addChangeListener(this.getUserData, 'user');
-      // UserAction.decode(token);
     },
 
     getUserData: function() {
-      // var data = UserStore.getDecodedData();
       var data = UserStore.getUser();
       this.setState({
         userData: {
@@ -72,7 +70,6 @@
       var token = localStorage.getItem('x-access-token');
       UserAction.update(token, id, this.state.userData);
       toastr.success('Profile Updated', {timeout: 1000});
-      // window.location.assign('/profile');
       this.context.router.push('/profile');
     },
 
@@ -112,13 +109,6 @@
                 <div className="mdl-cell mdl-cell--12-col">
                   <h6>Email: </h6>
                   <input id="inputemail" className="mdl-textfield__input mdl-cell mdl-cell--12-col" type="text" value={this.state.userData.email} name="email" onInput={this.fetchInputValues} />
-                </div>
-              </div>
-
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--12-col">
-                  <h6>Role </h6>
-                  <input id="inputrole" className="mdl-textfield__input mdl-cell mdl-cell--12-col" type="text" value={this.state.userData.role} name="role" onInput={this.fetchInputValues} />
                 </div>
               </div>
 

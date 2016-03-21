@@ -44,7 +44,6 @@
         localStorage.setItem('x-access-token', info.token);
         localStorage.setItem('user', info._id);
         browserHistory.push('/dashboard');
-        // this.context.router.push('/dashboard');
       }
     },
     handleLogin: function() {
@@ -55,7 +54,6 @@
         localStorage.setItem('x-access-token', data.token);
         localStorage.setItem('user', data._id);
         browserHistory.push('/dashboard');
-        // this.context.router.push('/dashboard');
       }
     },
 

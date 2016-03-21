@@ -33,6 +33,10 @@
     componentWillMount: function() {
       var pathArray = this.props.params.id;
       var token = localStorage.getItem('x-access-token');
+      if(!token) {
+        browserHistory.push('/');
+        toastr.error('You must be logged in bitte :)', {timeout: 3000});
+      }
       localStorage.setItem('document', pathArray);
       DocumentAction.setDoc(pathArray, token);
     },

@@ -14,7 +14,7 @@
         if (err)
           return res.status(500).send(err.errmessage || err);
         if (!user) {
-          return res.status(409).json({
+          return res.status(401).json({
             error: 'Sign up failed. This Email or Username is already in use'
           });
         }

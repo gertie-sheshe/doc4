@@ -47,24 +47,26 @@
             create: '',
             buttonClass: ''
           });
-          // this.context.router.push('/');
           browserHistory.push('/');
-          // window.location.assign('/');
-          // browserHistory.push('/');
         } if (decoded.error === 'Failed to Authenticate. You are not logged in.') {
           this.context.router.push('/');
         } if (!decoded.error && decoded) {
           this.setState({
-            logout: 'Logout',
-            profile: 'Profile',
-            create: 'Create Doc',
-            buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect headerbutton"
+            logout: 'launch',
+            profile: 'person',
+            create: 'add',
+            dashboard: 'dashboard',
+            buttonClass: "mdl-button close mdl-js-button"
           });
         }
       },
 
       profile: function() {
         this.context.router.push('/profile');
+      },
+
+      dashboard: function() {
+        this.context.router.push('/dashboard');
       },
 
       create: function() {
@@ -83,12 +85,11 @@
             logout: '',
             profile: '',
             create: '',
+            dashboard: '',
             buttonClass: ''
           });
         }
-        // this.context.router.push('/');
         browserHistory.push('/');
-        // window.location.assign('/');
       },
 
       render: function() {
@@ -100,19 +101,28 @@
                <a id="home" className="mdl-layout-title" onClick={this.home}>Doc4</a>
                <div className="mdl-layout-spacer"></div>
                <div className="mdl-grid">
-                 <div className="mdl-cell mdl-cell--4-col mdl-cell--hide-phone mdl-cell--hide-tablet">
-                   <a className={this.state.buttonClass} onClick={this.create}>
-                     {this.state.create}
+                 <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
+                   <a id="headerbutton" className={this.state.buttonClass} onClick={this.create}>
+                     <div id="createdoc"className="material-icons">{this.state.create}</div>
+                       <div className="mdl-tooltip" htmlFor="createdoc">Create</div>
                    </a>
                  </div>
-                 <div className="mdl-cell mdl-cell--4-col mdl-cell--hide-phone mdl-cell--hide-tablet">
-                   <a className={this.state.buttonClass} onClick={this.profile}>
-                     {this.state.profile}
+                 <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
+                   <a id="headerbutton" className={this.state.buttonClass} onClick={this.dashboard}>
+                     <i id="dashlink" className="material-icons">{this.state.dashboard}</i>
+                     <div className="mdl-tooltip" htmlFor="dashlink">Dashboard</div>
                    </a>
                  </div>
-                 <div className="mdl-cell mdl-cell--4-col mdl-cell--hide-phone mdl-cell--hide-tablet">
-                   <a id="logout" className={this.state.buttonClass} onClick={this.logout}>
-                     {this.state.logout}
+                 <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
+                   <a id="headerbutton" className={this.state.buttonClass} onClick={this.profile}>
+                     <i id="profilelink" className="material-icons">{this.state.profile}</i>
+                     <div className="mdl-tooltip" htmlFor="profilelink">Profile</div>
+                   </a>
+                 </div>
+                 <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
+                   <a id="logout" id="headerbutton" className={this.state.buttonClass} onClick={this.logout}>
+                     <i id="logoutlink" className="material-icons">{this.state.logout}</i>
+                     <div className="mdl-tooltip" htmlFor="logoutlink">Logout</div>
                    </a>
                  </div>
                </div>
@@ -121,7 +131,7 @@
            <div className="mdl-layout__drawer">
              <span className="mdl-layout-title">Doc4</span>
              <nav className="mdl-navigation">
-               <a className="mdl-navigation__link" href="/create">{this.state.create}</a>
+               <a className="mdl-navigation__link" href="/create">{this.state.create}</a>,
                <a className="mdl-navigation__link" href="/profile">{this.state.profile}</a>
                <a className="mdl-navigation__link" onClick={this.logout}>{this.state.logout}</a>
              </nav>

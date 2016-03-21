@@ -14,8 +14,6 @@
       var token = localStorage.getItem('x-access-token');
       if(!token) {
         this.context.router.push('/dashboard');
-        // window.location.assign('/dashboard');
-        // browserHistory.push('/dashboard');
       }
     },
 
@@ -78,13 +76,13 @@
                 <label className="mdl-textfield__label" htmlFor="text">Content</label>
               </div>
               <div className="mdl-grid">
-                <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
+                <div className="mdl-cell--12-col radio">
                   <input type="radio" name="access" value="Admin" onInput={this.fetchInputValues}>&nbsp; Admin</input>
                 </div>
-                <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
+                <div className="mdl-cell--12-col radio">
                   <input type="radio" name="access" value="Staff" onInput={this.fetchInputValues}>&nbsp; Staff</input>
                 </div>
-                <div className="mdl-cell--4-col-desktop mdl-cell--12-col radio">
+                <div className="mdl-cell--12-col radio">
                   <input type="radio" name="access" value="Viewer" defaultChecked onInput={this.fetchInputValues}>&nbsp; Viewer</input>
                 </div>
               </div>

@@ -70,7 +70,7 @@
         <div id="profile" className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
         <div className="demo-card-square mdl-card mdl-shadow--2dp">
           <div className="mdl-card__supporting-text">
-            <form id ="form-document" action="post">
+            <form action="post">
               <div className="mdl-grid">
                 <div className="mdl-cell mdl-cell--12-col">
                   <h5>First Name: </h5>
@@ -95,7 +95,7 @@
               </div>
               </form>
           </div>
-          <div id="form-document" className="mdl-card__actions mdl-card--border">
+          <div className="mdl-card__actions mdl-card--border">
             <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick={this.dashboard}>
               DASHBOARD
             </a>
