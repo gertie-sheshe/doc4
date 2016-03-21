@@ -50,9 +50,7 @@
       } else {
         DocumentAction.createDocument(this.state.document, token);
         toastr.success('Document successfully created', {timeout: 100});
-        // window.location.assign('/dashboard');
         browserHistory.push('/dashboard');
-        // this.context.router.push('/dashboard');
       }
     },
 
