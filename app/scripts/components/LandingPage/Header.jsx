@@ -16,7 +16,14 @@
           logout: '',
           profile: '',
           create: '',
-          buttonClass: ''
+          buttonClass: '',
+          sidenav: {
+            link1: '',
+            url1: '',
+            link2: '',
+            url2: '',
+            link3: '',
+          }
         };
       },
 
@@ -32,7 +39,14 @@
             logout: 'Logout',
             profile: 'Profile',
             create: 'Create Doc',
-            buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect headerbutton"
+            buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect headerbutton",
+            sidenav: {
+              link1: 'Create',
+              url1: '/create',
+              link2: 'Profile',
+              url2: '/profile',
+              link3: 'Logout',
+            }
           });
         }
       },
@@ -45,7 +59,14 @@
             logout: '',
             profile: '',
             create: '',
-            buttonClass: ''
+            buttonClass: '',
+            sidenav: {
+              link1: '',
+              url1: '',
+              link2: '',
+              url2: '',
+              link3: '',
+            }
           });
           browserHistory.push('/');
         } if (decoded.error === 'Failed to Authenticate. You are not logged in.') {
@@ -56,7 +77,14 @@
             profile: 'person',
             create: 'add',
             dashboard: 'dashboard',
-            buttonClass: "mdl-button close mdl-js-button"
+            buttonClass: "mdl-button close mdl-js-button",
+            sidenav: {
+              link1: 'Create',
+              url1: '/create',
+              link2: 'Profile',
+              url2: '/profile',
+              link3: 'Logout',
+            }
           });
         }
       },
@@ -131,9 +159,9 @@
            <div className="mdl-layout__drawer">
              <span className="mdl-layout-title">Doc4</span>
              <nav className="mdl-navigation">
-               <a className="mdl-navigation__link" href="/create">{this.state.create}</a>,
-               <a className="mdl-navigation__link" href="/profile">{this.state.profile}</a>
-               <a className="mdl-navigation__link" onClick={this.logout}>{this.state.logout}</a>
+               <a className="mdl-navigation__link" href={this.state.sidenav.url2}>{this.state.sidenav.link2}</a>
+               <a className="mdl-navigation__link" onClick={this.logout}>{this.state.sidenav.link3}</a>
+               <a className="mdl-navigation__link" href={this.state.sidenav.url1}>{this.state.sidenav.link1}</a>,
              </nav>
            </div>
           <main className="mdl-layout__content">
