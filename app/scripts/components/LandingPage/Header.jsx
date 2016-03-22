@@ -16,13 +16,13 @@
           logout: '',
           profile: '',
           create: '',
+          dashboard: '',
           buttonClass: '',
           sidenav: {
-            link1: '',
-            url1: '',
-            link2: '',
-            url2: '',
-            link3: '',
+            link1: 'Home',
+            link2: 'About',
+            link3: 'Contact Us',
+            link4: 'Social',
           }
         };
       },
@@ -36,16 +36,16 @@
         var token = localStorage.getItem('x-access-token');
         if(token) {
           this.setState({
-            logout: 'Logout',
-            profile: 'Profile',
-            create: 'Create Doc',
-            buttonClass: "mdl-button close mdl-js-button mdl-button--raised mdl-js-ripple-effect headerbutton",
+            logout: 'launch',
+            profile: 'person',
+            create: 'add',
+            dashboard: 'dashboard',
+            buttonClass: "mdl-button close mdl-js-button",
             sidenav: {
               link1: 'Create',
-              url1: '/create',
               link2: 'Profile',
-              url2: '/profile',
-              link3: 'Logout',
+              link3: 'Dashboard',
+              link4: 'Logout',
             }
           });
         }
@@ -59,13 +59,13 @@
             logout: '',
             profile: '',
             create: '',
+            dashboard: '',
             buttonClass: '',
             sidenav: {
-              link1: '',
-              url1: '',
-              link2: '',
-              url2: '',
-              link3: '',
+              link1: 'Home',
+              link2: 'About',
+              link3: 'Contact Us',
+              link4: 'Social',
             }
           });
           browserHistory.push('/');
@@ -80,29 +80,51 @@
             buttonClass: "mdl-button close mdl-js-button",
             sidenav: {
               link1: 'Create',
-              url1: '/create',
               link2: 'Profile',
-              url2: '/profile',
-              link3: 'Logout',
+              link3: 'Dashboard',
+              link4: 'Logout',
             }
           });
         }
       },
 
       profile: function() {
-        this.context.router.push('/profile');
+        var token = localStorage.getItem('x-access-token');
+        if (!token) {
+          console.log('no through way');
+        } else {
+          this.context.router.push('/profile');
+          var nav = document.querySelector('.mdl-layout');
+          nav.MaterialLayout.toggleDrawer();
+        }
       },
 
       dashboard: function() {
-        this.context.router.push('/dashboard');
+        var token = localStorage.getItem('x-access-token');
+        if (!token) {
+          console.log('no through way');
+        } else {
+          this.context.router.push('/dashboard');
+          var nav = document.querySelector('.mdl-layout');
+          nav.MaterialLayout.toggleDrawer();
+        }
       },
 
       create: function() {
-        this.context.router.push('/create');
+        var token = localStorage.getItem('x-access-token');
+        if (!token) {
+          console.log('no through way');
+        } else {
+          this.context.router.push('/create');
+          var nav = document.querySelector('.mdl-layout');
+          nav.MaterialLayout.toggleDrawer();
+        }
       },
 
       home: function() {
         this.context.router.push('/');
+        var nav = document.querySelector('.mdl-layout');
+        nav.MaterialLayout.toggleDrawer();
       },
 
       logout: function() {
@@ -118,6 +140,8 @@
           });
         }
         browserHistory.push('/');
+        var nav = document.querySelector('.mdl-layout');
+        nav.MaterialLayout.toggleDrawer();
       },
 
       render: function() {
@@ -159,9 +183,10 @@
            <div className="mdl-layout__drawer">
              <span className="mdl-layout-title">Doc4</span>
              <nav className="mdl-navigation">
-               <a className="mdl-navigation__link" href={this.state.sidenav.url2}>{this.state.sidenav.link2}</a>
-               <a className="mdl-navigation__link" onClick={this.logout}>{this.state.sidenav.link3}</a>
-               <a className="mdl-navigation__link" href={this.state.sidenav.url1}>{this.state.sidenav.link1}</a>,
+               <a className="mdl-navigation__link" onClick={this.create}>{this.state.sidenav.link1}</a>
+               <a className="mdl-navigation__link" onClick={this.profile}>{this.state.sidenav.link2}</a>
+               <a className="mdl-navigation__link" onClick={this.dashboard}>{this.state.sidenav.link3}</a>
+               <a className="mdl-navigation__link" onClick={this.logout}>{this.state.sidenav.link4}</a>
              </nav>
            </div>
           <main className="mdl-layout__content">
