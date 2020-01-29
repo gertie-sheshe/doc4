@@ -3,49 +3,35 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { logout } from '../../redux/user/user.actions';
 
 class Header extends Component {
   state = {
-    logout: '',
-    profile: '',
-    create: '',
-    dashboard: '',
-    buttonClass: '',
+    logout: 'launch',
+    profile: 'person',
+    create: 'add',
+    dashboard: 'dashboard',
+    buttonClass: 'mdl-button close mdl-js-button',
     sidenav: {
-      link1: 'Home',
-      link2: 'About',
-      link3: 'Contact Us',
-      link4: 'Social',
+      link1: 'Create',
+      link2: 'Profile',
+      link3: 'Dashboard',
+      link4: 'Logout',
     },
   };
 
   componentDidMount = () => {
-    const { currentUser } = this.props;
-
-    console.log('OLAAA PROOOPS', currentUser);
-
-    if (currentUser) {
-      this.setState({
-        logout: 'launch',
-        profile: 'person',
-        create: 'add',
-        dashboard: 'dashboard',
-        buttonClass: 'mdl-button close mdl-js-button',
-        sidenav: {
-          link1: 'Create',
-          link2: 'Profile',
-          link3: 'Dashboard',
-          link4: 'Logout',
-        },
-      });
-    }
+    console.log('POOOW', this.props);
   };
 
-  logout() {
+  logout = () => {
     // Action to logout
-  }
+    const { logout } = this.props;
+    logout();
+  };
 
   render() {
+    const { currentUser } = this.props;
     return (
       <div>
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -60,9 +46,12 @@ class Header extends Component {
               <div className="mdl-grid">
                 <Link to="/create">
                   <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
-                    <div id="headerbutton" className={this.state.buttonClass}>
+                    <div
+                      id="headerbutton"
+                      className={currentUser ? this.state.buttonClass : ''}
+                    >
                       <div id="createdoc" className="material-icons">
-                        {this.state.create}
+                        {currentUser ? this.state.create : ''}
                       </div>
                       <div className="mdl-tooltip" htmlFor="createdoc">
                         Create
@@ -74,7 +63,7 @@ class Header extends Component {
                   <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
                     <div id="headerbutton" className={this.state.buttonClass}>
                       <i id="dashlink" className="material-icons">
-                        {this.state.dashboard}
+                        {currentUser ? this.state.dashboard : ''}
                       </i>
                       <div className="mdl-tooltip" htmlFor="dashlink">
                         Dashboard
@@ -86,7 +75,7 @@ class Header extends Component {
                   <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
                     <div id="headerbutton" className={this.state.buttonClass}>
                       <i id="profilelink" className="material-icons">
-                        {this.state.profile}
+                        {currentUser ? this.state.profile : ''}
                       </i>
                       <div className="mdl-tooltip" htmlFor="profilelink">
                         Profile
@@ -94,7 +83,7 @@ class Header extends Component {
                     </div>
                   </div>
                 </Link>
-                <Link to="/logout">
+                <Link to="/">
                   <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone mdl-cell--hide-tablet">
                     <div
                       id="logout"
@@ -103,7 +92,7 @@ class Header extends Component {
                       onClick={this.logout}
                     >
                       <i id="logoutlink" className="material-icons">
-                        {this.state.logout}
+                        {currentUser ? this.state.logout : ''}
                       </i>
                       <div className="mdl-tooltip" htmlFor="logoutlink">
                         Logout
@@ -124,4 +113,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { logout })(Header);

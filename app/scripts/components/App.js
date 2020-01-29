@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -16,16 +16,22 @@ import Landing from './LandingPage/LandingPage.js';
 // import Edit from './components/Profile/Edit.js';
 import Auth from './Authentication/Auth';
 // import Update from './components/Documents/Update.js';
-// import Dashboard from './components/Dashboard/Dashboard.js';
+import Dashboard from './Dashboard/Dashboard.js';
 
 class App extends Component {
   render() {
+    const { currentUser } = this.props;
     return (
       <div>
-        <Header user={this.props.currentUser} />
+        <Header />
         <Switch>
           <Route exact path="/" render={Landing} />
           <Route exact path="/auth" render={props => <Auth {...props} />} />
+          <Route
+            exact
+            path="/dashboard"
+            render={props => <Dashboard {...props} />}
+          />
         </Switch>
       </div>
     );

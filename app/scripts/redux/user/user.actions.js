@@ -65,3 +65,7 @@ export const loginStartAsync = (user, history) => {
     }
   };
 };
+
+export const logout = () => ({
+  type: userActionTypes.LOG_OUT_SUCCESS,
+});
