@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import ReactDOM from 'react-dom';
-import localStorage from 'localStorage';
-import { browserHistory } from 'react-router';
-import UserStore from '../../stores/UserStore';
-import UserAction from '../../actions/UserActions';
-
 class Header extends Component {
   state = {
     logout: '',
