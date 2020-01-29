@@ -1,0 +1,10 @@
+const userActionTypes = {
+  SIGN_UP_START: 'SIGN_UP_START',
+  SIGN_UP_FAILURE: 'SIGN_UP_FAILURE',
+  SIGN_UP_SUCCESS: 'SIGN_UP_SUCCESS',
+  LOG_IN_START: 'LOG_IN_START',
+  LOG_IN_FAILURE: 'LOG_IN_FAILURE',
+  LOG_IN_SUCCESS: 'LOG_IN_SUCCESS',
+};
+
+export default userActionTypes;

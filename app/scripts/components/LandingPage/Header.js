@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 class Header extends Component {
   state = {
@@ -16,12 +19,12 @@ class Header extends Component {
     },
   };
 
-  componentDidMount() {
-    const { user } = this.props;
+  componentDidMount = () => {
+    const { currentUser } = this.props;
 
-    console.log('OLAAA PROOOPS', user);
+    console.log('OLAAA PROOOPS', currentUser);
 
-    if (user) {
+    if (currentUser) {
       this.setState({
         logout: 'launch',
         profile: 'person',
@@ -36,7 +39,7 @@ class Header extends Component {
         },
       });
     }
-  }
+  };
 
   logout() {
     // Action to logout
@@ -117,4 +120,8 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(Header);
