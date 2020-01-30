@@ -42,6 +42,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
         currentUser: null,
         error: null,
       };
+
+    case 'EDIT_USER_FAIL':
+      return {
+        ...state,
+        error: payload,
+      };
+    case 'EDIT_USER_START':
+    case 'EDIT_USER_SUCCESS':
     default:
       return state;
   }

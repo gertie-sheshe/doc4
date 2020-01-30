@@ -1,4 +1,5 @@
 import userActionTypes from './user.types';
+import toastr from 'toastr';
 
 export const signUpSuccess = user => ({
   type: userActionTypes.SIGN_UP_SUCCESS,
@@ -63,8 +64,6 @@ export const loginStartAsync = (user, history) => {
 
       const responseData = await response.json();
 
-      console.log('AUTH', response);
-
       dispatch(loginSuccess(responseData));
       history.push('/dashboard');
     } catch (error) {
@@ -76,3 +75,40 @@ export const loginStartAsync = (user, history) => {
 export const logout = () => ({
   type: userActionTypes.LOG_OUT_SUCCESS,
 });
+
+export const editUserStart = () => ({
+  type: userActionTypes.EDIT_USER_START,
+});
+
+export const editUserFail = error => ({
+  type: userActionTypes.EDIT_USER_FAIL,
+  payload: error,
+});
+
+export const editUserSuccess = () => ({
+  type: userActionTypes.EDIT_USER_SUCCESS,
+});
+
+export const editUserStartAsync = (token, id, user, history) => {
+  return async dispatch => {
+    try {
+      dispatch(editUserStart());
+
+      const response = await fetch(`/api/users/${id}`, {
+        method: 'PUT',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+
+      const responseData = await response.json();
+
+      history.push('/dashboard');
+      toastr.success('User successfully updated', { timeout: 100 });
+    } catch (error) {
+      dispatch(editUserFail(error));
+    }
+  };
+};
