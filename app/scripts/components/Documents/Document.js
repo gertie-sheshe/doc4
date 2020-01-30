@@ -18,9 +18,9 @@ class Document extends Component {
     selectDocument(match.params.id);
   };
 
-  onBack = () => {
+  onRouteSwitch = route => {
     const { history } = this.props;
-    history.push('/dashboard');
+    history.push(`/${route}`);
   };
 
   deleteDocument = () => {
@@ -75,7 +75,7 @@ class Document extends Component {
                 <div className="mdl-card__actions mdl-card--border">
                   <a
                     className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-                    onClick={() => console.log('one')}
+                    onClick={() => this.onRouteSwitch('update')}
                   >
                     Edit
                   </a>
@@ -87,7 +87,7 @@ class Document extends Component {
                   </a>
                   <a
                     className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-                    onClick={this.onBack}
+                    onClick={() => this.onRouteSwitch('dashboard')}
                   >
                     Back
                   </a>

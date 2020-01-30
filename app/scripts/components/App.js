@@ -15,7 +15,7 @@ import Create from './Documents/Create';
 // import Profile from './components/Profile/Profile.js';
 // import Edit from './components/Profile/Edit.js';
 import Auth from './Authentication/Auth';
-// import Update from './components/Documents/Update.js';
+import Update from './Documents/Update.js';
 import Dashboard from './Dashboard/Dashboard.js';
 
 class App extends Component {
@@ -38,6 +38,7 @@ class App extends Component {
             render={props => <Document {...props} />}
           />
           <Route exact path="/create" render={props => <Create {...props} />} />
+          <Route exact path="/update" render={props => <Update {...props} />} />
         </Switch>
       </div>
     );

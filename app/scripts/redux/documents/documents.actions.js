@@ -152,3 +152,40 @@ export const deleteDocumentStartAsync = (id, token, history) => {
     }
   };
 };
+
+export const updateDocumentStart = () => ({
+  type: documentActionTypes.UPDATE_DOCUMENT_START,
+});
+
+export const updateDocumentSuccess = () => ({
+  type: documentActionTypes.UPDATE_DOCUMENT_SUCCESS,
+});
+
+export const updateDocumentFail = error => ({
+  type: documentActionTypes.UPDATE_DOCUMENT_FAIL,
+  payload: error,
+});
+
+export const updateDocumentStartAsync = (id, document, token, history) => {
+  return async dispatch => {
+    try {
+      dispatch(updateDocumentStart());
+      const response = await fetch(`/api/documents/${id}`, {
+        method: 'PUT',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(document),
+      });
+
+      const responseData = await response.json();
+
+      dispatch(updateDocumentSuccess());
+      history.push('/dashboard');
+      toastr.success('Document successfully deleted', { timeout: 100 });
+    } catch (error) {
+      dispatch(updateDocumentFail());
+    }
+  };
+};
