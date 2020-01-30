@@ -10,7 +10,7 @@ import Header from './LandingPage/Header';
 import Landing from './LandingPage/LandingPage.js';
 // import { supportsHistory } from 'history/DOMUtils';
 // import NotFound from './components/NotFound/NotFound.js';
-// import Document from './components/Documents/Document.js';
+import Document from './Documents/Document';
 // import Create from './components/Documents/Create.js';
 // import Profile from './components/Profile/Profile.js';
 // import Edit from './components/Profile/Edit.js';
@@ -31,6 +31,11 @@ class App extends Component {
             exact
             path="/dashboard"
             render={props => <Dashboard {...props} />}
+          />
+          <Route
+            exact
+            path="/dashboard/:id"
+            render={props => <Document {...props} />}
           />
         </Switch>
       </div>
