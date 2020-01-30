@@ -11,7 +11,7 @@ import Landing from './LandingPage/LandingPage.js';
 // import { supportsHistory } from 'history/DOMUtils';
 // import NotFound from './components/NotFound/NotFound.js';
 import Document from './Documents/Document';
-// import Create from './components/Documents/Create.js';
+import Create from './Documents/Create';
 // import Profile from './components/Profile/Profile.js';
 // import Edit from './components/Profile/Edit.js';
 import Auth from './Authentication/Auth';
@@ -37,6 +37,7 @@ class App extends Component {
             path="/dashboard/:id"
             render={props => <Document {...props} />}
           />
+          <Route exact path="/create" render={props => <Create {...props} />} />
         </Switch>
       </div>
     );

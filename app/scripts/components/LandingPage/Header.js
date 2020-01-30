@@ -33,7 +33,7 @@ class Header extends Component {
   render() {
     const { currentUser } = this.props;
     return (
-      <div>
+      <div id="header">
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header className="mdl-layout__header">
             <div className="mdl-layout__header-row">

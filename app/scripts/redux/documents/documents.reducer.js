@@ -48,9 +48,25 @@ const documentReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedDoc: filterSelectedDocument(
-          state.userDocuments,
+          state.ownerDocuments,
           action.payload,
         ),
+      };
+    case 'CREATE_DOCUMENT_START':
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case 'CREATE_DOCUMENT_SUCCESS':
+      return {
+        ...state,
+        isFetching: null,
+      };
+    case 'CREATE_DOCUMENT_FAIL':
+      return {
+        ...state,
+        error: action.payload,
+        isFetching: false,
       };
     default:
       return state;

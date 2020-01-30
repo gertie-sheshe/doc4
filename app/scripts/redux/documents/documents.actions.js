@@ -1,4 +1,5 @@
 import documentActionTypes from './documents.types';
+import toastr from 'toastr';
 
 export const fetchDocumentsSuccess = documents => ({
   type: documentActionTypes.FETCH_DOCUMENTS_SUCCESS,
@@ -76,3 +77,41 @@ export const selectDocument = id => ({
   type: documentActionTypes.SELECT_DOCUMENT,
   payload: id,
 });
+
+export const createDocumentStart = () => ({
+  type: documentActionTypes.CREATE_DOCUMENT_START,
+});
+
+export const createDocumentFail = error => ({
+  type: documentActionTypes.CREATE_DOCUMENT_FAILURE,
+  payload: error,
+});
+
+export const createDocumentSuccess = () => ({
+  type: documentActionTypes.CREATE_DOCUMENT_SUCCESS,
+});
+
+export const createDocumentStartAsync = (document, token, history) => {
+  return async dispatch => {
+    try {
+      dispatch(createDocumentStart());
+
+      const response = await fetch('/api/documents', {
+        method: 'POST',
+        body: JSON.stringify(document),
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const responseData = await response.json();
+
+      dispatch(createDocumentSuccess());
+      toastr.success('Document successfully created', { timeout: 100 });
+      history.push('/dashboard');
+    } catch (error) {
+      dispatch(createDocumentFail(error));
+    }
+  };
+};
