@@ -68,6 +68,18 @@ const documentReducer = (state = INITIAL_STATE, action) => {
         error: action.payload,
         isFetching: false,
       };
+    case 'DELETE_DOCUMENT_START':
+      return state;
+
+    case 'DELETE_DOCUMENT_SUCCESS':
+      return state;
+
+    case 'DELETE_DOCUMENT_FAIL':
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

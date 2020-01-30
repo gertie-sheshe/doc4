@@ -115,3 +115,40 @@ export const createDocumentStartAsync = (document, token, history) => {
     }
   };
 };
+
+export const deleteDocumentStart = () => ({
+  type: documentActionTypes.DELETE_DOCUMENT_START,
+});
+
+export const deleteDocumentFail = error => ({
+  type: documentActionTypes.DELETE_DOCUMENT_FAIL,
+  payload: error,
+});
+
+export const deleteDocumentSuccess = () => ({
+  type: documentActionTypes.DELETE_DOCUMENT_SUCCESS,
+});
+
+export const deleteDocumentStartAsync = (id, token, history) => {
+  return async dispatch => {
+    try {
+      dispatch(deleteDocumentStart());
+
+      const response = await fetch(`/api/documents/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const responseData = await response.json();
+
+      dispatch(deleteDocumentSuccess());
+      toastr.success('Document successfully deleted', { timeout: 100 });
+      history.push('/dashboard');
+    } catch (error) {
+      dispatch(deleteDocumentFail(error));
+    }
+  };
+};

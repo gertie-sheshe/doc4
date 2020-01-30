@@ -1,146 +1,16 @@
-// import React, { Component } from 'react';
-// import moment from 'moment';
-// // var browserHistory = require('react-router').browserHistory;
-// // var Documents = require('./Documents.js');
-// // var Public = require('./PublicDocs.js');
-// // var DocumentStore = require('../../stores/DocumentStore');
-// // var DocumentAction = require('../../actions/DocumentActions');
-// // var UserAction = require('../../actions/UserActions');
-// // var UserStore = require('../../stores/UserStore');
-// // var toastr = require('toastr');
-// var popups = require('popups');
-
-// class Document extends Component {
-//   componentDidMount = () => {
-//     console.log('MONSIEUR', this.props);
-//   };
-//   // getInitialState: function() {
-//   //   return {
-//   //     document: [],
-//   //     updatedDoc: {
-//   //       title: '',
-//   //       content: '',
-//   //       access: '',
-//   //     },
-//   //   };
-//   // },
-
-//   // componentWillMount: function() {
-//   //   var pathArray = this.props.params.id;
-//   //   var token = localStorage.getItem('x-access-token');
-//   //   if (!token) {
-//   //     browserHistory.push('/');
-//   //     toastr.error('You must be logged in bitte :)', { timeout: 3000 });
-//   //   }
-//   //   localStorage.setItem('document', pathArray);
-//   //   DocumentAction.setDoc(pathArray, token);
-//   // },
-
-//   // componentDidMount: function() {
-//   //   DocumentStore.addChangeListener(this.handleSelected, 'doc');
-//   // },
-
-//   handleSelected() {
-//     var selectDoc = DocumentStore.getSelectedDoc();
-//     var doc = [].concat(selectDoc);
-//     this.setState({
-//       document: doc,
-//     });
-//   }
-
-//   // back: function() {
-//   //   localStorage.removeItem('document');
-//   //   this.context.router.push('/dashboard');
-//   //   // browserHistory.push('/dashboard');
-//   //   // window.location.assign('/dashboard');
-//   // },
-
-//   // update: function() {
-//   //   this.context.router.push('/update');
-//   // },
-
-// render() {
-//   if (this.state.document) {
-//     var that = this;
-//     var data = this.state.document.map(function(doc) {
-//       var deleteDoc = function() {
-//         popups.confirm({
-//           content: '<h6>Are you sure you want to delete this document?</h6>',
-//           labelOk: 'Yes',
-//           additionalButtonOkClass:
-//             'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect',
-//           additionalButtonCancelClass:
-//             'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect',
-//           labelCancel: 'No',
-//           onSubmit: function() {
-//             var id = window.location.pathname.split('/')[1];
-//             // var token = localStorage.getItem('x-access-token');
-//             DocumentAction.deleteDocument(id, token);
-//             toastr.success('Document has been deleted', { timeout: 3000 });
-//             that.context.router.push('/dashboard');
-//             // window.location.assign('/dashboard');
-//             // that.history.pushState(null, '/dashboard');
-//           },
-//           onClose: function() {
-//             return;
-//           },
-//         });
-//       };
-//         return (
-//           <div className="mdl-grid" key={doc._id}>
-//             <div id="single-doc" className="mdl-cell mdl-cell--12-col">
-//               <div className="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
-//                 <div className="demo-card-square mdl-card mdl-shadow--2dp">
-//                   <div className="mdl-card__title mdl-card--expand">
-//                     <h1 className="mdl-card__title-text">
-//                       Title:&nbsp; {doc.title}
-//                     </h1>
-//                   </div>
-//                   <h6 id="docdate">
-//                     {' '}
-//                     Added:&nbsp; {moment(doc.dateCreated).fromNow()}{' '}
-//                   </h6>
-//                   <div className="mdl-card__supporting-text">{doc.content}</div>
-//                   <div className="mdl-card__actions mdl-card--border">
-//                     <a
-//                       className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-//                       onClick={that.update}
-//                     >
-//                       Edit
-//                     </a>
-//                     <a
-//                       className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-//                       onClick={deleteDoc}
-//                     >
-//                       Delete
-//                     </a>
-//                     <a
-//                       className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-//                       onClick={that.back}
-//                     >
-//                       Back
-//                     </a>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         );
-//       });
-//     }
-//     return <div>{data}</div>;
-//   }
-// }
-// export default Document;
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import popups from 'popups';
 import { createStructuredSelector } from 'reselect';
 
-import { selectDocument } from '../../redux/documents/documents.actions';
+import {
+  selectDocument,
+  deleteDocumentStartAsync,
+  deleteDocumentStart,
+} from '../../redux/documents/documents.actions';
 import { selectCurrentDocument } from '../../redux/documents/documents.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 class Document extends Component {
   componentDidMount = () => {
@@ -151,6 +21,17 @@ class Document extends Component {
   onBack = () => {
     const { history } = this.props;
     history.push('/dashboard');
+  };
+
+  deleteDocument = () => {
+    const {
+      currentDoc,
+      currentUser,
+      deleteDocumentStartAsync,
+      history,
+    } = this.props;
+
+    deleteDocumentStartAsync(currentDoc[0]._id, currentUser.token, history);
   };
 
   render() {
@@ -165,15 +46,8 @@ class Document extends Component {
         additionalButtonCancelClass:
           'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect',
         labelCancel: 'No',
-        onSubmit: function() {
-          console.log('SHALL BE');
-          // var id = window.location.pathname.split('/')[1];
-          // // var token = localStorage.getItem('x-access-token');
-          // DocumentAction.deleteDocument(id, token);
-          // toastr.success('Document has been deleted', { timeout: 3000 });
-          // that.context.router.push('/dashboard');
-          // // window.location.assign('/dashboard');
-          // // that.history.pushState(null, '/dashboard');
+        onSubmit: () => {
+          this.deleteDocument();
         },
         onClose: function() {
           return;
@@ -193,10 +67,7 @@ class Document extends Component {
                   </h1>
                 </div>
                 <h6 id="docdate">
-                  {' '}
-                  Added:&nbsp; {moment(
-                    currentDoc[0].dateCreated,
-                  ).fromNow()}{' '}
+                  Added:&nbsp; {moment(currentDoc[0].dateCreated).fromNow()}
                 </h6>
                 <div className="mdl-card__supporting-text">
                   {currentDoc[0].content}
@@ -234,6 +105,10 @@ class Document extends Component {
 
 const mapStateToProps = createStructuredSelector({
   currentDoc: selectCurrentDocument,
+  currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps, { selectDocument })(Document);
+export default connect(mapStateToProps, {
+  selectDocument,
+  deleteDocumentStartAsync,
+})(Document);
