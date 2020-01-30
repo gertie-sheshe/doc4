@@ -8,11 +8,10 @@ import { selectCurrentUser } from '../redux/user/user.selectors';
 
 import Header from './LandingPage/Header';
 import Landing from './LandingPage/LandingPage.js';
-// import { supportsHistory } from 'history/DOMUtils';
 // import NotFound from './components/NotFound/NotFound.js';
 import Document from './Documents/Document';
 import Create from './Documents/Create';
-// import Profile from './components/Profile/Profile.js';
+import Profile from './Profile/Profile.js';
 // import Edit from './components/Profile/Edit.js';
 import Auth from './Authentication/Auth';
 import Update from './Documents/Update.js';
@@ -39,6 +38,11 @@ class App extends Component {
           />
           <Route exact path="/create" render={props => <Create {...props} />} />
           <Route exact path="/update" render={props => <Update {...props} />} />
+          <Route
+            exact
+            path="/profile"
+            render={props => <Profile {...props} />}
+          />
         </Switch>
       </div>
     );
