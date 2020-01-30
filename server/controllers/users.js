@@ -142,9 +142,7 @@
             } else if (docs && docs.length) {
               return res.status(200).json(docs);
             } else {
-              return res.status(404).json({
-                message: 'No documents found',
-              });
+              return res.status(404).json([]);
             }
           });
       } else {
@@ -160,9 +158,7 @@
             if (err) {
               return res.status(500).send(err.errmessage || err);
             } else if (document.length < 1) {
-              return res.status(404).json({
-                message: 'Document not found',
-              });
+              return res.status(404).json([]);
             } else {
               return res.status(200).json(document);
             }

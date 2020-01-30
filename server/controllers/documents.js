@@ -9,17 +9,17 @@
 
   module.exports = {
     create: function(req, res) {
-        var document = new Document();
-        document.ownerId = req.decoded._doc._id;
-        document.owner = req.decoded._doc.username;
-        document.title = req.body.title;
-        document.content = req.body.content;
-        document.dateCreated = new Date();
-        document.lastModified = Date.now();
-        document.accessType = req.body.accessType || "None";
+      var document = new Document();
+      document.ownerId = req.decoded._doc._id;
+      document.owner = req.decoded._doc.username;
+      document.title = req.body.title;
+      document.content = req.body.content;
+      document.dateCreated = new Date();
+      document.lastModified = Date.now();
+      document.accessType = req.body.accessType || 'None';
       // Get RoleId of the role assigned to the document
       Role.find({
-        title: req.body.access || 'Viewer'
+        title: req.body.access || 'Viewer',
       }).exec(function(err, access) {
         if (err) {
           res.status(500).send(err.errormessage || err);
@@ -28,16 +28,15 @@
 
           // Get TypeId of the role assigned to the document
           Type.find({
-            type: req.body.type || 'General'
+            type: req.body.type || 'General',
           }).exec(function(err, type) {
-            if (err)
-              return res.status(500).send(err.errormessage || err);
+            if (err) return res.status(500).send(err.errormessage || err);
             document.typeId = type[0]._id;
             document.save(function(err, document) {
               if (err)
                 return res.status(409).send({
-                  'error': err.errmessage || err,
-                  'message': 'Document cannot be duplicate'
+                  error: err.errmessage || err,
+                  message: 'Document cannot be duplicate',
                 });
               return res.status(200).json(document);
             });
@@ -48,107 +47,116 @@
 
     session: function(req, res, next) {
       var tokenOne = req.headers['x-access-token'];
-      if(tokenOne) {
+      if (tokenOne) {
         jwt.verify(tokenOne, secretKey, function(err, decoded) {
           if (!err) {
             req.decoded = decoded;
             next();
           } else {
             return res.status(401).send({
-              message: 'Failed to Authenticate'
+              message: 'Failed to Authenticate',
             });
           }
         });
       } else {
-        return res.status(401).send({message: 'You are not authenticated documents'});
+        return res
+          .status(401)
+          .send({ message: 'You are not authenticated documents' });
       }
     },
 
     find: function(req, res) {
       // Users can only view documents available to their roles and are not private.
       if (req.query.from) {
-        Document.find({
-          accessType: 'None',
-          accessId: req.decoded._doc.roleId,
-          dateCreated: {
-            $gte: new Date(req.query.from),
-            $lt: new Date(req.query.to)
-          }
-        }, function(err, documents) {
-          if (err) {
-            return res.status(500).send(err.errmessage || err);
-          } else if (documents.length < 1) {
-            res.status(404).json({
-              'message': 'No documents found'
-            });
-          } else {
-            res.status(200).json(documents);
-          }
-        });
+        Document.find(
+          {
+            accessType: 'None',
+            accessId: req.decoded._doc.roleId,
+            dateCreated: {
+              $gte: new Date(req.query.from),
+              $lt: new Date(req.query.to),
+            },
+          },
+          function(err, documents) {
+            if (err) {
+              return res.status(500).send(err.errmessage || err);
+            } else if (documents.length < 1) {
+              res.status(404).json([]);
+            } else {
+              res.status(200).json(documents);
+            }
+          },
+        );
       } else if (req.query.title) {
-        Document.find({
-          accessType: 'None',
-          accessId: req.decoded._doc.roleId,
-          title: req.query.title
-        }, function(err, documents) {
-          if (err) {
-            return res.status(500).send(err.errmessage || err);
-          } else if (documents.length < 1) {
-            res.status(404).json({
-              'message': 'No documents found'
-            });
-          } else {
-            res.status(200).json(documents);
-          }
-        });
+        Document.find(
+          {
+            accessType: 'None',
+            accessId: req.decoded._doc.roleId,
+            title: req.query.title,
+          },
+          function(err, documents) {
+            if (err) {
+              return res.status(500).send(err.errmessage || err);
+            } else if (documents.length < 1) {
+              res.status(404).json([]);
+            } else {
+              res.status(200).json(documents);
+            }
+          },
+        );
       } else if (req.query.role) {
         Role.find({
-          title: req.query.role
+          title: req.query.role,
         }).exec(function(err, role) {
           if (err) {
             return res.status(500).send(err.errmessage || err);
           } else {
             if (role[0]._id != req.decoded._doc.roleId) {
               return res.status(401).json({
-                'message': 'Sorry, you are not allowed to view documents with this role'
+                message:
+                  'Sorry, you are not allowed to view documents with this role',
               });
             } else {
-              Document.find({
-                accessType: 'None',
-                accessId: role[0]._id,
-              }, function(err, documents) {
-                if (err) {
-                  return res.status(500).send(err.errmessage || err);
-                } else if (documents.length < 1) {
-                  res.status(404).json({
-                    'message': 'No documents found'
-                  });
-                } else {
-                  res.status(200).json(documents);
-                }
-              });
+              Document.find(
+                {
+                  accessType: 'None',
+                  accessId: role[0]._id,
+                },
+                function(err, documents) {
+                  if (err) {
+                    return res.status(500).send(err.errmessage || err);
+                  } else if (documents.length < 1) {
+                    res.status(404).json([]);
+                  } else {
+                    res.status(200).json(documents);
+                  }
+                },
+              );
             }
           }
         });
       } else {
         Document.find({
           accessType: 'None',
-          accessId: req.decoded._doc.roleId
-        }).limit(req.query.limit).sort({
-          dateCreated: -1
-        }).exec(function(err, document) {
-          if (err) {
-            return res.status(500).send(err.errmessage || err);
-          } else {
-            return res.status(200).json(document);
-          }
-        });
+          accessId: req.decoded._doc.roleId,
+        })
+          .limit(req.query.limit)
+          .sort({
+            dateCreated: -1,
+          })
+          .exec(function(err, document) {
+            if (err) {
+              return res.status(500).send(err.errmessage || err);
+            } else {
+              return res.status(200).json(document);
+            }
+          });
       }
     },
 
     findADoc: function(req, res) {
       Document.find({
-        _id: req.params.document_id
+        _id: req.params.document_id,
       }).exec(function(err, documents) {
         return res.status(200).json(documents);
       });
@@ -161,22 +169,24 @@
         } else {
           // Documents can only be deleted by Admin or Owner
           Role.findById(req.decoded._doc.roleId, function(err, role) {
-            if (err)
-              return res.status(500).send(err.errmessage || err);
+            if (err) return res.status(500).send(err.errmessage || err);
             roles = role.title;
             if (roles === 'Admin' || doc.ownerId === req.decoded._doc._id) {
-              Document.remove({
-                _id: req.params.document_id
-              }, function(err) {
-                if (err)
-                  return res.status(500).send(err.errmessage || err);
-                return res.status(200).json({
-                  'message': 'Document has been deleted'
-                });
-              });
+              Document.remove(
+                {
+                  _id: req.params.document_id,
+                },
+                function(err) {
+                  if (err) return res.status(500).send(err.errmessage || err);
+                  return res.status(200).json({
+                    message: 'Document has been deleted',
+                  });
+                },
+              );
             } else {
               return res.status(403).json({
-                'message': 'You need to be Owner or Admin to delete this Document'
+                message:
+                  'You need to be Owner or Admin to delete this Document',
               });
             }
           });
@@ -190,9 +200,9 @@
           return res.status(500).send(err.errmessage || err);
         } else {
           // Users can only edit documents available to their role or they are the owner
-           if (req.body.title && req.body.content && req.body.access) {
+          if (req.body.title && req.body.content && req.body.access) {
             Role.find({
-              title: req.body.access
+              title: req.body.access,
             }).exec(function(err, access) {
               if (err) {
                 res.status(500).send(err.errormessage || err);
@@ -209,7 +219,7 @@
                 });
               }
             });
-          } else if(req.body.title && req.body.content) {
+          } else if (req.body.title && req.body.content) {
             doc.title = req.body.title;
             doc.content = req.body.content;
             doc.save(function(err, savedDoc) {
@@ -219,7 +229,7 @@
                 return res.status(200).json(savedDoc);
               }
             });
-          } else if(req.body.content) {
+          } else if (req.body.content) {
             doc.content = req.body.content;
             doc.save(function(err, savedDoc) {
               if (err) {
@@ -228,7 +238,7 @@
                 return res.status(200).json(savedDoc);
               }
             });
-          }  else if(req.body.title) {
+          } else if (req.body.title) {
             doc.title = req.body.title;
             doc.save(function(err, savedDoc) {
               if (err) {
@@ -237,9 +247,9 @@
                 return res.status(200).json(savedDoc);
               }
             });
-          }  else if(req.body.access) {
+          } else if (req.body.access) {
             Role.find({
-              title: req.body.access
+              title: req.body.access,
             }).exec(function(err, access) {
               if (err) {
                 res.status(500).send(err.errormessage || err);
@@ -257,6 +267,6 @@
           }
         }
       });
-    }
+    },
   };
 })();

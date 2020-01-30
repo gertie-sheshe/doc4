@@ -12,7 +12,7 @@ import Landing from './LandingPage/LandingPage.js';
 import Document from './Documents/Document';
 import Create from './Documents/Create';
 import Profile from './Profile/Profile.js';
-// import Edit from './components/Profile/Edit.js';
+import Edit from './Profile/Edit';
 import Auth from './Authentication/Auth';
 import Update from './Documents/Update.js';
 import Dashboard from './Dashboard/Dashboard.js';
@@ -38,6 +38,7 @@ class App extends Component {
           />
           <Route exact path="/create" render={props => <Create {...props} />} />
           <Route exact path="/update" render={props => <Update {...props} />} />
+          <Route exact path="/edit" render={props => <Edit {...props} />} />
           <Route
             exact
             path="/profile"
