@@ -1,6 +1,9 @@
+import { filterSelectedDocument } from './document.utils';
+
 const INITIAL_STATE = {
   userDocuments: [],
   ownerDocuments: [],
+  selectedDoc: [],
   isFetching: null,
   error: null,
 };
@@ -32,6 +35,22 @@ const documentReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case 'LOG_OUT_SUCCESS':
+      return {
+        ...state,
+        ownerDocuments: [],
+        userDocuments: [],
+        selectedDoc: [],
+        error: null,
+      };
+    case 'SELECT_DOCUMENT':
+      return {
+        ...state,
+        selectedDoc: filterSelectedDocument(
+          state.userDocuments,
+          action.payload,
+        ),
       };
     default:
       return state;

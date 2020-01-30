@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   currentUser: '',
   error: null,
+  isFetching: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -23,6 +24,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: action.payload,
       };
+
+    case 'LOG_IN_START':
+      return {
+        ...state,
+        isFetching: true,
+      };
+
     case 'LOG_IN_FAILURE':
       return {
         ...state,

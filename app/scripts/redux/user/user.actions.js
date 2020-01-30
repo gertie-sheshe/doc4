@@ -40,6 +40,10 @@ export const loginSuccess = user => ({
   payload: user,
 });
 
+export const loginStart = () => ({
+  type: userActionTypes.LOG_IN_START,
+});
+
 export const loginFailure = error => ({
   type: userActionTypes.LOG_IN_FAILURE,
   payload: error,
@@ -48,6 +52,7 @@ export const loginFailure = error => ({
 export const loginStartAsync = (user, history) => {
   return async dispatch => {
     try {
+      dispatch(loginStart());
       const response = await fetch('/api/users/login', {
         method: 'POST',
         headers: {
@@ -57,6 +62,8 @@ export const loginStartAsync = (user, history) => {
       });
 
       const responseData = await response.json();
+
+      console.log('AUTH', response);
 
       dispatch(loginSuccess(responseData));
       history.push('/dashboard');
