@@ -12,6 +12,7 @@ import {
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import Documents from '../Documents/Documents';
 import Public from '../Documents/PublicDocs.js';
+import { Link, Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -21,12 +22,24 @@ class Dashboard extends Component {
       currentUser,
     } = this.props;
 
-    fetchDocumentsStartAsync(currentUser.token);
-    fetchOwnerDocumentsStartAsync(currentUser.token, currentUser._id);
+    if (currentUser) {
+      fetchDocumentsStartAsync(currentUser.token);
+      fetchOwnerDocumentsStartAsync(currentUser.token, currentUser._id);
+    }
   }
 
   render() {
-    const { userDocuments, ownerDocuments, history, match } = this.props;
+    const {
+      userDocuments,
+      ownerDocuments,
+      history,
+      match,
+      currentUser,
+    } = this.props;
+
+    if (!currentUser) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div className="mdl-grid">
@@ -34,21 +47,16 @@ class Dashboard extends Component {
           id="ownerdoc"
           className="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop"
         >
-          <Documents
-            documents={ownerDocuments}
-            history={history}
-            match={match}
-          />
-        </div>
-        <div
-          id="userdoc"
-          className="mdl-cell mdl-cell--12-col mdl-cell--4-col-desktop"
-        >
-          <h6 id="public-doc">
-            <strong>Public Documents</strong>
-          </h6>
-          <hr />
-          <Public documents={userDocuments} />
+          <ul id="ownerdocs" className="collection without-header">
+            <li className="collection-header">
+              <h4 id="doctitle">Documents</h4>
+            </li>
+            <Documents
+              documents={ownerDocuments}
+              history={history}
+              match={match}
+            />
+          </ul>
         </div>
       </div>
     );
