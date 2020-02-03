@@ -13,6 +13,22 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(woff|ttf|woff2)$/,
+        use: {
+          loader: 'url-loader',
+        },
+      },
+      {
+        test: /\.(jpeg|png)$/,
+        use: {
+          loader: 'url-loader',
+        },
+      },
     ],
   },
 };
