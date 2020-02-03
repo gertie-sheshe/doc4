@@ -36,13 +36,33 @@ class App extends Component {
             path="/dashboard/:id"
             render={props => <Document {...props} />}
           />
-          <Route exact path="/create" render={props => <Create {...props} />} />
-          <Route exact path="/update" render={props => <Update {...props} />} />
-          <Route exact path="/edit" render={props => <Edit {...props} />} />
+          <Route
+            exact
+            path="/create"
+            render={props =>
+              currentUser ? <Create {...props} /> : <Redirect to="/" />
+            }
+          />
+          <Route
+            exact
+            path="/update"
+            render={props =>
+              currentUser ? <Update {...props} /> : <Redirect to="/" />
+            }
+          />
+          <Route
+            exact
+            path="/edit"
+            render={props =>
+              currentUser ? <Edit {...props} /> : <Redirect to="/" />
+            }
+          />
           <Route
             exact
             path="/profile"
-            render={props => <Profile {...props} />}
+            render={props =>
+              currentUser ? <Profile {...props} /> : <Redirect to="/" />
+            }
           />
         </Switch>
       </div>
