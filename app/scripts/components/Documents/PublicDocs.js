@@ -9,7 +9,7 @@ class PublicDocument extends Component {
           title: doc.title,
           content: {
             tag: 'div.mdl-card__supporting-text',
-            html: doc.content,
+            html: 'Public content',
           },
         });
       };

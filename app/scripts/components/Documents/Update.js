@@ -37,8 +37,6 @@ class Update extends Component {
       currentUser.token,
       history,
     );
-
-    // console.log('POLEE', this.state);
   };
 
   handleChange = event => {
@@ -93,34 +91,40 @@ class Update extends Component {
                 </div>
                 <div className="mdl-grid">
                   <div className="mdl-cell--12-col radio">
-                    <input
-                      type="radio"
-                      name="access"
-                      value="Admin"
-                      defaultChecked
-                      onChange={this.handleChange}
-                    />
-                    &nbsp; Admin
+                    <label>
+                      <input
+                        type="radio"
+                        name="access"
+                        value="Admin"
+                        onInput={this.handleChange}
+                      />
+                      <span>Admin</span>
+                    </label>
                   </div>
 
                   <div className="mdl-cell--12-col radio">
-                    <input
-                      type="radio"
-                      name="access"
-                      value="Staff"
-                      onChange={this.handleChange}
-                    />
-                    &nbsp; Staff
+                    <label>
+                      <input
+                        type="radio"
+                        name="access"
+                        value="Staff"
+                        onInput={this.handleChange}
+                      />
+                      <span>Staff</span>
+                    </label>
                   </div>
 
                   <div className="mdl-cell--12-col radio">
-                    <input
-                      type="radio"
-                      name="access"
-                      value="Viewer"
-                      onChange={this.handleChange}
-                    />
-                    &nbsp; Viewer
+                    <label>
+                      <input
+                        type="radio"
+                        name="access"
+                        value="Viewer"
+                        defaultChecked
+                        onInput={this.handleChange}
+                      />
+                      <span>Viewer</span>
+                    </label>
                   </div>
                 </div>
                 <div className="mdl-dialog__actions mdl-cell mdl-cell--11-col">

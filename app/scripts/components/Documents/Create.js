@@ -12,7 +12,7 @@ class Create extends Component {
   state = {
     title: '',
     content: '',
-    access: '',
+    access: 'Viewer',
   };
 
   backToDashboard = () => {
@@ -31,6 +31,10 @@ class Create extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  };
+
+  onTextEditorChange = content => {
+    this.setState({ content });
   };
 
   render() {
@@ -56,14 +60,12 @@ class Create extends Component {
                     Document Title
                   </label>
                 </div>
+
                 <div className="mdl-textfield mdl-js-textfield mdl-cell--12-col">
                   <textarea
-                    className="mdl-textfield__input"
-                    type="text"
-                    rows="20"
-                    required
                     id="text"
                     name="content"
+                    className="materialize-textarea"
                     onChange={this.handleChange}
                   ></textarea>
                   <label
@@ -76,35 +78,41 @@ class Create extends Component {
                 </div>
                 <div className="mdl-grid">
                   <div className="mdl-cell--12-col radio">
-                    <input
-                      type="radio"
-                      name="access"
-                      value="Admin"
-                      onInput={this.handleChange}
-                    />
-                    &nbsp; Admin
+                    <label>
+                      <input
+                        type="radio"
+                        name="access"
+                        value="Admin"
+                        onInput={this.handleChange}
+                      />
+                      <span>Admin</span>
+                    </label>
                   </div>
                   <div className="mdl-cell--12-col radio">
-                    <input
-                      type="radio"
-                      name="access"
-                      value="Staff"
-                      onInput={this.handleChange}
-                    />
-                    &nbsp; Staff
+                    <label>
+                      <input
+                        type="radio"
+                        name="access"
+                        value="Staff"
+                        onInput={this.handleChange}
+                      />
+                      <span>Staff</span>
+                    </label>
                   </div>
                   <div className="mdl-cell--12-col radio">
-                    <input
-                      type="radio"
-                      name="access"
-                      value="Viewer"
-                      defaultChecked
-                      onInput={this.handleChange}
-                    />
-                    &nbsp; Viewer
+                    <label>
+                      <input
+                        type="radio"
+                        name="access"
+                        value="Viewer"
+                        defaultChecked
+                        onInput={this.handleChange}
+                      />
+                      <span>Viewer</span>
+                    </label>
                   </div>
                 </div>
-                <div id="form-document" className="mdl-card__actions  mdl-grid">
+                <div className="mdl-card__actions mdl-grid">
                   <button
                     id="createdoc"
                     type="submit"
