@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => (
   <div className="img">
@@ -15,13 +16,13 @@ const LandingPage = () => (
       </div>
       <div className="mdl-grid">
         <div className="mdl-cell mdl-cell--12-col">
-          <a
-            href="/auth"
+          <Link
+            to="/auth"
             type="button"
             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
           >
             GET STARTED
-          </a>
+          </Link>
         </div>
       </div>
     </div>

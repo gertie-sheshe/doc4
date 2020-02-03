@@ -16,10 +16,13 @@ class SignUpForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { signUpStartAsync, history } = this.props;
+
+    console.log('STATE', this.state);
     signUpStartAsync(this.state, history);
   };
 
   handleChange = event => {
+    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -102,35 +105,38 @@ class SignUpForm extends Component {
             <div className="mdl-grid">
               <h6>Select Role: </h6>
               <div className="mdl-cell--12-col radio">
-                <input
-                  id="admin"
-                  type="radio"
-                  name="role"
-                  value="Admin"
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="admin">&nbsp; Admin</label>
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="Admin"
+                    onInput={this.handleChange}
+                  />
+                  <span>Admin</span>
+                </label>
               </div>
               <div className="mdl-cell--12-col radio">
-                <input
-                  id="staff"
-                  type="radio"
-                  name="role"
-                  value="Staff"
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="staff">&nbsp; Staff </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="Staff"
+                    onInput={this.handleChange}
+                  />
+                  <span>Staff</span>
+                </label>
               </div>
               <div className="mdl-cell--12-col radio">
-                <input
-                  id="viewer"
-                  type="radio"
-                  defaultChecked
-                  name="role"
-                  value="Viewer"
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="viewer">&nbsp; Viewer</label>
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="Viewer"
+                    defaultChecked
+                    onInput={this.handleChange}
+                  />
+                  <span>Viewer</span>
+                </label>
               </div>
             </div>
           </div>

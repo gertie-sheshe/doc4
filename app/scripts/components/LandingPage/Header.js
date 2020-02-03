@@ -37,11 +37,9 @@ class Header extends Component {
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header className="mdl-layout__header">
             <div className="mdl-layout__header-row">
-              <Link to="/">
-                <div id="home" className="mdl-layout-title">
-                  Doc4
-                </div>
-              </Link>
+              <div id="home" className="mdl-layout-title">
+                Doc4
+              </div>
               <div className="mdl-layout-spacer"></div>
               <div className="mdl-grid">
                 <Link to="/create">
