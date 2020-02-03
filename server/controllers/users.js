@@ -78,9 +78,7 @@
       passport.authenticate('login', function(err, user) {
         if (err) return res.status(500).send(err.errmessage || err);
         if (!user) {
-          return res.status(409).json({
-            error: 'Sorry. Wrong username and password combination',
-          });
+          return res.status(500).send({ error: 'Wrong username or password' });
         }
         if (user) {
           var token = jwt.sign(user, req.app.get('superSecret'), {
@@ -198,6 +196,8 @@
               if (err) {
                 return res.status(500).send(err.errmessage || err);
               } else {
+                var token = req.headers['x-access-token'];
+                user.token = token;
                 return res.status(200).json(user);
               }
             });

@@ -9,43 +9,43 @@
   var documentSchema = new Schema({
     ownerId: {
       type: String,
-      required: true
+      required: true,
     },
     owner: {
       type: String,
-      required: true
+      required: true,
     },
     title: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     content: {
       type: String,
-      required: true
+      required: true,
     },
     accessType: {
       type: String,
-      default: 'None'
+      default: 'None',
     },
     accessId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Role',
-      required: false
+      required: false,
     },
     typeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Type',
-      required: true
+      required: true,
     },
     dateCreated: {
       type: Date,
-      required: true
+      required: true,
     },
     lastModified: {
       type: Date,
-      required: true
-    }
+      required: true,
+    },
   });
 
   // Create model and export

@@ -64,10 +64,15 @@ export const loginStartAsync = (user, history) => {
 
       const responseData = await response.json();
 
-      dispatch(loginSuccess(responseData));
-      history.push('/dashboard');
+      if (responseData.error) {
+        throw new Error(responseData.error);
+      } else {
+        dispatch(loginSuccess(responseData));
+        history.push('/dashboard');
+      }
     } catch (error) {
-      dispatch(loginFailure(error));
+      dispatch(loginFailure(error.message));
+      toastr.error(error.message, { timeout: 100 });
     }
   };
 };
@@ -85,12 +90,14 @@ export const editUserFail = error => ({
   payload: error,
 });
 
-export const editUserSuccess = () => ({
+export const editUserSuccess = user => ({
   type: userActionTypes.EDIT_USER_SUCCESS,
+  payload: user,
 });
 
 export const editUserStartAsync = (token, id, user, history) => {
   return async dispatch => {
+    console.log('EDIT USER', user);
     try {
       dispatch(editUserStart());
 
@@ -105,7 +112,11 @@ export const editUserStartAsync = (token, id, user, history) => {
 
       const responseData = await response.json();
 
-      history.push('/dashboard');
+      console.log('DATA RESPONSE', responseData);
+
+      dispatch(editUserSuccess(responseData));
+
+      history.push('/profile');
       toastr.success('User successfully updated', { timeout: 100 });
     } catch (error) {
       dispatch(editUserFail(error));
